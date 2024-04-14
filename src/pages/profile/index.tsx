@@ -6,7 +6,7 @@ import {Routes} from "../../config/routes";
 import {Neutral} from "../../config/themes";
 import {RouteProp, useNavigation, useRoute} from "@react-navigation/native";
 import {NavigationParamList, ScreenRouteProp} from "../../types/navigation";
-import {FlatList, StyleSheet, TouchableOpacity, View, Text} from "react-native";
+import {FlatList, StyleSheet, TouchableOpacity, View, Text, Alert} from "react-native";
 
 const ListDivider = (): ReactElement => <View style={styles.listDivider} />;
 
@@ -22,13 +22,34 @@ export default function Page(): ReactElement {
             login="Max"
             size="large"
           />
-          <ButtonUI
-            size="small"
-            variant="secondary"
-            title="Edit profile"
-            style={styles.button}
-            onPress={(): void => navigate(Routes.Settings)}
-          />
+          <View>
+            <ButtonUI
+              size="small"
+              title="Edit"
+              variant="secondary"
+              style={styles.button}
+              onPress={(): void => navigate(Routes.Settings)}
+            />
+            <ButtonUI
+              size="small"
+              title="Delete"
+              variant="primary"
+              style={styles.button}
+              onPress={(): void => {
+                Alert.alert("Are you sure, you want delete account?", "All your recipes will be deleted and can not be undo", [
+                  {
+                    text: "Cancel",
+                    style: "cancel",
+                    onPress: () => console.log("Cancel Pressed"),
+                  },
+                  {
+                    text: "OK",
+                    onPress: () => console.log("OK Pressed"),
+                  },
+                ]);
+              }}
+            />
+          </View>
         </View>
         <TextUI
           variant="h5"
@@ -105,6 +126,7 @@ const styles = StyleSheet.create({
   button: {
     height: 36,
     width: 107,
+    marginVertical: 5,
   },
   description: {
     marginTop: 10,

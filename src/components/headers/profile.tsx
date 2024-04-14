@@ -1,19 +1,23 @@
 import {TextUI} from "../../UI/TextUI";
 import React, {ReactElement} from "react";
-import {Neutral} from "../../config/themes";
-import MoreIcon from "../../assets/icons/more";
-import {StyleSheet, TouchableOpacity, View} from "react-native";
+import {ButtonUI} from "../../UI/ButtonUI";
+import {StyleSheet, View} from "react-native";
+import {BottomTabHeaderProps} from "@react-navigation/bottom-tabs";
 
-export function ProfileHeader(): ReactElement {
+export function ProfileHeader({navigation}: BottomTabHeaderProps): ReactElement {
   return (
     <View style={styles.container}>
       <TextUI
         variant="h4"
         isBold={true}
       >My profile</TextUI>
-      <TouchableOpacity>
-        <MoreIcon width={24} height={24} color={Neutral.Neutral100}/>
-      </TouchableOpacity>
+      <ButtonUI
+        size="small"
+        title="Log out"
+        variant="secondary"
+        style={styles.button}
+        onPress={(): void => console.log("logout")}
+      />
     </View>
   );
 }
@@ -24,8 +28,12 @@ const styles = StyleSheet.create({
     paddingVertical: 20,
     flexDirection: "row",
     alignItems: "center",
-    paddingHorizontal: 22,
+    paddingHorizontal: 25,
     backgroundColor: "white",
     justifyContent: "space-between",
+  },
+  button: {
+    height: 36,
+    width: 107,
   },
 });

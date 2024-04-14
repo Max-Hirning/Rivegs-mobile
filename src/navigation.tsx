@@ -102,6 +102,7 @@ function AppScreens(): ReactElement {
       <Tab.Screen
         options={{
           header: ProfileHeader,
+          // headerShown: false,
           tabBarIcon: ProfileTabBarIcon,
         }}
         name={Routes.Profile}
