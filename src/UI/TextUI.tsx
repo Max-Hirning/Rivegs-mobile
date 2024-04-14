@@ -4,8 +4,9 @@ import {StyleSheet, Text, TextProps, TextStyle} from "react-native";
 
 interface IProps extends TextProps {
   isBold?: boolean;
-  variant: "heading"|"h1"|"h2"|"h3"|"h4"|"h5"|"p"|"label"|"small"|"tiny";
+  variant: TextVariant;
 }
+export type TextVariant = "heading"|"h1"|"h2"|"h3"|"h4"|"h5"|"p"|"label"|"small"|"tiny";
 
 export function TextUI({children, style, isBold, variant, ...props}: IProps): ReactElement {
   const boldStyles = (): TextStyle => {

@@ -10,6 +10,7 @@ import ProfilePage from "./pages/profile/index";
 import ProfileIcon from "./assets/icons/profile";
 import SettingsPage from "./pages/settings/index";
 import BookmarkIcon from "./assets/icons/bookmark";
+import {PageHeader} from "./components/headers/page";
 import AddRecipePage from "./pages/recipe/add/index";
 import EditRecipePage from "./pages/recipe/edit/index";
 import {SearchHeader} from "./components/headers/search";
@@ -18,7 +19,6 @@ import NotificationPage from "./pages/notifications/index";
 import SavedRecipesPage from "./pages/saved-recipes/index";
 import NotificationIcon from "./assets/icons/notification";
 import {ProfileHeader} from "./components/headers/profile";
-import {AddRecipeHeader} from "./components/headers/addRecipe";
 import {NotificationHeader} from "./components/headers/notification";
 import {SavedRecipesHeader} from "./components/headers/savedRecipes";
 import {createBottomTabNavigator} from "@react-navigation/bottom-tabs";
@@ -51,9 +51,9 @@ const AddRecipeTabBarIcon = (): ReactElement => {
     </View>
   );
 };
+const PageHeaderComponent = (): ReactElement => <PageHeader/>;
 const SearchHeaderComponent = (): ReactElement => <SearchHeader/>;
 const ProfileHeaderComponent = (): ReactElement => <ProfileHeader/>;
-const AddRecipeHeaderComponent = (): ReactElement => <AddRecipeHeader/>;
 const NotificationHeaderComponent = (): ReactElement => <NotificationHeader/>;
 const SavedRecipesHeaderComponent = (): ReactElement => <SavedRecipesHeader/>;
 const HomeTabBarIcon = ({focused}: ITabBarIconArg): ReactElement => <HomeIcon width={24} height={24} color={focused ? "#E23E3E" : "#C1C1C1"} fill={focused ? "#F9D8D8" : "white"}/>;
@@ -91,7 +91,7 @@ function AppScreens(): ReactElement {
           tabBarStyle: {
             display: "none",
           },
-          header: AddRecipeHeaderComponent,
+          header: PageHeaderComponent,
         }}
         name={Routes.AddRecipe}
         component={AddRecipePage}
@@ -123,13 +123,40 @@ export default function Navigation(): ReactElement {
       }}
       initialRouteName={Routes.App}
     >
-      <Stack.Screen name={Routes.App} component={AppScreens} />
-      <Stack.Screen name={Routes.Recipe} component={RecipePage} />
-      <Stack.Screen name={Routes.Profile} component={ProfilePage} />
-      <Stack.Screen name={Routes.Security} component={SecurityPage} />
-      <Stack.Screen name={Routes.Settings} component={SettingsPage} />
-      <Stack.Screen name={Routes.AddRecipe} component={AddRecipePage} />
-      <Stack.Screen name={Routes.EditRecipe} component={EditRecipePage} />
+      <Stack.Screen
+        name={Routes.App}
+        component={AppScreens}
+      />
+      <Stack.Screen
+        options={{
+          headerShown: true,
+          header: PageHeaderComponent,
+        }}
+        name={Routes.Recipe}
+        component={RecipePage}
+      />
+      <Stack.Screen
+        options={{
+          headerShown: true,
+          header: PageHeaderComponent,
+        }}
+        name={Routes.Profile}
+        component={ProfilePage}
+      />
+      <Stack.Screen
+        name={Routes.Security}
+        component={SecurityPage}
+      />
+      <Stack.Screen
+        name={Routes.Settings}
+        component={SettingsPage}
+      />
+      <Stack.Screen
+        name={Routes.AddRecipe}
+        component={AddRecipePage} />
+      <Stack.Screen
+        name={Routes.EditRecipe}
+        component={EditRecipePage} />
     </Stack.Navigator>
   );
 }

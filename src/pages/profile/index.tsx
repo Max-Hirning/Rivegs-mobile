@@ -2,18 +2,25 @@ import {TextUI} from "../../UI/TextUI";
 import React, {ReactElement} from "react";
 import {ButtonUI} from "../../UI/ButtonUI";
 import {AvatarUI} from "../../UI/AvatarUI";
+import {Routes} from "../../config/routes";
 import {Neutral} from "../../config/themes";
-import {FlatList, StyleSheet, View} from "react-native";
+import {RouteProp, useNavigation, useRoute} from "@react-navigation/native";
+import {NavigationParamList, ScreenRouteProp} from "../../types/navigation";
+import {FlatList, StyleSheet, TouchableOpacity, View, Text} from "react-native";
 
 const ListDivider = (): ReactElement => <View style={styles.listDivider} />;
 
 export default function Page(): ReactElement {
+  const {navigate} = useNavigation<ScreenRouteProp>();
+  const {params} = useRoute<RouteProp<NavigationParamList, Routes.Profile>>();
+  console.log(params?.userId);
   return (
     <View style={styles.container}>
       <View style={styles.userInfo}>
         <View style={styles.userAvatarContainer}>
           <AvatarUI
             login="Max"
+            size="large"
           />
           <ButtonUI
             size="small"
@@ -62,7 +69,16 @@ export default function Page(): ReactElement {
         contentContainerStyle={styles.list}
         ItemSeparatorComponent={ListDivider}
         keyExtractor={(item): string => item.toString()}
-        renderItem={({item}: {item: number}): ReactElement => <View style={styles.recipeCard} />}
+        renderItem={({item}: {item: number}): ReactElement => {
+          return (
+            <TouchableOpacity
+              style={styles.recipeCard}
+              onPress={(): void => navigate(Routes.Recipe, {recipeId: item.toString()})}
+            >
+              <Text>{item}</Text>
+            </TouchableOpacity>
+          );
+        }}
       />
     </View>
   );

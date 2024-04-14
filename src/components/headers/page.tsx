@@ -5,7 +5,7 @@ import {useNavigation} from "@react-navigation/native";
 import ArrowLeftIcon from "../../assets/icons/arrows/left";
 import {StyleSheet, TouchableOpacity, View} from "react-native";
 
-export function AddRecipeHeader(): ReactElement {
+export function PageHeader(): ReactElement {
   const {goBack} = useNavigation();
 
   return (
