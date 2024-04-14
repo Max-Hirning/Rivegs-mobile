@@ -1,3 +1,4 @@
+/* eslint-disable react-native/no-inline-styles */
 import {TextUI} from "../../UI/TextUI";
 import {AvatarUI} from "../../UI/AvatarUI";
 import {ButtonUI} from "../../UI/ButtonUI";
