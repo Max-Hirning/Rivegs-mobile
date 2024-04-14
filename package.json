@@ -1,13 +1,28 @@
 {
-  "name": "Rivegs",
-  "version": "0.0.1",
   "private": true,
+  "license": "MIT",
+  "version": "1.0.0",
+  "name": "rivegs-mobile",
+  "author": {
+    "name": "Max-Hirning",
+    "url": "https://github.com/Max-Hirning"
+  },
+  "engines": {
+    "node": ">=16"
+  },
   "scripts": {
-    "android": "react-native run-android",
-    "ios": "react-native run-ios",
-    "lint": "eslint .",
+    "test": "jest",
+    "prepare": "husky install",
     "start": "react-native start",
-    "test": "jest"
+    "ios": "react-native run-ios",
+    "ts": "tsc --project tsconfig.json",
+    "android": "react-native run-android",
+    "lint": "eslint \"{App.tsx,src/**/*.ts}\"",
+    "lint:fix": "eslint \"{App.tsx,src/**/*.ts}\" --fix"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Max-Hirning/Rivegs-mobile"
   },
   "dependencies": {
     "react": "18.2.0",
@@ -24,14 +39,12 @@
     "@types/react": "^18.0.24",
     "@types/react-test-renderer": "^18.0.0",
     "babel-jest": "^29.2.1",
-    "eslint": "^8.19.0",
+    "eslint": "^8.57.0",
+    "eslint-plugin-react-native": "^4.1.0",
     "jest": "^29.2.1",
     "metro-react-native-babel-preset": "0.76.5",
-    "prettier": "^2.4.1",
     "react-test-renderer": "18.2.0",
-    "typescript": "4.8.4"
-  },
-  "engines": {
-    "node": ">=16"
+    "typescript": "4.8.4",
+    "husky": "^8.0.0"
   }
 }
