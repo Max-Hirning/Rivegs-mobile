@@ -1,3 +1,4 @@
+import {Neutral} from "../config/themes";
 import React, {ReactElement} from "react";
 import {StyleSheet, Text, TextProps, TextStyle} from "react-native";
 
@@ -19,12 +20,15 @@ export function TextUI({children, style, isBold, variant, ...props}: IProps): Re
   return (
     <Text
       {...props}
-      style={[styles[variant], boldStyles(), style]}
+      style={[styles[variant], boldStyles(), style, styles.default]}
     >{children}</Text>
   );
 }
 
 const styles = StyleSheet.create({
+  default: {
+    color: Neutral.Neutral100,
+  },
   heading: {
     fontSize: 56,
   },
