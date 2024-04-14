@@ -1,23 +1,24 @@
 import {TextUI} from "./TextUI";
 import {Neutral, Primary} from "../config/themes";
 import React, {ReactElement, ReactNode} from "react";
-import {StyleSheet, ButtonProps, TouchableOpacity} from "react-native";
+import {StyleSheet, ButtonProps, TouchableOpacity, ViewStyle} from "react-native";
 
 interface IProps extends ButtonProps {
   title: string;
+  style?: ViewStyle;
   leftIcon?: ReactNode;
   rightIcon?: ReactNode;
   size: "large"|"small";
   variant: "primary"|"secondary"|"text";
 }
 
-export function ButtonUI({title, size, onPress, leftIcon, variant, rightIcon, disabled, ...props}: IProps): ReactElement {
+export function ButtonUI({title, size, style, onPress, leftIcon, variant, rightIcon, disabled, ...props}: IProps): ReactElement {
   return (
     <TouchableOpacity
       {...props}
       onPress={onPress}
       disabled={disabled}
-      style={[stylesButton.button, (disabled ? stylesDisabledButton[variant] : stylesButton[variant]), stylesButton[size]]}
+      style={[stylesButton.button, (disabled ? stylesDisabledButton[variant] : stylesButton[variant]), stylesButton[size], style]}
     >
       {leftIcon && leftIcon}
       <TextUI

@@ -20,7 +20,7 @@ export function TextUI({children, style, isBold, variant, ...props}: IProps): Re
   return (
     <Text
       {...props}
-      style={[styles[variant], boldStyles(), style, styles.default]}
+      style={[styles[variant], boldStyles(), styles.default, style]}
     >{children}</Text>
   );
 }
