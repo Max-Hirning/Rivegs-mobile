@@ -14,11 +14,11 @@ import {PageHeader} from "./components/headers/page";
 import AddRecipePage from "./pages/recipe/add/index";
 import EditRecipePage from "./pages/recipe/edit/index";
 import {SearchHeader} from "./components/headers/search";
-import SecurityPage from "./pages/settings/security/index";
 import NotificationPage from "./pages/notifications/index";
 import SavedRecipesPage from "./pages/saved-recipes/index";
 import NotificationIcon from "./assets/icons/notification";
 import {ProfileHeader} from "./components/headers/profile";
+import {PageWithMenuHeader} from "./components/headers/pageWithMenu";
 import {NotificationHeader} from "./components/headers/notification";
 import {SavedRecipesHeader} from "./components/headers/savedRecipes";
 import {createBottomTabNavigator} from "@react-navigation/bottom-tabs";
@@ -51,11 +51,6 @@ const AddRecipeTabBarIcon = (): ReactElement => {
     </View>
   );
 };
-const PageHeaderComponent = (): ReactElement => <PageHeader/>;
-const SearchHeaderComponent = (): ReactElement => <SearchHeader/>;
-const ProfileHeaderComponent = (): ReactElement => <ProfileHeader/>;
-const NotificationHeaderComponent = (): ReactElement => <NotificationHeader/>;
-const SavedRecipesHeaderComponent = (): ReactElement => <SavedRecipesHeader/>;
 const HomeTabBarIcon = ({focused}: ITabBarIconArg): ReactElement => <HomeIcon width={24} height={24} color={focused ? "#E23E3E" : "#C1C1C1"} fill={focused ? "#F9D8D8" : "white"}/>;
 const ProfileTabBarIcon = ({focused}: ITabBarIconArg): ReactElement => <ProfileIcon width={24} height={24} color={focused ? "#E23E3E" : "#C1C1C1"} fill={focused ? "#F9D8D8" : "white"}/>;
 const NotificationTabBarIcon = ({focused}: ITabBarIconArg): ReactElement => <NotificationIcon width={24} height={24} color={focused ? "#E23E3E" : "#C1C1C1"} fill={focused ? "#F9D8D8" : "white"}/>;
@@ -71,43 +66,43 @@ function AppScreens(): ReactElement {
     >
       <Tab.Screen
         options={{
+          header: SearchHeader,
           tabBarIcon: HomeTabBarIcon,
-          header: SearchHeaderComponent,
         }}
         name={Routes.Home}
         component={HomePage}
       />
       <Tab.Screen
         options={{
+          header: SavedRecipesHeader,
           tabBarIcon: SavedRecipesTabBarIcon,
-          header: SavedRecipesHeaderComponent,
         }}
         name={Routes.SavedRecipes}
         component={SavedRecipesPage}
       />
       <Tab.Screen
         options={{
-          tabBarIcon: AddRecipeTabBarIcon,
           tabBarStyle: {
             display: "none",
           },
-          header: PageHeaderComponent,
+          header: PageWithMenuHeader,
+          tabBarIcon: AddRecipeTabBarIcon,
         }}
         name={Routes.AddRecipe}
         component={AddRecipePage}
       />
       <Tab.Screen
         options={{
+          header: NotificationHeader,
           tabBarIcon: NotificationTabBarIcon,
-          header: NotificationHeaderComponent,
         }}
         name={Routes.Notification}
         component={NotificationPage}
       />
       <Tab.Screen
         options={{
+          header: ProfileHeader,
           tabBarIcon: ProfileTabBarIcon,
-          header: ProfileHeaderComponent,
         }}
         name={Routes.Profile}
         component={ProfilePage}
@@ -130,7 +125,7 @@ export default function Navigation(): ReactElement {
       <Stack.Screen
         options={{
           headerShown: true,
-          header: PageHeaderComponent,
+          header: PageWithMenuHeader,
         }}
         name={Routes.Recipe}
         component={RecipePage}
@@ -138,23 +133,31 @@ export default function Navigation(): ReactElement {
       <Stack.Screen
         options={{
           headerShown: true,
-          header: PageHeaderComponent,
+          header: PageWithMenuHeader,
         }}
         name={Routes.Profile}
         component={ProfilePage}
       />
       <Stack.Screen
-        name={Routes.Security}
-        component={SecurityPage}
-      />
-      <Stack.Screen
+        options={{
+          headerShown: true,
+          header: PageHeader,
+        }}
         name={Routes.Settings}
         component={SettingsPage}
       />
       <Stack.Screen
+        options={{
+          headerShown: true,
+          header: PageHeader,
+        }}
         name={Routes.AddRecipe}
         component={AddRecipePage} />
       <Stack.Screen
+        options={{
+          headerShown: true,
+          header: PageHeader,
+        }}
         name={Routes.EditRecipe}
         component={EditRecipePage} />
     </Stack.Navigator>

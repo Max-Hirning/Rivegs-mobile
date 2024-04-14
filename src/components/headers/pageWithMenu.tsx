@@ -1,16 +1,20 @@
 import React, {ReactElement} from "react";
 import {Neutral} from "../../config/themes";
+import MoreIcon from "../../assets/icons/more";
 import {useNavigation} from "@react-navigation/native";
 import ArrowLeftIcon from "../../assets/icons/arrows/left";
 import {StyleSheet, TouchableOpacity, View} from "react-native";
 
-export function PageHeader(): ReactElement {
+export function PageWithMenuHeader(): ReactElement {
   const {goBack} = useNavigation();
 
   return (
     <View style={styles.container}>
       <TouchableOpacity onPress={(): void => goBack()}>
         <ArrowLeftIcon width={24} height={24} color={Neutral.Neutral100}/>
+      </TouchableOpacity>
+      <TouchableOpacity>
+        <MoreIcon width={24} height={24} color={Neutral.Neutral100}/>
       </TouchableOpacity>
     </View>
   );

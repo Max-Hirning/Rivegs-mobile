@@ -1,12 +1,13 @@
-/* eslint-disable react-native/no-inline-styles */
+
 import {TextUI} from "../../UI/TextUI";
+import React, {ReactElement} from "react";
 import {AvatarUI} from "../../UI/AvatarUI";
 import {ButtonUI} from "../../UI/ButtonUI";
 import {Routes} from "../../config/routes";
 import StarIcon from "../../assets/icons/star";
 import {StyleSheet, Text, View} from "react-native";
-import React, {ReactElement, useState} from "react";
 import {Neutral, Rating} from "../../config/themes";
+import {TabsNavigation} from "../../components/tabsNavigation";
 import {PageScroll} from "../../components/wrappers/pageScroll";
 import {NavigationParamList, ScreenRouteProp} from "../../types/navigation";
 import {RouteProp, useNavigation, useRoute} from "@react-navigation/native";
@@ -14,7 +15,6 @@ import {RouteProp, useNavigation, useRoute} from "@react-navigation/native";
 export default function Page(): ReactElement {
   const {navigate} = useNavigation<ScreenRouteProp>();
   const {params} = useRoute<RouteProp<NavigationParamList, Routes.Recipe>>();
-  const [activeBtn, setActiveBtn] = useState<"ingredients"|"steps">("ingredients");
   console.log(params.recipeId);
   return (
     <PageScroll>
@@ -53,51 +53,34 @@ export default function Page(): ReactElement {
             />
           </View>
         </View>
-        <View style={{
-          marginTop: 30,
-          alignItems: "center",
-        }}>
-          <View style={{
-            display: "flex",
-            flexDirection: "row",
-            alignItems: "center",
-            width: 280,
-            justifyContent: "space-between",
-            marginBottom: 10,
-          }}>
-            <ButtonUI
-              style={{
-                width: 125,
-              }}
-              onPress={(): void => setActiveBtn("ingredients")}
-              size="small"
-              variant={(activeBtn === "ingredients") ? "primary" : "secondary"}
-              title="Ingredients"
-            />
-            <ButtonUI
-              style={{
-                width: 125,
-              }}
-              size="small"
-              onPress={(): void => setActiveBtn("steps")}
-              variant={(activeBtn === "steps") ? "primary" : "secondary"}
-              title="Steps"
-            />
-          </View>
-          <View style={{
-            paddingBottom: 10,
-          }}>
+        <TabsNavigation
+          tabs={[
             {
-              [1,2,3,4,5,6,7,8,9,10].map((el) => {
-                return (
-                  <View key={el} style={styles.el}>
-                    <Text>{el}</Text>
-                  </View>
-                );
-              })
-            }
-          </View>
-        </View>
+              label: "Steps",
+              content: (
+                <View>
+                  {[1, 2, 3, 7, 8, 9, 10].map((el) => (
+                    <View key={el} style={styles.el}>
+                      <Text>{el}</Text>
+                    </View>
+                  ))}
+                </View>
+              ),
+            },
+            {
+              label: "Ingredients",
+              content: (
+                <View>
+                  {[1, 2, 3, 4].map((el) => (
+                    <View key={el} style={styles.el}>
+                      <Text>{el}</Text>
+                    </View>
+                  ))}
+                </View>
+              ),
+            },
+          ]}
+        />
       </>
     </PageScroll>
   );
@@ -113,6 +96,7 @@ const styles = StyleSheet.create({
   infoContainer: {
     width: "100%",
     marginTop: 10,
+    marginBottom: 30,
     paddingHorizontal: 25,
   },
   rateContainer: {

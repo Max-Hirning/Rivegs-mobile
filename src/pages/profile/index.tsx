@@ -27,6 +27,7 @@ export default function Page(): ReactElement {
             variant="secondary"
             title="Edit profile"
             style={styles.button}
+            onPress={(): void => navigate(Routes.Settings)}
           />
         </View>
         <TextUI
@@ -122,11 +123,11 @@ const styles = StyleSheet.create({
   horizontalDivider: {
     height: 1,
     width: "100%",
-    marginVertical: 20,
+    marginTop: 20,
     backgroundColor: Neutral.Neutral30,
   },
   list: {
-    paddingBottom: 20,
+    paddingVertical: 20,
     alignItems: "center",
   },
   listDivider: {
