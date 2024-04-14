@@ -85,7 +85,7 @@ function AppScreens(): ReactElement {
           tabBarStyle: {
             display: "none",
           },
-          header: PageWithMenuHeader,
+          header: PageHeader,
           tabBarIcon: AddRecipeTabBarIcon,
         }}
         name={Routes.AddRecipe}

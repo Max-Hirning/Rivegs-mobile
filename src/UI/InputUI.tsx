@@ -1,18 +1,19 @@
 import {TextUI} from "./TextUI";
 import React, {ReactElement, useState} from "react";
 import {Error, Neutral, Primary} from "../config/themes";
-import {StyleSheet, TextInput, TextInputProps, View} from "react-native";
+import {StyleSheet, TextInput, TextInputProps, View, ViewStyle} from "react-native";
 
 interface IProps extends TextInputProps {
   label?: string;
   errorMsg?: string;
+  containerStyle?: ViewStyle;
 }
 
-export function InputUI({label, errorMsg, ...props}: IProps): ReactElement {
+export function InputUI({label, containerStyle, errorMsg, ...props}: IProps): ReactElement {
   const [status, setStatus] = useState<"default"|"focus">("default");
 
   return (
-    <View>
+    <View style={containerStyle}>
       {
         label &&
         <TextUI
@@ -40,9 +41,11 @@ export function InputUI({label, errorMsg, ...props}: IProps): ReactElement {
 
 const styles = StyleSheet.create({
   label: {
+    marginBottom: 10,
     color: Neutral.Neutral100,
   },
   error: {
+    marginTop: 2.5,
     color: Error.Error100,
   },
   input: {

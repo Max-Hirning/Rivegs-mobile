@@ -18,13 +18,14 @@ export function TabsNavigation({tabs}: IProps): ReactElement {
   };
 
   return (
-    <View>
+    <View style={styles.container}>
       <View style={styles.tabContainer}>
         {tabs.map((tab, index) => (
           <ButtonUI
             key={index}
             size="small"
             title={tab.label}
+            style={styles.tabButton}
             onPress={(): void => handleTabPress(index)}
             variant={activeTab === index ? "primary" : "secondary"}
           />
@@ -36,12 +37,21 @@ export function TabsNavigation({tabs}: IProps): ReactElement {
 }
 
 const styles = StyleSheet.create({
+  container: {
+    width: "100%",
+    paddingHorizontal: 25,
+  },
   tabContainer: {
     marginBottom: 10,
     flexDirection: "row",
-    justifyContent: "space-between",
+    justifyContent: "center",
+  },
+  tabButton: {
+    marginHorizontal: 15,
   },
   contentContainer: {
+    width: "100%",
+    marginTop: 30,
     paddingBottom: 10,
   },
 });

@@ -4,11 +4,12 @@ import {StyleSheet, Text, TextProps, TextStyle} from "react-native";
 
 interface IProps extends TextProps {
   isBold?: boolean;
+  inOneLine?: boolean;
   variant: TextVariant;
 }
 export type TextVariant = "heading"|"h1"|"h2"|"h3"|"h4"|"h5"|"p"|"label"|"small"|"tiny";
 
-export function TextUI({children, style, isBold, variant, ...props}: IProps): ReactElement {
+export function TextUI({children, style, inOneLine, isBold, variant, ...props}: IProps): ReactElement {
   const boldStyles = (): TextStyle => {
     if(isBold) {
       return ({
@@ -21,6 +22,8 @@ export function TextUI({children, style, isBold, variant, ...props}: IProps): Re
   return (
     <Text
       {...props}
+      numberOfLines={inOneLine ? 1 : undefined}
+      ellipsizeMode={inOneLine ? "tail" : undefined}
       style={[styles[variant], boldStyles(), styles.default, style]}
     >{children}</Text>
   );

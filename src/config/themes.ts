@@ -1,6 +1,6 @@
 export enum Error {
-  Error100 = "#804E00",
-  Error10 = "#995E00",
+  Error100 = "#EE1133",
+  Error10 = "#FDE7EB",
 }
 
 export enum Rating {
