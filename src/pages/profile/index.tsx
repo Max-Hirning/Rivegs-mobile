@@ -7,7 +7,7 @@ import {Neutral} from "../../config/themes";
 import {ProfileHeader} from "../../components/headers/profile";
 import {RouteProp, useNavigation, useRoute} from "@react-navigation/native";
 import {NavigationParamList, ScreenRouteProp} from "../../types/navigation";
-import {FlatList, StyleSheet, TouchableOpacity, View, Text, Alert} from "react-native";
+import {FlatList, StyleSheet, TouchableOpacity, View, Text} from "react-native";
 
 const ListDivider = (): ReactElement => <View style={styles.listDivider} />;
 
@@ -19,7 +19,8 @@ export default function Page(): ReactElement {
     <View style={styles.container}>
       <ProfileHeader
         title="My profile"
-        showLogoutBtn={true}
+        showLogoutBtn={!(params?.userId)}
+        showReturnBtn={!!(params?.userId)}
       />
       <View style={styles.userInfo}>
         <View style={styles.userAvatarContainer}>
@@ -27,34 +28,22 @@ export default function Page(): ReactElement {
             login="Max"
             size="large"
           />
-          <View>
-            <ButtonUI
-              size="small"
-              title="Edit"
-              variant="secondary"
-              style={styles.button}
-              onPress={(): void => navigate(Routes.Settings)}
-            />
-            <ButtonUI
-              size="small"
-              title="Delete"
-              variant="primary"
-              style={styles.button}
-              onPress={(): void => {
-                Alert.alert("Are you sure, you want delete account?", "All your recipes will be deleted and can not be undo", [
-                  {
-                    text: "Cancel",
-                    style: "cancel",
-                    onPress: () => console.log("Cancel Pressed"),
-                  },
-                  {
-                    text: "OK",
-                    onPress: () => console.log("OK Pressed"),
-                  },
-                ]);
-              }}
-            />
-          </View>
+          {
+            (params?.userId) ?
+              <ButtonUI
+                size="small"
+                title="Follow"
+                variant="primary"
+                style={styles.button}
+              /> :
+              <ButtonUI
+                size="small"
+                title="Edit"
+                variant="secondary"
+                style={styles.button}
+                onPress={(): void => navigate(Routes.Settings)}
+              />
+          }
         </View>
         <TextUI
           variant="h5"
@@ -132,7 +121,6 @@ const styles = StyleSheet.create({
   button: {
     height: 36,
     width: 107,
-    marginVertical: 5,
   },
   description: {
     marginTop: 10,
