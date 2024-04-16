@@ -2,22 +2,29 @@ import {TextUI} from "../../UI/TextUI";
 import React, {ReactElement} from "react";
 import {ButtonUI} from "../../UI/ButtonUI";
 import {StyleSheet, View} from "react-native";
-import {BottomTabHeaderProps} from "@react-navigation/bottom-tabs";
 
-export function ProfileHeader({navigation}: BottomTabHeaderProps): ReactElement {
+interface IProps {
+  title: string;
+  showLogoutBtn?: boolean;
+}
+
+export function ProfileHeader({showLogoutBtn, title}: IProps): ReactElement {
   return (
     <View style={styles.container}>
       <TextUI
         variant="h4"
         isBold={true}
-      >My profile</TextUI>
-      <ButtonUI
-        size="small"
-        title="Log out"
-        variant="secondary"
-        style={styles.button}
-        onPress={(): void => console.log("logout")}
-      />
+      >{title}</TextUI>
+      {
+        (showLogoutBtn) &&
+        <ButtonUI
+          size="small"
+          title="Log out"
+          variant="secondary"
+          style={styles.button}
+          onPress={(): void => console.log("logout")}
+        />
+      }
     </View>
   );
 }

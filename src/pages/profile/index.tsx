@@ -4,6 +4,7 @@ import {ButtonUI} from "../../UI/ButtonUI";
 import {AvatarUI} from "../../UI/AvatarUI";
 import {Routes} from "../../config/routes";
 import {Neutral} from "../../config/themes";
+import {ProfileHeader} from "../../components/headers/profile";
 import {RouteProp, useNavigation, useRoute} from "@react-navigation/native";
 import {NavigationParamList, ScreenRouteProp} from "../../types/navigation";
 import {FlatList, StyleSheet, TouchableOpacity, View, Text, Alert} from "react-native";
@@ -16,6 +17,10 @@ export default function Page(): ReactElement {
   console.log(params?.userId);
   return (
     <View style={styles.container}>
+      <ProfileHeader
+        title="My profile"
+        showLogoutBtn={true}
+      />
       <View style={styles.userInfo}>
         <View style={styles.userAvatarContainer}>
           <AvatarUI
@@ -113,6 +118,7 @@ const styles = StyleSheet.create({
   },
   userInfo: {
     width: "100%",
+    marginTop: 15,
     paddingHorizontal: 25,
   },
   userAvatarContainer: {

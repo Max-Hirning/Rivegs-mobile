@@ -1,13 +1,14 @@
 import React, {ReactElement} from "react";
-import {SafeAreaView, ScrollView, StyleSheet} from "react-native";
+import {SafeAreaView, ScrollView, StyleSheet, ViewStyle} from "react-native";
 
 interface IProps {
+  style?: ViewStyle;
   children: ReactElement;
 }
 
-export function PageScroll({children}: IProps): ReactElement {
+export function PageScroll({children, style}: IProps): ReactElement {
   return (
-    <SafeAreaView style={styles.container}>
+    <SafeAreaView style={[styles.container, style]}>
       <ScrollView contentContainerStyle={styles.list}>
         {children}
       </ScrollView>

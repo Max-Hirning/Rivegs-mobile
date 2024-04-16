@@ -1,5 +1,5 @@
 import {ButtonUI} from "../UI/ButtonUI";
-import {View, StyleSheet} from "react-native";
+import {View, StyleSheet, ViewStyle} from "react-native";
 import React, {ReactNode, ReactElement, useState} from "react";
 
 interface Tab {
@@ -8,9 +8,10 @@ interface Tab {
 }
 interface IProps {
   tabs: Tab[];
+  style?: ViewStyle;
 }
 
-export function TabsNavigation({tabs}: IProps): ReactElement {
+export function TabsNavigation({tabs, style}: IProps): ReactElement {
   const [activeTab, setActiveTab] = useState<number>(0);
 
   const handleTabPress = (index: number): void => {
@@ -18,7 +19,7 @@ export function TabsNavigation({tabs}: IProps): ReactElement {
   };
 
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, style]}>
       <View style={styles.tabContainer}>
         {tabs.map((tab, index) => (
           <ButtonUI

@@ -10,17 +10,11 @@ import ProfilePage from "./pages/profile/index";
 import ProfileIcon from "./assets/icons/profile";
 import SettingsPage from "./pages/settings/index";
 import BookmarkIcon from "./assets/icons/bookmark";
-import {PageHeader} from "./components/headers/page";
 import AddRecipePage from "./pages/recipe/add/index";
 import EditRecipePage from "./pages/recipe/edit/index";
-import {SearchHeader} from "./components/headers/search";
 import NotificationPage from "./pages/notifications/index";
 import SavedRecipesPage from "./pages/saved-recipes/index";
 import NotificationIcon from "./assets/icons/notification";
-import {ProfileHeader} from "./components/headers/profile";
-import {PageWithMenuHeader} from "./components/headers/pageWithMenu";
-import {NotificationHeader} from "./components/headers/notification";
-import {SavedRecipesHeader} from "./components/headers/savedRecipes";
 import {createBottomTabNavigator} from "@react-navigation/bottom-tabs";
 import {createNativeStackNavigator} from "@react-navigation/native-stack";
 
@@ -60,13 +54,13 @@ function AppScreens(): ReactElement {
   return (
     <Tab.Navigator
       screenOptions={{
+        headerShown: false,
         tabBarShowLabel: false,
       }}
       initialRouteName={Routes.Settings}
     >
       <Tab.Screen
         options={{
-          header: SearchHeader,
           tabBarIcon: HomeTabBarIcon,
         }}
         name={Routes.Home}
@@ -74,7 +68,6 @@ function AppScreens(): ReactElement {
       />
       <Tab.Screen
         options={{
-          header: SavedRecipesHeader,
           tabBarIcon: SavedRecipesTabBarIcon,
         }}
         name={Routes.SavedRecipes}
@@ -85,7 +78,6 @@ function AppScreens(): ReactElement {
           tabBarStyle: {
             display: "none",
           },
-          header: PageHeader,
           tabBarIcon: AddRecipeTabBarIcon,
         }}
         name={Routes.AddRecipe}
@@ -93,7 +85,6 @@ function AppScreens(): ReactElement {
       />
       <Tab.Screen
         options={{
-          header: NotificationHeader,
           tabBarIcon: NotificationTabBarIcon,
         }}
         name={Routes.Notification}
@@ -101,8 +92,6 @@ function AppScreens(): ReactElement {
       />
       <Tab.Screen
         options={{
-          header: ProfileHeader,
-          // headerShown: false,
           tabBarIcon: ProfileTabBarIcon,
         }}
         name={Routes.Profile}
@@ -124,43 +113,25 @@ export default function Navigation(): ReactElement {
         component={AppScreens}
       />
       <Stack.Screen
-        options={{
-          headerShown: true,
-          header: PageWithMenuHeader,
-        }}
         name={Routes.Recipe}
         component={RecipePage}
       />
       <Stack.Screen
-        options={{
-          headerShown: true,
-          header: PageWithMenuHeader,
-        }}
         name={Routes.Profile}
         component={ProfilePage}
       />
       <Stack.Screen
-        options={{
-          headerShown: true,
-          header: PageHeader,
-        }}
         name={Routes.Settings}
         component={SettingsPage}
       />
       <Stack.Screen
-        options={{
-          headerShown: true,
-          header: PageHeader,
-        }}
         name={Routes.AddRecipe}
-        component={AddRecipePage} />
+        component={AddRecipePage}
+      />
       <Stack.Screen
-        options={{
-          headerShown: true,
-          header: PageHeader,
-        }}
         name={Routes.EditRecipe}
-        component={EditRecipePage} />
+        component={EditRecipePage}
+      />
     </Stack.Navigator>
   );
 }
