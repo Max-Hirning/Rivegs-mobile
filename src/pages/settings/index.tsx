@@ -21,7 +21,7 @@ export default function Page(): ReactElement {
           </TouchableOpacity>
         }
       />
-      <PageScroll>
+      <PageScroll listStyle={styles.list}>
         <TabsNavigation
           tabs={[
             {
@@ -44,6 +44,11 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: Neutral.Neutral0,
+  },
+  list: {
+    paddingTop: 10,
+    paddingBottom: 25,
+    paddingHorizontal: 25,
   },
   tabs: {
     marginTop: 10,

@@ -10,6 +10,8 @@ import ProfilePage from "./pages/profile/index";
 import ProfileIcon from "./assets/icons/profile";
 import SettingsPage from "./pages/settings/index";
 import BookmarkIcon from "./assets/icons/bookmark";
+import SignInPage from "./pages/auth/sign-in/index";
+import SignUpPage from "./pages/auth/sign-up/index";
 import AddRecipePage from "./pages/recipe/add/index";
 import EditRecipePage from "./pages/recipe/edit/index";
 import NotificationPage from "./pages/notifications/index";
@@ -100,14 +102,38 @@ function AppScreens(): ReactElement {
     </Tab.Navigator>
   );
 }
+function AuthScreens(): ReactElement {
+  return (
+    <Stack.Navigator
+      screenOptions={{
+        headerShown: false,
+      }}
+      initialRouteName={Routes.SignIn}
+    >
+      <Stack.Screen
+        name={Routes.SignIn}
+        component={SignInPage}
+      />
+      <Stack.Screen
+        name={Routes.SignUp}
+        component={SignUpPage}
+      />
+    </Stack.Navigator>
+  );
+}
+
 export default function Navigation(): ReactElement {
   return (
     <Stack.Navigator
       screenOptions={{
         headerShown: false,
       }}
-      initialRouteName={Routes.App}
+      initialRouteName={Routes.Auth}
     >
+      <Stack.Screen
+        name={Routes.Auth}
+        component={AuthScreens}
+      />
       <Stack.Screen
         name={Routes.App}
         component={AppScreens}

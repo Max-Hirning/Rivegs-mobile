@@ -1,7 +1,10 @@
 export enum Routes {
   App = "app",
   Home = "home",
+  Auth = "auth",
   Recipe = "recipe",
+  SignIn = "sign-in",
+  SignUp = "sign-up",
   Profile = "profile",
   Security = "security",
   Settings = "settings",

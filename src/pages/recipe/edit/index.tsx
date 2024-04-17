@@ -4,6 +4,7 @@ import {Neutral} from "../../../config/themes";
 import {Header} from "../../../components/headers/header";
 import ArrowLeftIcon from "../../../assets/icons/arrows/left";
 import {StyleSheet, TouchableOpacity, View} from "react-native";
+import {PageScroll} from "../../../components/wrappers/pageScroll";
 import {RouteProp, useNavigation, useRoute} from "@react-navigation/native";
 import {NavigationParamList, ScreenRouteProp} from "../../../types/navigation";
 
@@ -20,6 +21,9 @@ export default function Page(): ReactElement {
           </TouchableOpacity>
         }
       />
+      <PageScroll listStyle={styles.list}>
+        <></>
+      </PageScroll>
     </View>
   );
 }
@@ -28,5 +32,10 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: Neutral.Neutral0,
+  },
+  list: {
+    paddingTop: 10,
+    paddingBottom: 25,
+    paddingHorizontal: 25,
   },
 });

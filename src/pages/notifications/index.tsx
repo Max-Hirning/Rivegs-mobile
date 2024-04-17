@@ -43,7 +43,7 @@ export default function Page(): ReactElement {
           </TouchableOpacity>
         </View>
       </PopUpMenu>
-      <PageScroll>
+      <PageScroll listStyle={styles.list}>
         <></>
       </PageScroll>
     </View>
@@ -68,5 +68,10 @@ const styles = StyleSheet.create({
   },
   menuItem: {
     paddingVertical: 8,
+  },
+  list: {
+    paddingTop: 10,
+    paddingBottom: 25,
+    paddingHorizontal: 25,
   },
 });

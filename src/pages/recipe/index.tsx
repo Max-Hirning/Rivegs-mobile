@@ -94,7 +94,7 @@ export default function Page(): ReactElement {
           </TouchableOpacity>
         </View>
       </PopUpMenu>
-      <PageScroll>
+      <PageScroll listStyle={styles.list}>
         <>
           <View style={styles.image} />
           <View style={styles.infoContainer}>
@@ -182,6 +182,11 @@ const styles = StyleSheet.create({
   },
   menuItem: {
     paddingVertical: 8,
+  },
+  list: {
+    paddingTop: 10,
+    paddingBottom: 25,
+    paddingHorizontal: 25,
   },
   image: {
     width: 335,

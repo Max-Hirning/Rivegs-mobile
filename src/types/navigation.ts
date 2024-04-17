@@ -9,6 +9,11 @@ type AppParamList = {
   [Routes.SavedRecipes]: undefined;
 };
 
+type AuthParamList = {
+  [Routes.SignIn]: undefined;
+  [Routes.SignUp]: undefined;
+};
+
 export type NavigationParamList = {
   [Routes.Recipe]: {
     recipeId: string;
@@ -20,8 +25,10 @@ export type NavigationParamList = {
     recipeId: string;
   };
 	[Routes.App]: undefined;
+  [Routes.Auth]: undefined;
   [Routes.Settings]: undefined;
   [Routes.Security]: undefined;
 };
 export type AppRouteProp = NavigationProp<AppParamList, Routes.Home>;
+export type AuthRouteProp = NavigationProp<AuthParamList, Routes.SignIn>;
 export type ScreenRouteProp = NavigationProp<NavigationParamList, Routes.App>;
