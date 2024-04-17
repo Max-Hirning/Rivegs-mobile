@@ -1,25 +1,99 @@
 
 import {TextUI} from "../../UI/TextUI";
-import React, {ReactElement} from "react";
 import {AvatarUI} from "../../UI/AvatarUI";
 import {ButtonUI} from "../../UI/ButtonUI";
 import {Routes} from "../../config/routes";
+import MoreIcon from "../../assets/icons/more";
 import StarIcon from "../../assets/icons/star";
-import {StyleSheet, Text, View} from "react-native";
 import {Neutral, Rating} from "../../config/themes";
-import {RecipeHeader} from "../../components/headers/recipe";
+import React, {ReactElement, useState} from "react";
+import {PopUpMenu} from "../../components/popUpMenu";
+import {Header} from "../../components/headers/header";
+import ArrowLeftIcon from "../../assets/icons/arrows/left";
 import {TabsNavigation} from "../../components/tabsNavigation";
 import {PageScroll} from "../../components/wrappers/pageScroll";
 import {NavigationParamList, ScreenRouteProp} from "../../types/navigation";
 import {RouteProp, useNavigation, useRoute} from "@react-navigation/native";
+import {Alert, StyleSheet, Text, TouchableOpacity, View} from "react-native";
 
 export default function Page(): ReactElement {
-  const {navigate} = useNavigation<ScreenRouteProp>();
+  const [menu, setMenu] = useState<boolean>(false);
+  const {navigate, goBack} = useNavigation<ScreenRouteProp>();
   const {params} = useRoute<RouteProp<NavigationParamList, Routes.Recipe>>();
   console.log(params.recipeId);
   return (
     <View style={styles.container}>
-      <RecipeHeader/>
+      <Header
+        leftIcon={
+          <TouchableOpacity onPress={(): void => goBack()}>
+            <ArrowLeftIcon width={24} height={24} color={Neutral.Neutral100}/>
+          </TouchableOpacity>
+        }
+        rightIcon={
+          <TouchableOpacity onPress={(): void => setMenu(true)}>
+            <MoreIcon width={24} height={24} color={Neutral.Neutral100}/>
+          </TouchableOpacity>
+        }
+      />
+      <PopUpMenu
+        isVisible={menu}
+        onClose={(): void => setMenu(false)}
+      >
+        <View style={styles.menu}>
+          <TouchableOpacity
+            onPress={(): void => {
+              setMenu(false);
+            }}
+            style={styles.menuItem}
+          >
+            <TextUI variant="p">Share</TextUI>
+          </TouchableOpacity>
+          <TouchableOpacity
+            onPress={(): void => {
+              setMenu(false);
+            }}
+            style={styles.menuItem}
+          >
+            <TextUI variant="p">Unsave</TextUI>
+          </TouchableOpacity>
+          <TouchableOpacity
+            onPress={(): void => {
+              setMenu(false);
+            }}
+            style={styles.menuItem}
+          >
+            <TextUI variant="p">Rate Recipe</TextUI>
+          </TouchableOpacity>
+          <TouchableOpacity
+            onPress={(): void => {
+              setMenu(false);
+              navigate(Routes.EditRecipe, {recipeId: params.recipeId});
+            }}
+            style={styles.menuItem}
+          >
+            <TextUI variant="p">Edit Recipe</TextUI>
+          </TouchableOpacity>
+          <TouchableOpacity
+            onPress={(): void => {
+              setMenu(false);
+              Alert.alert("Are you sure, you want delete this recipe?", "Recipe will be deleted and can not be undo", [
+                {
+                  text: "Cancel",
+                  style: "cancel",
+                  onPress: () => console.log("Cancel Pressed"),
+                },
+                {
+                  text: "Delete",
+                  onPress: () => console.log("OK Pressed"),
+                },
+              ]);
+            }}
+            style={styles.menuItem}
+          >
+            <TextUI variant="p">Delete Recipe</TextUI>
+          </TouchableOpacity>
+        </View>
+      </PopUpMenu>
       <PageScroll>
         <>
           <View style={styles.image} />
@@ -94,6 +168,20 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: Neutral.Neutral0,
+  },
+  menu: {
+    gap: 10,
+    top: 45,
+    right: 25,
+    width: 164,
+    padding: 10,
+    zIndex: 100,
+    borderRadius: 8,
+    position: "absolute",
+    backgroundColor: "white",
+  },
+  menuItem: {
+    paddingVertical: 8,
   },
   image: {
     width: 335,

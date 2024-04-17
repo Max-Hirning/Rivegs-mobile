@@ -1,9 +1,9 @@
 import React, {ReactElement} from "react";
 import {Routes} from "../../config/routes";
 import {Neutral} from "../../config/themes";
+import {Header} from "../../components/headers/header";
 import {useNavigation} from "@react-navigation/native";
 import {ScreenRouteProp} from "../../types/navigation";
-import {SavedRecipesHeader} from "../../components/headers/savedRecipes";
 import {FlatList, StyleSheet, TouchableOpacity, View, Text} from "react-native";
 
 const ListDivider = (): ReactElement => <View style={styles.listDivider} />;
@@ -13,7 +13,7 @@ export default function Page(): ReactElement {
 
   return (
     <View style={styles.container}>
-      <SavedRecipesHeader/>
+      <Header title="Saved recipes"/>
       <FlatList
         data={[1,2,3,4,5,6,7,8,9,10]}
         contentContainerStyle={styles.list}

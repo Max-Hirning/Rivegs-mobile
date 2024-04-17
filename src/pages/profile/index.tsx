@@ -1,27 +1,83 @@
 import {TextUI} from "../../UI/TextUI";
-import React, {ReactElement} from "react";
 import {ButtonUI} from "../../UI/ButtonUI";
 import {AvatarUI} from "../../UI/AvatarUI";
 import {Routes} from "../../config/routes";
 import {Neutral} from "../../config/themes";
-import {ProfileHeader} from "../../components/headers/profile";
+import MoreIcon from "../../assets/icons/more";
+import React, {ReactElement, useState} from "react";
+import {PopUpMenu} from "../../components/popUpMenu";
+import {Header} from "../../components/headers/header";
+import ArrowLeftIcon from "../../assets/icons/arrows/left";
 import {RouteProp, useNavigation, useRoute} from "@react-navigation/native";
 import {NavigationParamList, ScreenRouteProp} from "../../types/navigation";
-import {FlatList, StyleSheet, TouchableOpacity, View, Text} from "react-native";
+import {FlatList, StyleSheet, TouchableOpacity, View, Text, Alert} from "react-native";
 
 const ListDivider = (): ReactElement => <View style={styles.listDivider} />;
 
 export default function Page(): ReactElement {
-  const {navigate} = useNavigation<ScreenRouteProp>();
+  const [menu, setMenu] = useState<boolean>(false);
+  const {navigate, goBack} = useNavigation<ScreenRouteProp>();
   const {params} = useRoute<RouteProp<NavigationParamList, Routes.Profile>>();
   console.log(params?.userId);
   return (
     <View style={styles.container}>
-      <ProfileHeader
-        title="My profile"
-        showLogoutBtn={!(params?.userId)}
-        showReturnBtn={!!(params?.userId)}
+      <Header
+        leftIcon={
+          <>
+            {
+              (params?.userId) ?
+                <TouchableOpacity onPress={(): void => goBack()}>
+                  <ArrowLeftIcon width={24} height={24} color={Neutral.Neutral100}/>
+                </TouchableOpacity> : <></>
+            }
+          </>
+        }
+        rightIcon={
+          <>
+            {
+              (!params?.userId) ?
+                <TouchableOpacity onPress={(): void => setMenu(true)}>
+                  <MoreIcon width={24} height={24} color={Neutral.Neutral100}/>
+                </TouchableOpacity> : <></>
+            }
+          </>
+        }
+        title={(!params?.userId) ? "My profile" : undefined}
       />
+      <PopUpMenu
+        isVisible={menu}
+        onClose={(): void => setMenu(false)}
+      >
+        <View style={styles.menu}>
+          <TouchableOpacity
+            onPress={(): void => {
+              setMenu(false);
+            }}
+            style={styles.menuItem}
+          >
+            <TextUI variant="p">Log out</TextUI>
+          </TouchableOpacity>
+          <TouchableOpacity
+            onPress={(): void => {
+              setMenu(false);
+              Alert.alert("Are you sure, you want delete account?", "All your recipes will be deleted and can not be undo", [
+                {
+                  text: "Cancel",
+                  style: "cancel",
+                  onPress: () => console.log("Cancel Pressed"),
+                },
+                {
+                  text: "Delete",
+                  onPress: () => console.log("OK Pressed"),
+                },
+              ]);
+            }}
+            style={styles.menuItem}
+          >
+            <TextUI variant="p">Delete</TextUI>
+          </TouchableOpacity>
+        </View>
+      </PopUpMenu>
       <View style={styles.userInfo}>
         <View style={styles.userAvatarContainer}>
           <AvatarUI
@@ -104,6 +160,20 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: Neutral.Neutral0,
+  },
+  menu: {
+    gap: 10,
+    top: 45,
+    right: 25,
+    width: 164,
+    padding: 10,
+    zIndex: 100,
+    borderRadius: 8,
+    position: "absolute",
+    backgroundColor: "white",
+  },
+  menuItem: {
+    paddingVertical: 8,
   },
   userInfo: {
     width: "100%",

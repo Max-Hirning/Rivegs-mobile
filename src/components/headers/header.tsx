@@ -2,13 +2,24 @@ import {TextUI} from "../../UI/TextUI";
 import React, {ReactElement} from "react";
 import {StyleSheet, View} from "react-native";
 
-export function SavedRecipesHeader(): ReactElement {
+interface IProps {
+  title?: string;
+  leftIcon?: ReactElement;
+  rightIcon?: ReactElement;
+}
+
+export function Header({leftIcon, rightIcon, title}: IProps): ReactElement {
   return (
     <View style={styles.container}>
-      <TextUI
-        variant="h4"
-        isBold={true}
-      >Saved recipes</TextUI>
+      {(leftIcon) && leftIcon}
+      {
+        (title) &&
+        <TextUI
+          variant="h4"
+          isBold={true}
+        >{title}</TextUI>
+      }
+      {(rightIcon) && rightIcon}
     </View>
   );
 }
@@ -19,6 +30,7 @@ const styles = StyleSheet.create({
     paddingVertical: 20,
     flexDirection: "row",
     alignItems: "center",
+    position: "relative",
     paddingHorizontal: 25,
     backgroundColor: "white",
     justifyContent: "space-between",

@@ -1,15 +1,26 @@
 import React, {ReactElement} from "react";
 import {Neutral} from "../../config/themes";
-import {StyleSheet, View} from "react-native";
-import {PageHeader} from "../../components/headers/page";
+import {Header} from "../../components/headers/header";
+import {useNavigation} from "@react-navigation/native";
+import {ScreenRouteProp} from "../../types/navigation";
+import ArrowLeftIcon from "../../assets/icons/arrows/left";
 import {TabsNavigation} from "../../components/tabsNavigation";
+import {StyleSheet, TouchableOpacity, View} from "react-native";
 import {PageScroll} from "../../components/wrappers/pageScroll";
 import {SecurityForm, SettingsForm} from "../../modules/profile";
 
 export default function Page(): ReactElement {
+  const {goBack} = useNavigation<ScreenRouteProp>();
+
   return (
     <View style={styles.container}>
-      <PageHeader/>
+      <Header
+        leftIcon={
+          <TouchableOpacity onPress={(): void => goBack()}>
+            <ArrowLeftIcon width={24} height={24} color={Neutral.Neutral100}/>
+          </TouchableOpacity>
+        }
+      />
       <PageScroll>
         <TabsNavigation
           tabs={[
