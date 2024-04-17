@@ -1,16 +1,23 @@
 import {Neutral} from "../config/themes";
 import React, {ReactElement} from "react";
 import {TextUI, TextVariant} from "./TextUI";
-import {StyleSheet, View, ViewStyle} from "react-native";
+import {Image, ImageStyle, StyleSheet, View} from "react-native";
 
 interface IProps {
   login: string;
-  size: "large"|"small"|"medium";
+  source?: string|null;
+  size: "large"|"small"|"medium"|"big";
 }
 
-export function AvatarUI({login, size}: IProps): ReactElement {
-  const sizeStyles = (): ViewStyle => {
+export function AvatarUI({login, size, source}: IProps): ReactElement {
+  const sizeStyles = (): ImageStyle => {
     if(size === "large") {
+      return ({
+        width: 150,
+        height: 150,
+      });
+    }
+    if(size === "big") {
       return ({
         width: 100,
         height: 100,
@@ -30,6 +37,9 @@ export function AvatarUI({login, size}: IProps): ReactElement {
 
   const labelSizeStyles = (): TextVariant => {
     if(size === "large") {
+      return "h1";
+    }
+    if(size === "big") {
       return "h2";
     }
     if(size === "small") {
@@ -37,6 +47,15 @@ export function AvatarUI({login, size}: IProps): ReactElement {
     }
     return "h3";
   };
+
+  if(source) {
+    return (
+      <Image
+        source={{uri: source}}
+        style={[styles.avatar, sizeStyles()]}
+      />
+    );
+  }
 
   return (
     <View style={[styles.avatar, sizeStyles()]}>
@@ -50,10 +69,12 @@ export function AvatarUI({login, size}: IProps): ReactElement {
 
 const styles = StyleSheet.create({
   avatar: {
+    borderWidth: 1,
     display: "flex",
     borderRadius: 100,
     alignItems: "center",
     justifyContent: "center",
+    borderColor: Neutral.Neutral30,
     backgroundColor: Neutral.Neutral30,
   },
   label: {

@@ -1,14 +1,41 @@
-import React, {ReactElement} from "react";
+import {ImagePicker} from "./ImagePicker";
+import {IImage} from "../../../types/image";
 import {InputUI} from "../../../UI/InputUI";
 import {ButtonUI} from "../../../UI/ButtonUI";
 import {StyleSheet, View} from "react-native";
+import React, {ReactElement, useState} from "react";
 
 export function SettingsForm(): ReactElement {
+  const [imageFile, setImageFile] = useState<null|IImage>(null);
+
   return (
     <View style={styles.form}>
+      <View style={styles.avatarContainer}>
+        <ImagePicker
+          image={imageFile?.uri || undefined}
+          chooseImage={(image: IImage): void => {
+            setImageFile(image);
+          }}
+        />
+        <View style={styles.avatarActions}>
+          <ButtonUI
+            size="small"
+            title="Cancel"
+            variant="secondary"
+            disabled={!imageFile}
+            onPress={(): void => setImageFile(null)}
+          />
+          <ButtonUI
+            size="small"
+            title="Delete"
+            variant="primary"
+          />
+        </View>
+      </View>
       <InputUI
         label="Login"
         placeholder="Login"
+        containerStyle={styles.input}
       />
       <InputUI
         label="Email"
@@ -35,6 +62,18 @@ const styles = StyleSheet.create({
   form: {
     width: "100%",
     maxWidth: 335,
+  },
+  avatarContainer: {
+    display: "flex",
+    alignItems: "center",
+    flexDirection: "row",
+    justifyContent: "space-between",
+  },
+  avatarActions: {
+    gap: 10,
+    display: "flex",
+    alignItems: "center",
+    flexDirection: "column",
   },
   input: {
     marginTop: 20,
