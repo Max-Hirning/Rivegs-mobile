@@ -2,10 +2,11 @@ import {View} from "react-native";
 import HomePage from "./pages/index";
 import {Routes} from "./config/routes";
 import {Primary} from "./config/themes";
-import React, {ReactElement} from "react";
+import {useDispatch} from "react-redux";
 import HomeIcon from "./assets/icons/home";
 import PlusIcon from "./assets/icons/plus";
 import RecipePage from "./pages/recipe/index";
+import {useSession} from "./modules/authForm";
 import ProfilePage from "./pages/profile/index";
 import ProfileIcon from "./assets/icons/profile";
 import SettingsPage from "./pages/settings/index";
@@ -17,6 +18,9 @@ import EditRecipePage from "./pages/recipe/edit/index";
 import NotificationPage from "./pages/notifications/index";
 import SavedRecipesPage from "./pages/saved-recipes/index";
 import NotificationIcon from "./assets/icons/notification";
+import {AppDispatch, fetchRecipeTypes} from "./modules/store";
+import AuthorProfilePage from "./pages/profile/[userId]/index";
+import React, {ReactElement, useCallback, useEffect} from "react";
 import {createBottomTabNavigator} from "@react-navigation/bottom-tabs";
 import {createNativeStackNavigator} from "@react-navigation/native-stack";
 
@@ -123,6 +127,18 @@ function AuthScreens(): ReactElement {
 }
 
 export default function Navigation(): ReactElement {
+  const {update} = useSession();
+  const dispatch: AppDispatch = useDispatch();
+
+  const start = useCallback(async (): Promise<void> => {
+    update();
+    await dispatch(fetchRecipeTypes());
+  }, [dispatch, update]);
+
+  useEffect(() => {
+    start();
+  }, [start]);
+
   return (
     <Stack.Navigator
       screenOptions={{
@@ -143,8 +159,8 @@ export default function Navigation(): ReactElement {
         component={RecipePage}
       />
       <Stack.Screen
-        name={Routes.Profile}
-        component={ProfilePage}
+        name={Routes.AuthorProfile}
+        component={AuthorProfilePage}
       />
       <Stack.Screen
         name={Routes.Settings}

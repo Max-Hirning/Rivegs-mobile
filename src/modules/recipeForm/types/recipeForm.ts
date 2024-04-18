@@ -1,10 +1,4 @@
-export interface IRecipeForm {
-  title: string;
-  typeId: string;
-  description: string;
-  steps: IStepIngredient[];
-  ingredients: IStepIngredient[];
-}
+import {IRecipe} from "../../recipe";
 
 export interface IStepIngredient {
   _id: string;
@@ -12,4 +6,8 @@ export interface IStepIngredient {
   bold: boolean;
   italic: boolean;
   underlined: boolean;
+}
+
+export interface IRecipeForm extends Pick<IRecipe, "ingredients"|"steps"|"title"|"description"> {
+  typeId: string;
 }

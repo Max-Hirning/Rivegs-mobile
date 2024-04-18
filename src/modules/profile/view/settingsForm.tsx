@@ -1,4 +1,4 @@
-import {ImagePicker} from "./ImagePicker";
+import {ImagePicker} from "./imagePicker";
 import {IImage} from "../../../types/image";
 import {InputUI} from "../../../UI/InputUI";
 import {ButtonUI} from "../../../UI/ButtonUI";

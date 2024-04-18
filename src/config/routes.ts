@@ -12,4 +12,5 @@ export enum Routes {
   EditRecipe = "edit-recipe",
   Notification = "notification",
   SavedRecipes = "saved-recipes",
+  AuthorProfile = "author-profile",
 }

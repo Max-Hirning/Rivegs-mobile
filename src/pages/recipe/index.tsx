@@ -126,7 +126,7 @@ export default function Page(): ReactElement {
                 size="small"
                 title="Visit"
                 variant="primary"
-                onPress={(): void => navigate(Routes.Profile, {userId: "1334"})}
+                onPress={(): void => navigate(Routes.AuthorProfile, {userId: "1334"})}
               />
             </View>
           </View>
@@ -199,7 +199,6 @@ const styles = StyleSheet.create({
     width: "100%",
     marginTop: 10,
     marginBottom: 30,
-    paddingHorizontal: 25,
   },
   rateContainer: {
     display: "flex",

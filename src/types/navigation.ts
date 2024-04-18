@@ -18,14 +18,14 @@ export type NavigationParamList = {
   [Routes.Recipe]: {
     recipeId: string;
   };
-  [Routes.Profile]: {
-    userId: string;
-  };
   [Routes.EditRecipe]: {
     recipeId: string;
   };
 	[Routes.App]: undefined;
   [Routes.Auth]: undefined;
+  [Routes.AuthorProfile]: {
+    userId: string;
+  };
   [Routes.Settings]: undefined;
   [Routes.Security]: undefined;
 };

@@ -40,7 +40,6 @@ export function TabsNavigation({tabs, style}: IProps): ReactElement {
 const styles = StyleSheet.create({
   container: {
     width: "100%",
-    paddingHorizontal: 25,
   },
   tabContainer: {
     marginBottom: 10,

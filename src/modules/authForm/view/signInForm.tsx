@@ -1,24 +1,26 @@
 import {useFormik} from "formik";
 import {StyleSheet} from "react-native";
 import React, {ReactElement} from "react";
+import {useSignIn} from "../hooks/signIn";
 import {TextUI} from "../../../UI/TextUI";
 import {InputUI} from "../../../UI/InputUI";
+import {signInModel} from "../models/signIn";
 import {ButtonUI} from "../../../UI/ButtonUI";
 import {signInSchema} from "../schemas/signIn";
 import {Neutral} from "../../../config/themes";
-import {signInInitialValue} from "../models/signIn";
 import {TouchableOpacity, View} from "react-native";
 import ArrowRightIcon from "../../../assets/icons/arrows/right";
 
 export function SignInForm(): ReactElement {
   const formik = useFormik({
+    initialValues: signInModel,
     validationSchema: signInSchema,
-    initialValues: signInInitialValue,
     onSubmit: (values, {resetForm}) => {
-      console.log(values);
+      mutate(values);
       resetForm();
     },
   });
+  const {mutate} = useSignIn();
 
   return (
     <View style={styles.form}>

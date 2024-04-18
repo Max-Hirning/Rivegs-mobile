@@ -1,6 +1,6 @@
 import {ISignIn} from "../types/signIn";
 
-export const signInInitialValue: ISignIn = {
+export const signInModel: ISignIn = {
   email: "",
   password: "",
 };
