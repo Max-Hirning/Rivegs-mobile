@@ -56,6 +56,7 @@ export default function Page(): ReactElement {
       <RecipeMenu
         menu={menu}
         _id={data.data._id}
+        rate={data.data.rate}
         isAuthed={!!(profile.data)}
         closeMenu={(): void => setMenu(false)}
         savedRecipes={profile.data?.savedRecipes || []}

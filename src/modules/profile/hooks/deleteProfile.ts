@@ -8,7 +8,7 @@ import {QueryKeys} from "@src/config/queryKeys";
 import {useSession} from "@src/modules/authForm";
 import {UseMutationResult, useMutation} from "@tanstack/react-query";
 
-export function useDeleteProfile(): UseMutationResult<IResponse<undefined>, IResponse<undefined>, unknown, unknown> {
+export function useDeleteProfile(): UseMutationResult<IResponse<undefined>, IResponse<undefined>, void> {
   const {logOut} = useSession();
   const profile = useSelector((state: RootState) => state.profile);
 

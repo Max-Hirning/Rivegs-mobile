@@ -15,7 +15,8 @@ class RecipeAPI {
       if(typeId) {params.typeId = typeId;}
       if(rate) {params.rate = JSON.stringify(rate);}
       if(authorLogin) {params.authorLogin = authorLogin;}
-      if(recipesIds) {params.recipesIds = JSON.stringify(recipesIds);}
+      if(recipesIds && recipesIds.length > 0) {params.recipesIds = JSON.stringify(recipesIds);}
+      if(Object.keys(params).length === 0) {throw "No recipes";}
       const response = await axios.get(this.url, {params});
       return response.data;
     } catch (error) {

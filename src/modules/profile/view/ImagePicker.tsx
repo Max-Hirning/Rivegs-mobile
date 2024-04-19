@@ -1,6 +1,8 @@
+import {useSelector} from "react-redux";
 import {IImage} from "@src/types/image";
 import React, {ReactElement} from "react";
 import {AvatarUI} from "@src/UI/AvatarUI";
+import {RootState} from "@src/modules/store";
 import {TouchableOpacity} from "react-native";
 import Toast from "react-native-toast-message";
 import {ImageLibraryOptions, launchImageLibrary} from "react-native-image-picker";
@@ -11,6 +13,8 @@ interface IProps {
 }
 
 export function ImagePicker({image, chooseImage}: IProps): ReactElement {
+  const profile = useSelector((state: RootState) => state.profile);
+
   const selectImage = async (): Promise<void> => {
     const options: ImageLibraryOptions = {
       selectionLimit: 1,
@@ -48,9 +52,9 @@ export function ImagePicker({image, chooseImage}: IProps): ReactElement {
   return (
     <TouchableOpacity onPress={selectImage}>
       <AvatarUI
-        login="asd"
         size="large"
         source={image}
+        login={profile.data?.login || "a"}
       />
     </TouchableOpacity>
   );

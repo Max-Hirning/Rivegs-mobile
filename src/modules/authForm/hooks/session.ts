@@ -10,8 +10,8 @@ import {AppDispatch, fetchUser, resetProfile, setToken} from "@src/modules/store
 
 interface IHookResponse {
   logOut: () => Promise<void>;
-  update: () => Promise<void>;
   logIn: (arg: ISignInResponse) => void;
+  update: (successCallback?: () => void) => Promise<void>;
 }
 
 export function useSession(): IHookResponse {
@@ -33,14 +33,14 @@ export function useSession(): IHookResponse {
     }
   };
 
-  const update = async (): Promise<void> => {
+  const update = async (successCallback?: () => void): Promise<void> => {
     try {
       const token = await AsyncStorage.getItem(Token);
       const userId = await AsyncStorage.getItem(UserId);
       if(token && userId) {
         dispatch(setToken(token));
         await dispatch(fetchUser(userId));
-        navigate(Routes.App);
+        (successCallback) && successCallback();
       } else {
         navigate(Routes.Auth);
       }

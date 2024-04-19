@@ -1,62 +1,66 @@
 import {TextUI} from "@src/UI/TextUI";
-import React, {ReactElement} from "react";
+import {RateModal} from "./rateModal";
 import {Routes} from "@src/config/routes";
 import {PopUpMenu} from "@src/components/popUpMenu";
+import React, {ReactElement, useState} from "react";
 import {ScreenRouteProp} from "@src/types/navigation";
 import {useNavigation} from "@react-navigation/native";
+import {useUpdateSavedRecipes} from "@src/modules/profile";
 import {Alert, StyleSheet, TouchableOpacity, View} from "react-native";
 
 interface IProps {
   _id: string;
+  rate: number;
   menu: boolean;
   isAuthed: boolean;
   closeMenu: () => void;
   savedRecipes: string[];
 }
 
-export function RecipeMenu({menu, closeMenu, isAuthed, savedRecipes, _id}: IProps): ReactElement {
+export function RecipeMenu({menu, closeMenu, rate, isAuthed, savedRecipes, _id}: IProps): ReactElement {
+  const deleteRecipe = useUpdateSavedRecipes();
+  const saveUnSaveRecipe = useUpdateSavedRecipes();
   const {navigate} = useNavigation<ScreenRouteProp>();
+  const [rateModal, setRateModal] = useState<boolean>(false);
 
   return (
-    <PopUpMenu
-      isVisible={menu}
-      onClose={closeMenu}
-    >
-      <View style={styles.menu}>
-        <TouchableOpacity
-          onPress={(): void => {
-            closeMenu();
-          }}
-          style={styles.menuItem}
-        >
-          <TextUI variant="p">Share</TextUI>
-        </TouchableOpacity>
-        {
-          (isAuthed) &&
+    <>
+      <PopUpMenu
+        isVisible={menu}
+        onClose={closeMenu}
+      >
+        <View style={styles.menu}>
+          <TouchableOpacity
+            onPress={(): void => {
+              closeMenu();
+            }}
+            style={styles.menuItem}
+          >
+            <TextUI variant="p">Share</TextUI>
+          </TouchableOpacity>
+          {
+            (isAuthed) &&
             <TouchableOpacity
               onPress={(): void => {
                 closeMenu();
-                if(savedRecipes.includes(_id)) {
-                  console.log("unsave");
-                } else {
-                  console.log("save");
-                }
+                saveUnSaveRecipe.mutate(_id);
               }}
               style={styles.menuItem}
             >
               <TextUI variant="p">{savedRecipes.includes(_id) ? "Unsave" : "Save"}</TextUI>
             </TouchableOpacity>
-        }
-        <TouchableOpacity
-          onPress={(): void => {
-            closeMenu();
-          }}
-          style={styles.menuItem}
-        >
-          <TextUI variant="p">Rate Recipe</TextUI>
-        </TouchableOpacity>
-        {
-          (isAuthed) &&
+          }
+          <TouchableOpacity
+            onPress={(): void => {
+              setRateModal(true);
+              closeMenu();
+            }}
+            style={styles.menuItem}
+          >
+            <TextUI variant="p">Rate Recipe</TextUI>
+          </TouchableOpacity>
+          {
+            (isAuthed) &&
             <>
               <TouchableOpacity
                 onPress={(): void => {
@@ -78,7 +82,9 @@ export function RecipeMenu({menu, closeMenu, isAuthed, savedRecipes, _id}: IProp
                     },
                     {
                       text: "Delete",
-                      onPress: () => console.log("OK Pressed"),
+                      onPress: (): void => {
+                        deleteRecipe.mutate(_id);
+                      },
                     },
                   ]);
                 }}
@@ -87,9 +93,17 @@ export function RecipeMenu({menu, closeMenu, isAuthed, savedRecipes, _id}: IProp
                 <TextUI variant="p">Delete Recipe</TextUI>
               </TouchableOpacity>
             </>
-        }
-      </View>
-    </PopUpMenu>
+          }
+        </View>
+      </PopUpMenu>
+      <RateModal
+        menu={rateModal}
+        initialRate={rate}
+        closeMenu={(): void => {
+          setRateModal(false);
+        }}
+      />
+    </>
   );
 }
 

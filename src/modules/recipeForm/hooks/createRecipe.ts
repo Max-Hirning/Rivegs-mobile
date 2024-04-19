@@ -26,9 +26,11 @@ export function useCreateRecipe(): UseMutationResult<IResponse<undefined>, IResp
         text1: "Success",
         text2: success.message,
       });
-      queryClient.invalidateQueries({queryKey: [QueryKeys.GetRecipe]});
       queryClient.invalidateQueries({queryKey: [QueryKeys.GetRecipes]});
     },
-    mutationFn: (data: FormData): Promise<IResponse<undefined>> => recipeAPI.create((profile.data as IUser)._id, data, profile.token as string),
+    mutationFn: (data: FormData): Promise<IResponse<undefined>> => {
+      data.append("authorId", (profile.data as IUser)._id);
+      return recipeAPI.create(data, profile.token as string);
+    },
   });
 }

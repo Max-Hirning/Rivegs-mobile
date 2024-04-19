@@ -78,7 +78,7 @@ class UserAPI {
 
   async updateSavedRecipes(userId: string, recipeId: string, token: string): Promise<IResponse<undefined>> {
     try {
-      const response = await axios.put(`${this.url}/security/${userId}`, {
+      const response = await axios.put(`${this.url}/saved-recipes/${userId}`, {
         "recipe": recipeId,
       }, {
         headers: {

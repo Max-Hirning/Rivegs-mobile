@@ -5,9 +5,9 @@ import {IRecipeType} from "../types/recipeTypes";
 class RecipeAPI {
   constructor(protected readonly url: string) {}
 
-  async create(userId: string, recipe: FormData, token: string): Promise<IResponse<undefined>> {
+  async create(recipe: FormData, token: string): Promise<IResponse<undefined>> {
     try {
-      const response = await axios.post(`${this.url}/${userId}`, recipe, {
+      const response = await axios.post(this.url, recipe, {
         headers: {
           Authorization: `Bearer ${token}`,
           "Content-type": "multipart/form-data",

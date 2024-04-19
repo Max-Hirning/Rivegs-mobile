@@ -1,19 +1,43 @@
+import {TextUI} from "@src/UI/TextUI";
+import {Error} from "@src/config/themes";
 import React, {ReactElement} from "react";
 import {IFilters} from "../types/filters";
-import {Neutral} from "@src/config/themes";
 import {IRecipe} from "@src/modules/recipe";
 import {useGetRecipes} from "../hooks/getRecipes";
 import {RecipeCard} from "@src/components/recipeCard";
-import {FlatList, StyleSheet, View} from "react-native";
+import {ActivityIndicator, FlatList, StyleSheet, View} from "react-native";
 
 interface IProps {
   filters: Partial<IFilters>;
 }
 
+const EmptyListComponnet = (isError: boolean): ReactElement => {
+  if(isError) {
+    return (
+      <TextUI
+        variant="h2"
+        isBold={true}
+        style={styles.error}
+      >No recipes</TextUI>
+    );
+  }
+  return <></>;
+};
+const ListFooterComponent = (isLoading: boolean, nextPage: boolean): ReactElement => {
+  if(nextPage === null || !isLoading) {
+    return <></>;
+  }
+  return (
+    <ActivityIndicator
+      size="large"
+      style={styles.loader}
+    />
+  );
+};
 const ListDivider = (): ReactElement => <View style={styles.listDivider} />;
 
 export function RecipesList({filters}: IProps): ReactElement {
-  const {data} = useGetRecipes(filters);
+  const {data, isError, isLoading} = useGetRecipes(filters);
 
   return (
     <FlatList
@@ -32,6 +56,8 @@ export function RecipesList({filters}: IProps): ReactElement {
           />
         );
       }}
+      ListEmptyComponent={(): ReactElement => EmptyListComponnet(isError)}
+      ListFooterComponent={(): ReactElement => ListFooterComponent(isLoading, !!(data?.data.next))}
     />
   );
 }
@@ -44,10 +70,10 @@ const styles = StyleSheet.create({
   listDivider: {
     marginVertical: 5,
   },
-  recipeCard: {
-    width: 335,
-    height: 223,
-    borderRadius: 10,
-    backgroundColor: Neutral.Neutral30,
+  loader: {
+    marginBottom: 15,
+  },
+  error: {
+    color: Error.Error100,
   },
 });

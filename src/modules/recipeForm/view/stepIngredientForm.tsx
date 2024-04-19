@@ -9,6 +9,7 @@ import {StyleSheet, TouchableOpacity, View, ViewStyle} from "react-native";
 
 interface IProps {
   title: string;
+  placeholder: string;
   values: IStepIngredient[];
   containerStyle?: ViewStyle;
   removeEntry: (value: string) => void;
@@ -16,7 +17,7 @@ interface IProps {
   updateEntry: (value: IStepIngredient, index: number) => void;
 }
 
-export function StepIngredientForm({title, containerStyle, values, updateEntry, removeEntry, addEntry}: IProps): ReactElement {
+export function StepIngredientForm({title, placeholder, containerStyle, values, updateEntry, removeEntry, addEntry}: IProps): ReactElement {
   const [value, setValue] = useState<string>("");
 
   return (
@@ -35,14 +36,15 @@ export function StepIngredientForm({title, containerStyle, values, updateEntry, 
               >
                 <InputUI
                   value={el.value}
+                  multiline={true}
+                  placeholder={placeholder}
+                  containerStyle={styles.input}
                   onChangeText={(newValue: string): void => {
                     updateEntry({
                       ...el,
                       value: newValue,
                     }, index);
                   }}
-                  placeholder="Ingerdient"
-                  containerStyle={styles.input}
                 />
                 <TouchableOpacity
                   style={styles.button}
@@ -102,7 +104,7 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
   },
   input: {
-    flexGrow: 1,
+    width: "90%",
   },
   button: {
     marginLeft: 20,

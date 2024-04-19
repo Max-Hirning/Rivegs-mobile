@@ -1,6 +1,8 @@
 import React, {ReactElement} from "react";
 import {Routes} from "@src/config/routes";
 import {Neutral} from "@src/config/themes";
+import {useGetRecipe} from "@src/modules/recipe";
+import {RecipeForm} from "@src/modules/recipeForm";
 import {Header} from "@src/components/headers/header";
 import ArrowLeftIcon from "@src/assets/icons/arrows/left";
 import {PageScroll} from "@src/components/wrappers/pageScroll";
@@ -11,7 +13,8 @@ import {RouteProp, useNavigation, useRoute} from "@react-navigation/native";
 export default function Page(): ReactElement {
   const {goBack} = useNavigation<ScreenRouteProp>();
   const {params} = useRoute<RouteProp<NavigationParamList, Routes.EditRecipe>>();
-  console.log(params.recipeId);
+  const {data} = useGetRecipe(params.recipeId);
+  console.log(data?.data);
   return (
     <View style={styles.container}>
       <Header
@@ -26,7 +29,17 @@ export default function Page(): ReactElement {
         }
       />
       <PageScroll listStyle={styles.list}>
-        <></>
+        {
+          (data?.data) ?
+            <RecipeForm initialState={{
+              steps: data.data.steps,
+              title: data.data.title,
+              typeId: data.data.type._id,
+              ingredients: data.data.ingredients,
+              description: data.data.description,
+            }}/> :
+            <></>
+        }
       </PageScroll>
     </View>
   );

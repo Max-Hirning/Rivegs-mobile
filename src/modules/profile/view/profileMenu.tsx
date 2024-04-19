@@ -2,7 +2,9 @@ import {TextUI} from "@src/UI/TextUI";
 import {useSelector} from "react-redux";
 import React, {ReactElement} from "react";
 import {RootState} from "@src/modules/store";
+import {useSession} from "@src/modules/authForm";
 import {PopUpMenu} from "@src/components/popUpMenu";
+import {useDeleteProfile} from "../hooks/deleteProfile";
 import {StyleSheet, TouchableOpacity, View, Alert} from "react-native";
 
 interface IProps {
@@ -11,6 +13,8 @@ interface IProps {
 }
 
 export function ProfileMenu({menu, closeMenu}: IProps): ReactElement {
+  const {logOut} = useSession();
+  const {mutate} = useDeleteProfile();
   const profile = useSelector((state: RootState) => state.profile);
 
   if(!profile.data) {return <></>;}
@@ -24,6 +28,7 @@ export function ProfileMenu({menu, closeMenu}: IProps): ReactElement {
         <TouchableOpacity
           onPress={(): void => {
             closeMenu();
+            logOut();
           }}
           style={styles.menuItem}
         >
@@ -40,7 +45,9 @@ export function ProfileMenu({menu, closeMenu}: IProps): ReactElement {
               },
               {
                 text: "Delete",
-                onPress: () => console.log("OK Pressed"),
+                onPress: (): void => {
+                  mutate();
+                },
               },
             ]);
           }}

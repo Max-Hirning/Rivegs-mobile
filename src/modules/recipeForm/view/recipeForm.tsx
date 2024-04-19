@@ -5,6 +5,8 @@ import {ImagePicker} from "./ImagePicker";
 import {ButtonUI} from "@src/UI/ButtonUI";
 import {StyleSheet, View} from "react-native";
 import React, {ReactElement, useState} from "react";
+import {useUpdateRecipe} from "../hooks/updateRecipe";
+import {useCreateRecipe} from "../hooks/createRecipe";
 import {useNavigation} from "@react-navigation/native";
 import {recipeFormSchema} from "../schemas/recipeForm";
 import {StepIngredientForm} from "./stepIngredientForm";
@@ -17,13 +19,34 @@ interface IProps {
 
 export function RecipeForm({initialState}: IProps): ReactElement {
   const formik = useFormik({
-    onSubmit: (values) => {
-      console.log(values);
+    onSubmit: (values, {setValues}) => {
+      const formData = new FormData();
+      (imageFile) && formData.append("file", (imageFile as IImage));
+      (values.title && values.title.length > 0) && formData.append("title", values.title);
+      (values.steps.length > 0) && formData.append("steps", JSON.stringify(values.steps));
+      (values.typeId && values.typeId.length > 0) && formData.append("typeId", values.typeId);
+      (values.ingredients.length > 0) && formData.append("ingredients", JSON.stringify(values.ingredients));
+      (values.description && values.description.length > 0) && formData.append("description", values.description);
+      if(initialState) {
+        updateRecipe.mutate(formData);
+      } else {
+        createRecipe.mutate(formData);
+      }
+      setValues(initialState || {
+        title: "",
+        steps: [],
+        typeId: "",
+        description: "",
+        ingredients: [],
+      });
+      setImageFile(null);
     },
     validationSchema: recipeFormSchema,
     initialValues: recipeFormInitialValue,
   });
   const navigation = useNavigation();
+  const updateRecipe = useUpdateRecipe();
+  const createRecipe = useCreateRecipe();
   const [imageFile, setImageFile] = useState<null|IImage>(null);
 
   React.useEffect(() => {
@@ -63,6 +86,7 @@ export function RecipeForm({initialState}: IProps): ReactElement {
       />
       <StepIngredientForm
         title="Ingredients"
+        placeholder="Ingredient"
         containerStyle={styles.divider}
         values={formik.values.ingredients}
         removeEntry={(id: string): void => {
@@ -79,6 +103,7 @@ export function RecipeForm({initialState}: IProps): ReactElement {
       />
       <StepIngredientForm
         title="Steps"
+        placeholder="Step"
         values={formik.values.steps}
         containerStyle={styles.divider}
         removeEntry={(id: string): void => {

@@ -10,6 +10,7 @@ import PlusIcon from "@src/assets/icons/plus";
 import Toast from "react-native-toast-message";
 import {useSession} from "@src/modules/authForm";
 import RecipePage from "@src/pages/recipe/index";
+import {ScreenRouteProp} from "./types/navigation";
 import ProfilePage from "@src/pages/profile/index";
 import ProfileIcon from "@src/assets/icons/profile";
 import {Neutral, Primary} from "@src/config/themes";
@@ -148,14 +149,16 @@ function AuthScreens(): ReactElement {
 
 export default function Navigation(): ReactElement {
   const {update} = useSession();
-  const {navigate} = useNavigation();
   const dispatch: AppDispatch = useDispatch();
+  const {navigate} = useNavigation<ScreenRouteProp>();
 
   const start = useCallback(async (): Promise<void> => {
-    update();
+    update((): void => {
+      navigate(Routes.App);
+    });
     await dispatch(fetchRecipeTypes());
     setTimeout(() => SplashScreen.hide(), 1000);
-  }, [dispatch, update]);
+  }, [dispatch, navigate, update]);
 
   useEffect(() => {
     start();

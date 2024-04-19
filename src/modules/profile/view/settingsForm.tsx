@@ -1,21 +1,47 @@
+import {useFormik} from "formik";
 import {IImage} from "@src/types/image";
 import {InputUI} from "@src/UI/InputUI";
+import {useSelector} from "react-redux";
 import {ImagePicker} from "./imagePicker";
 import {ButtonUI} from "@src/UI/ButtonUI";
+import {RootState} from "@src/modules/store";
 import {StyleSheet, View} from "react-native";
 import React, {ReactElement, useState} from "react";
+import {useDeleteAvatar} from "../hooks/deleteAvatar";
+import {useUpdateProfile} from "../hooks/updateProfile";
+import {settingsFormModel} from "../models/settingsForm";
+import {settingsFormSchema} from "../schemas/settingsForm";
 
 export function SettingsForm(): ReactElement {
+  const formik = useFormik({
+    initialValues: settingsFormModel,
+    validationSchema: settingsFormSchema,
+    onSubmit: (values, {resetForm}) => {
+      const formData = new FormData();
+      (imageFile) && formData.append("file", (imageFile as IImage));
+      (values.login && values.login.length > 0) && formData.append("login", values.login);
+      (values.email && values.email.length > 0) && formData.append("email", values.email);
+      (values.description && values.description.length > 0) && formData.append("description", values.description);
+      updateProfile.mutate(formData);
+      resetForm();
+      setImageFile(null);
+    },
+  });
+  const deleteAvatar = useDeleteAvatar();
+  const updateProfile = useUpdateProfile();
   const [imageFile, setImageFile] = useState<null|IImage>(null);
+  const profile = useSelector((state: RootState) => state.profile);
+  const [avatarHasBeenChanged, setAvatarHasBeenChanged] = useState<boolean>(false);
 
   return (
     <View style={styles.form}>
       <View style={styles.avatarContainer}>
         <ImagePicker
-          image={imageFile?.uri || undefined}
           chooseImage={(image: IImage): void => {
             setImageFile(image);
+            setAvatarHasBeenChanged(true);
           }}
+          image={imageFile?.uri || profile.data?.avatar || undefined}
         />
         <View style={styles.avatarActions}>
           <ButtonUI
@@ -23,29 +49,51 @@ export function SettingsForm(): ReactElement {
             title="Cancel"
             variant="secondary"
             disabled={!imageFile}
-            onPress={(): void => setImageFile(null)}
+            onPress={(): void => {
+              setImageFile(null);
+              setAvatarHasBeenChanged(false);
+            }}
           />
           <ButtonUI
             size="small"
             title="Delete"
             variant="primary"
+            onPress={(): void => {
+              deleteAvatar.mutate();
+              setAvatarHasBeenChanged(false);
+            }}
           />
         </View>
       </View>
       <InputUI
         label="Login"
         placeholder="Login"
+        value={formik.values.login}
         containerStyle={styles.input}
+        errorMsg={formik.errors.login}
+        onChangeText={(value: string): void => {
+          formik.setFieldValue("login", value);
+        }}
       />
       <InputUI
         label="Email"
         placeholder="Email"
+        value={formik.values.email}
         containerStyle={styles.input}
+        errorMsg={formik.errors.email}
+        onChangeText={(value: string): void => {
+          formik.setFieldValue("email", value);
+        }}
       />
       <InputUI
         multiline={true}
         label="Description"
         containerStyle={styles.input}
+        errorMsg={formik.errors.description}
+        value={formik.values.description}
+        onChangeText={(value: string): void => {
+          formik.setFieldValue("description", value);
+        }}
         placeholder="Type something about you..."
       />
       <ButtonUI
@@ -53,6 +101,10 @@ export function SettingsForm(): ReactElement {
         variant="primary"
         style={styles.button}
         title="Update Profile"
+        onPress={(): void => {
+          formik.submitForm();
+        }}
+        disabled={!((formik.isValid && Object.values(formik.values).some((el) => el.length > 0)) || avatarHasBeenChanged)}
       />
     </View>
   );

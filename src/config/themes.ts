@@ -9,7 +9,7 @@ export enum Rating {
 
 export enum Success {
   Success100 = "#31B057",
-  Success10 = "#EAF7EE",
+  Success10 = "#CEECD7",
 }
 
 export enum Neutral {
@@ -27,17 +27,17 @@ export enum Neutral {
 }
 
 export enum Primary {
-  Primary100 = "#396022",
-  Primary90 = "#447329",
-  Primary80 = "#508630",
-  Primary70 = "#5B9936",
-  Primary60 = "#67AC3D",
+  Primary100 = "#711F1F",
+  Primary90 = "#882525",
+  Primary80 = "#9E2B2B",
+  Primary70 = "#B53232",
+  Primary60 = "#CB3838",
   Primary50 = "#E23E3E",
-  Primary40 = "#80C557",
-  Primary30 = "#9CD27C",
-  Primary20 = "#B9DFA2",
-  Primary10 = "#D5ECC7",
-  Primary0 = "#F1F9EC",
+  Primary40 = "#E86565",
+  Primary30 = "#EE8B8B",
+  Primary20 = "#F3B2B2",
+  Primary10 = "#F9D8D8",
+  Primary0 = "#FCECEC",
 }
 
 export enum Secondary {

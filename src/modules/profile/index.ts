@@ -5,3 +5,4 @@ export {ProfileMenu} from "./view/profileMenu";
 export {ProfileInfo} from "./view/profileInfo";
 export {SecurityForm} from "./view/securityForm";
 export {SettingsForm} from "./view/settingsForm";
+export {useUpdateSavedRecipes} from "./hooks/updateSavedRecipes";

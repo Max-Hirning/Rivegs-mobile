@@ -31,7 +31,7 @@ class RecipeAPI {
 
   async updateRecipeRate(recipeId: string, rate: number, token: string): Promise<IResponse<undefined>> {
     try {
-      const response = await axios.patch(`${this.url}/rate/${recipeId}`, {rate}, {
+      const response = await axios.put(`${this.url}/rate/${recipeId}`, {rate}, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
