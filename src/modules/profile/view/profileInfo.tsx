@@ -62,7 +62,7 @@ export function ProfileInfo({login, avatar, description, isUserProfile, recipesA
             isBold={true}
           >{recipesAmount}</TextUI>
         </View>
-        <View style={styles.verticalDivider}/>
+        {/* <View style={styles.verticalDivider}/>
         <View>
           <TextUI variant="small">Followers</TextUI>
           <TextUI
@@ -77,7 +77,7 @@ export function ProfileInfo({login, avatar, description, isUserProfile, recipesA
             variant="h5"
             isBold={true}
           >120</TextUI>
-        </View>
+        </View> */}
       </View>
     </View>
   );

@@ -2,6 +2,10 @@ import axios, {AxiosError} from "axios";
 import {IResponse} from "../../../types/api";
 import {IRecipeType} from "../types/recipeTypes";
 
+class RecipeAPI {
+  constructor(protected readonly url: string) {}
+
+}
 class RecipeTypesAPI {
   constructor(protected readonly url: string) {}
 
@@ -16,5 +20,5 @@ class RecipeTypesAPI {
   }
 }
 
+export const recipeAPI = new RecipeAPI(`${process.env.API_URL}/recipe`);
 export const recipeTypesAPI = new RecipeTypesAPI(`${process.env.API_URL}/recipe-type`);
-

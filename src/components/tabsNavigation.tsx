@@ -42,7 +42,7 @@ const styles = StyleSheet.create({
     width: "100%",
   },
   tabContainer: {
-    marginBottom: 10,
+    marginBottom: 30,
     flexDirection: "row",
     justifyContent: "center",
   },
@@ -51,7 +51,5 @@ const styles = StyleSheet.create({
   },
   contentContainer: {
     width: "100%",
-    marginTop: 30,
-    paddingBottom: 10,
   },
 });

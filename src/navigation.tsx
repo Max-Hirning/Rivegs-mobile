@@ -14,6 +14,7 @@ import BookmarkIcon from "./assets/icons/bookmark";
 import SignInPage from "./pages/auth/sign-in/index";
 import SignUpPage from "./pages/auth/sign-up/index";
 import AddRecipePage from "./pages/recipe/add/index";
+import SplashScreen from "react-native-splash-screen";
 import EditRecipePage from "./pages/recipe/edit/index";
 import NotificationPage from "./pages/notifications/index";
 import SavedRecipesPage from "./pages/saved-recipes/index";
@@ -133,6 +134,7 @@ export default function Navigation(): ReactElement {
   const start = useCallback(async (): Promise<void> => {
     update();
     await dispatch(fetchRecipeTypes());
+    setTimeout(() => SplashScreen.hide(), 1000);
   }, [dispatch, update]);
 
   useEffect(() => {

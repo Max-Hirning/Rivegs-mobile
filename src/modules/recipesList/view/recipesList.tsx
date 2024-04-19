@@ -1,7 +1,7 @@
+import {IRecipe} from "../../recipe";
 import React, {ReactElement} from "react";
 import {IFilters} from "../types/filters";
 import {Neutral} from "../../../config/themes";
-import {IRecipe} from "../../recipe/types/recipe";
 import {useGetRecipes} from "../hooks/getRecipes";
 import {FlatList, StyleSheet, View} from "react-native";
 import {RecipeCard} from "../../../components/recipeCard";
