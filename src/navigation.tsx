@@ -19,6 +19,7 @@ import SignInPage from "./pages/auth/sign-in/index";
 import SignUpPage from "./pages/auth/sign-up/index";
 import AddRecipePage from "./pages/recipe/add/index";
 import SplashScreen from "react-native-splash-screen";
+import NetInfo from "@react-native-community/netinfo";
 import EditRecipePage from "./pages/recipe/edit/index";
 import NotificationPage from "./pages/notifications/index";
 import SavedRecipesPage from "./pages/saved-recipes/index";
@@ -28,6 +29,8 @@ import AuthorProfilePage from "./pages/profile/[userId]/index";
 import React, {ReactElement, useCallback, useEffect} from "react";
 import {createBottomTabNavigator} from "@react-navigation/bottom-tabs";
 import {createNativeStackNavigator} from "@react-navigation/native-stack";
+import {useNavigation} from "@react-navigation/native";
+import Toast from "react-native-toast-message";
 
 interface ITabBarIconArg {
   size: number;
@@ -145,6 +148,7 @@ function AuthScreens(): ReactElement {
 
 export default function Navigation(): ReactElement {
   const {update} = useSession();
+  const {navigate} = useNavigation();
   const dispatch: AppDispatch = useDispatch();
 
   const start = useCallback(async (): Promise<void> => {
@@ -156,6 +160,21 @@ export default function Navigation(): ReactElement {
   useEffect(() => {
     start();
   }, [start]);
+
+  useEffect(() => {
+    const removeNetInfoSubscription = NetInfo.addEventListener((state) => {
+      const offline = !(state.isConnected && state.isInternetReachable);
+      if(offline) {
+        Toast.show({
+          type: "error",
+          text1: "Error",
+          text2: "No internet connection",
+        });
+      }
+    });
+
+    return () => removeNetInfoSubscription();
+  }, [navigate]);
 
   return (
     <Stack.Navigator

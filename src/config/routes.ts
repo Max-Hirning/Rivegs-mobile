@@ -5,6 +5,7 @@ export enum Routes {
   Recipe = "recipe",
   SignIn = "sign-in",
   SignUp = "sign-up",
+  Offline = "offline",
   Profile = "profile",
   Security = "security",
   Settings = "settings",
