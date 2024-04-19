@@ -12,6 +12,7 @@ export function Loader(): ReactElement {
   const isDeletingUser = useIsMutating({mutationKey: [QueryKeys.DeleteUser]});
   const isUpdatingProfile = useIsMutating({mutationKey: [QueryKeys.UpdateProfile]});
   const isUpdatingSecurity = useIsMutating({mutationKey: [QueryKeys.UpdateSecurity]});
+  const isDeletingUserAvatar = useIsMutating({mutationKey: [QueryKeys.DeleteUserAvatar]});
 
   const isGetingRecipe = useIsFetching({queryKey: [QueryKeys.GetRecipe]});
   const isCreatingRecipe = useIsMutating({mutationKey: [QueryKeys.CreateRecipe]});
@@ -24,7 +25,7 @@ export function Loader(): ReactElement {
     <Modal
       transparent={true}
       animationType="fade"
-      visible={!!(isSignIn || isGetingUser || isGetingRecipe || isUpdatingSecurity || isUpdatingRecipeRate || isDeletingUser || isSaveUnSaveRecipe || isDeletingRecipe || isUpdatingRecipe || isCreatingRecipe || isSignUp || isUpdatingProfile)}
+      visible={!!(isSignIn || isDeletingUserAvatar || isGetingUser || isGetingRecipe || isUpdatingSecurity || isUpdatingRecipeRate || isDeletingUser || isSaveUnSaveRecipe || isDeletingRecipe || isUpdatingRecipe || isCreatingRecipe || isSignUp || isUpdatingProfile)}
     >
       <View style={styles.modalContainer}>
         <ActivityIndicator

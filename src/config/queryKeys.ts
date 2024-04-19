@@ -9,10 +9,11 @@ export enum QueryKeys {
   UpdateRecipe = "update-recipe",
   CreateRecipe = "create-recipe",
   UpdateRecipeRate = "update-recipe-rate",
-  SaveUnSaveRecipe = "save-unsave-recipe",
 
   GetUser = "get-user",
   DeleteUser = "delete-user",
   UpdateProfile = "update-profile",
   UpdateSecurity = "update-security",
+  DeleteUserAvatar = "delete-user-avatar",
+  SaveUnSaveRecipe = "save-unsave-recipe",
 }

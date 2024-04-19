@@ -11,7 +11,7 @@ export function useGetUser(): UseQueryResult<IResponse<IUser>, unknown> {
   const {params} = useRoute<RouteProp<NavigationParamList, Routes.AuthorProfile>>();
 
   return useQuery({
-    queryKey: [QueryKeys.GetUser],
+    queryKey: [QueryKeys.GetUser, params.userId],
     queryFn: (): Promise<IResponse<IUser>> => userAPI.get(params.userId),
   });
 }
