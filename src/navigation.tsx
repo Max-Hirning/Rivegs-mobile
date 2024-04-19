@@ -1,7 +1,9 @@
+/* eslint-disable react-native/no-inline-styles */
+
 import {View} from "react-native";
+import {TextUI} from "./UI/TextUI";
 import HomePage from "./pages/index";
 import {Routes} from "./config/routes";
-import {Primary} from "./config/themes";
 import {useDispatch} from "react-redux";
 import HomeIcon from "./assets/icons/home";
 import PlusIcon from "./assets/icons/plus";
@@ -9,8 +11,10 @@ import RecipePage from "./pages/recipe/index";
 import {useSession} from "./modules/authForm";
 import ProfilePage from "./pages/profile/index";
 import ProfileIcon from "./assets/icons/profile";
+import {Neutral, Primary} from "./config/themes";
 import SettingsPage from "./pages/settings/index";
 import BookmarkIcon from "./assets/icons/bookmark";
+import {getVersion} from "react-native-device-info";
 import SignInPage from "./pages/auth/sign-in/index";
 import SignUpPage from "./pages/auth/sign-up/index";
 import AddRecipePage from "./pages/recipe/add/index";
@@ -36,26 +40,38 @@ const Stack = createNativeStackNavigator();
 
 const AddRecipeTabBarIcon = (): ReactElement => {
   return (
-    // eslint-disable-next-line react-native/no-inline-styles
     <View style={{
-      width: 48,
-      height: 48,
-      bottom: 15,
-      display: "flex",
-      borderRadius: 100,
+      bottom: 5,
       alignItems: "center",
       position: "absolute",
-      justifyContent: "center",
-      backgroundColor: Primary.Primary50,
+      justifyContent: "space-between",
     }}>
-      <PlusIcon width={24} height={24} color="white"/>
+      <View style={{
+        width: 48,
+        height: 48,
+        bottom: 20,
+        display: "flex",
+        borderRadius: 100,
+        alignItems: "center",
+        position: "absolute",
+        justifyContent: "center",
+        backgroundColor: Primary.Primary50,
+      }}>
+        <PlusIcon width={24} height={24} color="white"/>
+      </View>
+      <TextUI
+        style={{
+          color: Neutral.Neutral70,
+        }}
+        variant="small"
+      >{getVersion()}</TextUI>
     </View>
   );
 };
-const HomeTabBarIcon = ({focused}: ITabBarIconArg): ReactElement => <HomeIcon width={24} height={24} color={focused ? "#E23E3E" : "#C1C1C1"} fill={focused ? "#F9D8D8" : "white"}/>;
-const ProfileTabBarIcon = ({focused}: ITabBarIconArg): ReactElement => <ProfileIcon width={24} height={24} color={focused ? "#E23E3E" : "#C1C1C1"} fill={focused ? "#F9D8D8" : "white"}/>;
-const NotificationTabBarIcon = ({focused}: ITabBarIconArg): ReactElement => <NotificationIcon width={24} height={24} color={focused ? "#E23E3E" : "#C1C1C1"} fill={focused ? "#F9D8D8" : "white"}/>;
-const SavedRecipesTabBarIcon = ({focused}: ITabBarIconArg): ReactElement => <BookmarkIcon width={24} height={24} color={focused ? "#E23E3E" : "#C1C1C1"} stroke={focused ? "#E23E3E" : "#C1C1C1"} fill={focused ? "#F9D8D8" : "white"}/>;
+const HomeTabBarIcon = ({focused}: ITabBarIconArg): ReactElement => <HomeIcon width={24} height={24} color={focused ? Primary.Primary50 : Neutral.Neutral30} fill={focused ? "#F9D8D8" : Neutral.Neutral0}/>;
+const ProfileTabBarIcon = ({focused}: ITabBarIconArg): ReactElement => <ProfileIcon width={24} height={24} color={focused ? Primary.Primary50 : Neutral.Neutral30} fill={focused ? "#F9D8D8" : Neutral.Neutral0}/>;
+const NotificationTabBarIcon = ({focused}: ITabBarIconArg): ReactElement => <NotificationIcon width={24} height={24} color={focused ? Primary.Primary50 : Neutral.Neutral30} fill={focused ? "#F9D8D8" : Neutral.Neutral0}/>;
+const SavedRecipesTabBarIcon = ({focused}: ITabBarIconArg): ReactElement => <BookmarkIcon width={24} height={24} color={focused ? Primary.Primary50 : Neutral.Neutral30} stroke={focused ? Primary.Primary50 : Neutral.Neutral30} fill={focused ? "#F9D8D8" : Neutral.Neutral0}/>;
 
 function AppScreens(): ReactElement {
   return (
