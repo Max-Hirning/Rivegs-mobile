@@ -1,4 +1,4 @@
-import {Routes} from "../config/routes";
+import {Routes} from "@src/config/routes";
 import type {NavigationProp} from "@react-navigation/native";
 
 type AppParamList = {

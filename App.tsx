@@ -1,10 +1,10 @@
 import {Provider} from "react-redux";
 import {StatusBar} from "react-native";
-import Navigation from "./src/navigation";
+import Navigation from "@src/navigation";
+import {store} from "@src/modules/store";
 import React, {ReactElement} from "react";
-import {store} from "./src/modules/store";
+import {Loader} from "@src/components/loader";
 import Toast from "react-native-toast-message";
-import {Loader} from "./src/components/loader";
 import {NavigationContainer} from "@react-navigation/native";
 import {QueryClient, QueryClientProvider} from "@tanstack/react-query";
 

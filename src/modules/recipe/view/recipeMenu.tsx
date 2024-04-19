@@ -1,9 +1,9 @@
-import {TextUI} from "../../../UI/TextUI";
+import {TextUI} from "@src/UI/TextUI";
 import React, {ReactElement} from "react";
-import {Routes} from "../../../config/routes";
+import {Routes} from "@src/config/routes";
+import {PopUpMenu} from "@src/components/popUpMenu";
+import {ScreenRouteProp} from "@src/types/navigation";
 import {useNavigation} from "@react-navigation/native";
-import {PopUpMenu} from "../../../components/popUpMenu";
-import {ScreenRouteProp} from "../../../types/navigation";
 import {Alert, StyleSheet, TouchableOpacity, View} from "react-native";
 
 interface IProps {

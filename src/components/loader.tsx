@@ -1,6 +1,6 @@
-import {Neutral} from "../config/themes";
 import React, {ReactElement} from "react";
-import {QueryKeys} from "../config/queryKeys";
+import {Neutral} from "@src/config/themes";
+import {QueryKeys} from "@src/config/queryKeys";
 import {useIsFetching, useIsMutating} from "@tanstack/react-query";
 import {StyleSheet, ActivityIndicator, View, Modal} from "react-native";
 

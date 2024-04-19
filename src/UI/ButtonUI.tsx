@@ -1,5 +1,5 @@
 import {TextUI} from "./TextUI";
-import {Neutral, Primary} from "../config/themes";
+import {Neutral, Primary} from "@src/config/themes";
 import React, {ReactElement, ReactNode} from "react";
 import {StyleSheet, ButtonProps, TouchableOpacity, ViewStyle} from "react-native";
 

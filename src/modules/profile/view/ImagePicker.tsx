@@ -1,7 +1,8 @@
+import {IImage} from "@src/types/image";
 import React, {ReactElement} from "react";
-import {IImage} from "../../../types/image";
-import {AvatarUI} from "../../../UI/AvatarUI";
+import {AvatarUI} from "@src/UI/AvatarUI";
 import {TouchableOpacity} from "react-native";
+import Toast from "react-native-toast-message";
 import {ImageLibraryOptions, launchImageLibrary} from "react-native-image-picker";
 
 interface IProps {
@@ -20,9 +21,10 @@ export function ImagePicker({image, chooseImage}: IProps): ReactElement {
     if(!didCancel && assets) {
       const chosenImage = assets[0];
       if((chosenImage.height && chosenImage.width) && chosenImage.height > chosenImage.width) {
-        console.log({
-          type: "warning",
-          message: "Image must be horizontal",
+        Toast.show({
+          type: "error",
+          text1: "Warning",
+          text2: "Image must be horizontal",
         });
         return;
       }
@@ -33,10 +35,10 @@ export function ImagePicker({image, chooseImage}: IProps): ReactElement {
           name: (Date.now()).toString(),
         });
       } else {
-        console.log({
-          type: "warning",
-          message: "Image is too big",
-          description: "Must be less than 300KB",
+        Toast.show({
+          type: "error",
+          text1: "Image is too big",
+          text2: "Must be less than 300KB",
         });
         return;
       }

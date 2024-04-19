@@ -1,6 +1,6 @@
 import {ISignUp} from "../types/signUp";
 import axios, {AxiosError} from "axios";
-import {IResponse} from "../../../types/api";
+import {IResponse} from "@src/types/api";
 import {ISignIn, ISignInResponse} from "../types/signIn";
 
 class AuthAPI {

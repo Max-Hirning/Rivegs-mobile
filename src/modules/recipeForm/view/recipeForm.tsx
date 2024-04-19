@@ -1,8 +1,8 @@
 import {useFormik} from "formik";
+import {InputUI} from "@src/UI/InputUI";
+import {IImage} from "@src/types/image";
 import {ImagePicker} from "./ImagePicker";
-import {InputUI} from "../../../UI/InputUI";
-import {IImage} from "../../../types/image";
-import {ButtonUI} from "../../../UI/ButtonUI";
+import {ButtonUI} from "@src/UI/ButtonUI";
 import {StyleSheet, View} from "react-native";
 import React, {ReactElement, useState} from "react";
 import {useNavigation} from "@react-navigation/native";

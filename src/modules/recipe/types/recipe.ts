@@ -1,6 +1,5 @@
-import {IUser} from "../../profile";
-import {IRecipeType} from "../../recipeForm/types/recipeTypes";
-import {IStepIngredient} from "../../recipeForm/types/recipeForm";
+import {IUser} from "@src/modules/profile";
+import {IRecipeType, IStepIngredient} from "@src/modules/recipeForm";
 
 export interface IRecipe {
   _id: string;

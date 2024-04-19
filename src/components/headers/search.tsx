@@ -1,7 +1,7 @@
-import {InputUI} from "../../UI/InputUI";
+import {InputUI} from "@src/UI/InputUI";
 import React, {ReactElement} from "react";
-import FilterIcon from "../../assets/icons/filter";
-import {Neutral, Primary} from "../../config/themes";
+import FilterIcon from "@src/assets/icons/filter";
+import {Neutral, Primary} from "@src/config/themes";
 import {StyleSheet, TouchableOpacity, View} from "react-native";
 
 export function SearchHeader(): ReactElement {

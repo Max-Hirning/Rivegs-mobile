@@ -1,6 +1,6 @@
+import {IImage} from "@src/types/image";
 import React, {ReactElement} from "react";
-import {IImage} from "../../../types/image";
-import {ButtonUI} from "../../../UI/ButtonUI";
+import {ButtonUI} from "@src/UI/ButtonUI";
 import Toast from "react-native-toast-message";
 import {Image, StyleSheet, TouchableOpacity} from "react-native";
 import {ImageLibraryOptions, launchImageLibrary} from "react-native-image-picker";

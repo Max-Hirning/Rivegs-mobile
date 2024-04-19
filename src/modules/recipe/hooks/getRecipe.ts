@@ -1,7 +1,7 @@
 import {IRecipe} from "../types/recipe";
+import {IResponse} from "@src/types/api";
 import {recipeAPI} from "../controllers/api";
-import {IResponse} from "../../../types/api";
-import {QueryKeys} from "../../../config/queryKeys";
+import {QueryKeys} from "@src/config/queryKeys";
 import {UseQueryResult, useQuery} from "@tanstack/react-query";
 
 export function useGetRecipe(recipeId: string): UseQueryResult<IResponse<IRecipe>, unknown> {

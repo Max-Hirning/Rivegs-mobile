@@ -1,10 +1,10 @@
 import {useSelector} from "react-redux";
 import React, {ReactElement} from "react";
-import {Neutral} from "../../config/themes";
+import {Neutral} from "@src/config/themes";
+import {RootState} from "@src/modules/store";
 import {StyleSheet, View} from "react-native";
-import {RootState} from "../../modules/store";
-import {RecipesList} from "../../modules/recipesList";
-import {Header} from "../../components/headers/header";
+import {RecipesList} from "@src/modules/recipesList";
+import {Header} from "@src/components/headers/header";
 
 export default function Page(): ReactElement {
   const profile = useSelector((state: RootState) => state.profile);

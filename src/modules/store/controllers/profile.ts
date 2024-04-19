@@ -1,5 +1,5 @@
-import {IUser, userAPI} from "../../profile";
 import {IProfileStore} from "../types/profile";
+import {IUser, userAPI} from "@src/modules/profile";
 import {profileStoreModel} from "../models/profile";
 import type {PayloadAction} from "@reduxjs/toolkit";
 import {createAsyncThunk, createSlice} from "@reduxjs/toolkit";

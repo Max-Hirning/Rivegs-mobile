@@ -1,10 +1,10 @@
-import {TextUI} from "../../../UI/TextUI";
-import {InputUI} from "../../../UI/InputUI";
-import {Neutral} from "../../../config/themes";
+import {TextUI} from "@src/UI/TextUI";
+import {InputUI} from "@src/UI/InputUI";
+import {Neutral} from "@src/config/themes";
 import React, {ReactElement, useState} from "react";
 import {IStepIngredient} from "../types/recipeForm";
-import AddBorderIcon from "../../../assets/icons/border/plus";
-import RemoveBorderIcon from "../../../assets/icons/border/minus";
+import AddBorderIcon from "@src/assets/icons/border/plus";
+import RemoveBorderIcon from "@src/assets/icons/border/minus";
 import {StyleSheet, TouchableOpacity, View, ViewStyle} from "react-native";
 
 interface IProps {

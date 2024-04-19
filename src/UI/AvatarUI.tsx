@@ -1,4 +1,4 @@
-import {Neutral} from "../config/themes";
+import {Neutral} from "@src/config/themes";
 import React, {ReactElement} from "react";
 import {TextUI, TextVariant} from "./TextUI";
 import {Image, ImageStyle, StyleSheet, View} from "react-native";

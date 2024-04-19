@@ -1,13 +1,13 @@
+import {TextUI} from "@src/UI/TextUI";
 import React, {ReactElement} from "react";
-import {TextUI} from "../../../UI/TextUI";
-import {AvatarUI} from "../../../UI/AvatarUI";
-import {ButtonUI} from "../../../UI/ButtonUI";
-import {Routes} from "../../../config/routes";
+import {AvatarUI} from "@src/UI/AvatarUI";
+import {ButtonUI} from "@src/UI/ButtonUI";
+import {Routes} from "@src/config/routes";
+import {Rating} from "@src/config/themes";
 import {StyleSheet, View} from "react-native";
-import {Rating} from "../../../config/themes";
-import StarIcon from "../../../assets/icons/star";
+import StarIcon from "@src/assets/icons/star";
+import {ScreenRouteProp} from "@src/types/navigation";
 import {useNavigation} from "@react-navigation/native";
-import {ScreenRouteProp} from "../../../types/navigation";
 
 interface IProps {
   rate: number;

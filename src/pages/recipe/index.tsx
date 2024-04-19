@@ -1,16 +1,16 @@
 import {useSelector} from "react-redux";
-import {Routes} from "../../config/routes";
-import {Neutral} from "../../config/themes";
-import {RootState} from "../../modules/store";
-import MoreIcon from "../../assets/icons/more";
+import {Routes} from "@src/config/routes";
+import {Neutral} from "@src/config/themes";
+import {RootState} from "@src/modules/store";
+import MoreIcon from "@src/assets/icons/more";
 import React, {ReactElement, useState} from "react";
-import {Header} from "../../components/headers/header";
-import ArrowLeftIcon from "../../assets/icons/arrows/left";
-import {TabsNavigation} from "../../components/tabsNavigation";
-import {PageScroll} from "../../components/wrappers/pageScroll";
-import {AuthorInfo, RecipeMenu, useGetRecipe} from "../../modules/recipe";
-import {IStepIngredient} from "../../modules/recipeForm/types/recipeForm";
-import {NavigationParamList, ScreenRouteProp} from "../../types/navigation";
+import {Header} from "@src/components/headers/header";
+import {IStepIngredient} from "@src/modules/recipeForm";
+import ArrowLeftIcon from "@src/assets/icons/arrows/left";
+import {TabsNavigation} from "@src/components/tabsNavigation";
+import {PageScroll} from "@src/components/wrappers/pageScroll";
+import {AuthorInfo, RecipeMenu, useGetRecipe} from "@src/modules/recipe";
+import {NavigationParamList, ScreenRouteProp} from "@src/types/navigation";
 import {RouteProp, useNavigation, useRoute} from "@react-navigation/native";
 import {StyleSheet, Text, TouchableOpacity, View, Image, TextStyle} from "react-native";
 

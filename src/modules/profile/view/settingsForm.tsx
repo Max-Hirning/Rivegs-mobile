@@ -1,7 +1,7 @@
+import {IImage} from "@src/types/image";
+import {InputUI} from "@src/UI/InputUI";
 import {ImagePicker} from "./imagePicker";
-import {IImage} from "../../../types/image";
-import {InputUI} from "../../../UI/InputUI";
-import {ButtonUI} from "../../../UI/ButtonUI";
+import {ButtonUI} from "@src/UI/ButtonUI";
 import {StyleSheet, View} from "react-native";
 import React, {ReactElement, useState} from "react";
 

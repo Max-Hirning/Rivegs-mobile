@@ -1,4 +1,4 @@
-import {IUser} from "../../profile";
+import {IUser} from "@src/modules/profile";
 
 export interface IProfileStore {
   data: IUser|null;

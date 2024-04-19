@@ -1,10 +1,10 @@
-import {IRecipe} from "../../recipe";
 import React, {ReactElement} from "react";
 import {IFilters} from "../types/filters";
-import {Neutral} from "../../../config/themes";
+import {Neutral} from "@src/config/themes";
+import {IRecipe} from "@src/modules/recipe";
 import {useGetRecipes} from "../hooks/getRecipes";
+import {RecipeCard} from "@src/components/recipeCard";
 import {FlatList, StyleSheet, View} from "react-native";
-import {RecipeCard} from "../../../components/recipeCard";
 
 interface IProps {
   filters: Partial<IFilters>;

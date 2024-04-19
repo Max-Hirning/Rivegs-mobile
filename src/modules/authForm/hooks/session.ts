@@ -1,13 +1,12 @@
-import {AppDispatch} from "../../store";
 import {useDispatch} from "react-redux";
-import {Routes} from "../../../config/routes";
+import {Routes} from "@src/config/routes";
 import Toast from "react-native-toast-message";
 import {ISignInResponse} from "../types/signIn";
+import {ScreenRouteProp} from "@src/types/navigation";
 import {useNavigation} from "@react-navigation/native";
-import {ScreenRouteProp} from "../../../types/navigation";
-import {Token, UserId} from "../../../config/asyncStorageKeys";
+import {Token, UserId} from "@src/config/asyncStorageKeys";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import {fetchUser, resetProfile, setToken} from "../../store/controllers/profile";
+import {AppDispatch, fetchUser, resetProfile, setToken} from "@src/modules/store";
 
 interface IHookResponse {
   logOut: () => Promise<void>;

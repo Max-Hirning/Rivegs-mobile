@@ -1,13 +1,12 @@
 import React, {ReactElement} from "react";
-import {Neutral} from "../../../config/themes";
-import {ProfileInfo} from "../../../modules/profile";
+import {Neutral} from "@src/config/themes";
+import {RecipesList} from "@src/modules/recipesList";
+import {Header} from "@src/components/headers/header";
+import {ScreenRouteProp} from "@src/types/navigation";
 import {useNavigation} from "@react-navigation/native";
-import {RecipesList} from "../../../modules/recipesList";
-import {Header} from "../../../components/headers/header";
-import {ScreenRouteProp} from "../../../types/navigation";
-import ArrowLeftIcon from "../../../assets/icons/arrows/left";
+import ArrowLeftIcon from "@src/assets/icons/arrows/left";
+import {ProfileInfo, useGetUser} from "@src/modules/profile";
 import {StyleSheet, TouchableOpacity, View} from "react-native";
-import {useGetUser} from "../../../modules/profile/hooks/getUser";
 
 export default function Page(): ReactElement {
   const {data, isLoading, isError} = useGetUser();

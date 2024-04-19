@@ -1,8 +1,8 @@
 import type {PayloadAction} from "@reduxjs/toolkit";
 import {IRecipeTypesStore} from "../types/recipeTypes";
 import {recipeTypesStoreModel} from "../models/recipeTypes";
-import {recipeTypesAPI, IRecipeType} from "../../recipeForm";
 import {createAsyncThunk, createSlice} from "@reduxjs/toolkit";
+import {recipeTypesAPI, IRecipeType} from "@src/modules/recipeForm";
 
 export const recipeTypesSlice = createSlice({
   reducers: {

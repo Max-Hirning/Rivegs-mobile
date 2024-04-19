@@ -1,4 +1,4 @@
-import {ButtonUI} from "../UI/ButtonUI";
+import {ButtonUI} from "@src/UI/ButtonUI";
 import {View, StyleSheet, ViewStyle} from "react-native";
 import React, {ReactNode, ReactElement, useState} from "react";
 

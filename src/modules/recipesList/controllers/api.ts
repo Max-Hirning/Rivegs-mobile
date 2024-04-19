@@ -1,6 +1,6 @@
 import axios, {AxiosError} from "axios";
+import {IResponse} from "@src/types/api";
 import {IFilters} from "../types/filters";
-import {IResponse} from "../../../types/api";
 import {IPagination} from "../types/pagination";
 
 class RecipeAPI {

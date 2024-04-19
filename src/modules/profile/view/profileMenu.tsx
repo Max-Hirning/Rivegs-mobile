@@ -1,8 +1,8 @@
+import {TextUI} from "@src/UI/TextUI";
 import {useSelector} from "react-redux";
-import {TextUI} from "../../../UI/TextUI";
 import React, {ReactElement} from "react";
-import {RootState} from "../../../modules/store";
-import {PopUpMenu} from "../../../components/popUpMenu";
+import {RootState} from "@src/modules/store";
+import {PopUpMenu} from "@src/components/popUpMenu";
 import {StyleSheet, TouchableOpacity, View, Alert} from "react-native";
 
 interface IProps {

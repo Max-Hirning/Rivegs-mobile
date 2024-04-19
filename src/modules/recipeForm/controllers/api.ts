@@ -1,5 +1,5 @@
 import axios, {AxiosError} from "axios";
-import {IResponse} from "../../../types/api";
+import {IResponse} from "@src/types/api";
 import {IRecipeType} from "../types/recipeTypes";
 
 class RecipeAPI {

@@ -1,6 +1,6 @@
 import {TextUI} from "./TextUI";
 import React, {ReactElement, useState} from "react";
-import {Error, Neutral, Primary} from "../config/themes";
+import {Error, Neutral, Primary} from "@src/config/themes";
 import {StyleSheet, TextInput, TextInputProps, View, ViewStyle} from "react-native";
 
 interface IProps extends TextInputProps {

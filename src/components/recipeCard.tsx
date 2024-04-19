@@ -1,10 +1,10 @@
-import {TextUI} from "../UI/TextUI";
-import {Routes} from "../config/routes";
+import {TextUI} from "@src/UI/TextUI";
+import {Routes} from "@src/config/routes";
 import React, {ReactElement} from "react";
-import {IRecipe} from "../modules/recipe";
-import StartIcon from "../assets/icons/star";
-import {Neutral, Secondary} from "../config/themes";
-import {ScreenRouteProp} from "../types/navigation";
+import {IRecipe} from "@src/modules/recipe";
+import StartIcon from "@src/assets/icons/star";
+import {Neutral, Secondary} from "@src/config/themes";
+import {ScreenRouteProp} from "@src/types/navigation";
 import {useNavigation} from "@react-navigation/native";
 import LinearGradient from "react-native-linear-gradient";
 import {ImageBackground, StyleSheet, TouchableOpacity, View} from "react-native";

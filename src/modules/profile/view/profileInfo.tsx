@@ -1,12 +1,12 @@
 import {IUser} from "../types/user";
-import {TextUI} from "../../../UI/TextUI";
+import {TextUI} from "@src/UI/TextUI";
 import React, {ReactElement} from "react";
-import {ButtonUI} from "../../../UI/ButtonUI";
-import {AvatarUI} from "../../../UI/AvatarUI";
-import {Routes} from "../../../config/routes";
+import {ButtonUI} from "@src/UI/ButtonUI";
+import {AvatarUI} from "@src/UI/AvatarUI";
+import {Routes} from "@src/config/routes";
 import {StyleSheet, View} from "react-native";
 import {useNavigation} from "@react-navigation/native";
-import {ScreenRouteProp} from "../../../types/navigation";
+import {ScreenRouteProp} from "@src/types/navigation";
 
 interface IProps extends Pick<IUser, "login"|"avatar"> {
   description?: string;

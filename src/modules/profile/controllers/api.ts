@@ -1,6 +1,6 @@
 import {IUser} from "../types/user";
 import axios, {AxiosError} from "axios";
-import {IResponse} from "../../../types/api";
+import {IResponse} from "@src/types/api";
 import {ISecurityForm} from "../types/securityForm";
 
 class UserAPI {

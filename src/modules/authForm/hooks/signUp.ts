@@ -1,11 +1,11 @@
 import {ISignUp} from "../types/signUp";
+import {IResponse} from "@src/types/api";
+import {Routes} from "@src/config/routes";
 import {authAPI} from "../controllers/api";
-import {IResponse} from "../../../types/api";
-import {Routes} from "../../../config/routes";
 import Toast from "react-native-toast-message";
-import {QueryKeys} from "../../../config/queryKeys";
+import {QueryKeys} from "@src/config/queryKeys";
+import {AuthRouteProp} from "@src/types/navigation";
 import {useNavigation} from "@react-navigation/native";
-import {AuthRouteProp} from "../../../types/navigation";
 import {UseMutationResult, useMutation} from "@tanstack/react-query";
 
 export function useSignUp(): UseMutationResult<IResponse<undefined>, IResponse<undefined>, Omit<ISignUp, "confirmPassword">, unknown> {

@@ -1,12 +1,12 @@
 import {useSession} from "./session";
+import {IResponse} from "@src/types/api";
+import {Routes} from "@src/config/routes";
 import {authAPI} from "../controllers/api";
-import {IResponse} from "../../../types/api";
-import {Routes} from "../../../config/routes";
 import Toast from "react-native-toast-message";
-import {QueryKeys} from "../../../config/queryKeys";
+import {QueryKeys} from "@src/config/queryKeys";
+import {ScreenRouteProp} from "@src/types/navigation";
 import {useNavigation} from "@react-navigation/native";
 import {ISignIn, ISignInResponse} from "../types/signIn";
-import {ScreenRouteProp} from "../../../types/navigation";
 import {UseMutationResult, useMutation} from "@tanstack/react-query";
 
 export function useSignIn(): UseMutationResult<IResponse<ISignInResponse>, IResponse<undefined>, ISignIn, unknown> {

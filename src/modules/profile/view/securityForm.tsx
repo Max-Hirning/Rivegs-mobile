@@ -1,6 +1,6 @@
+import {InputUI} from "@src/UI/InputUI";
 import React, {ReactElement} from "react";
-import {InputUI} from "../../../UI/InputUI";
-import {ButtonUI} from "../../../UI/ButtonUI";
+import {ButtonUI} from "@src/UI/ButtonUI";
 import {StyleSheet, View} from "react-native";
 
 export function SecurityForm(): ReactElement {

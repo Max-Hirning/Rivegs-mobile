@@ -1,13 +1,13 @@
 import React, {ReactElement} from "react";
-import {Neutral} from "../../config/themes";
-import {Header} from "../../components/headers/header";
+import {Neutral} from "@src/config/themes";
+import {Header} from "@src/components/headers/header";
+import {ScreenRouteProp} from "@src/types/navigation";
 import {useNavigation} from "@react-navigation/native";
-import {ScreenRouteProp} from "../../types/navigation";
-import ArrowLeftIcon from "../../assets/icons/arrows/left";
-import {TabsNavigation} from "../../components/tabsNavigation";
+import ArrowLeftIcon from "@src/assets/icons/arrows/left";
+import {TabsNavigation} from "@src/components/tabsNavigation";
+import {PageScroll} from "@src/components/wrappers/pageScroll";
 import {StyleSheet, TouchableOpacity, View} from "react-native";
-import {PageScroll} from "../../components/wrappers/pageScroll";
-import {SecurityForm, SettingsForm} from "../../modules/profile";
+import {SecurityForm, SettingsForm} from "@src/modules/profile";
 
 export default function Page(): ReactElement {
   const {goBack} = useNavigation<ScreenRouteProp>();

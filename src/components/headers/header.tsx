@@ -1,4 +1,4 @@
-import {TextUI} from "../../UI/TextUI";
+import {TextUI} from "@src/UI/TextUI";
 import React, {ReactElement} from "react";
 import {StyleSheet, View} from "react-native";
 

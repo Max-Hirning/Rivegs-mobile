@@ -1,4 +1,4 @@
-import {IRecipeType} from "../../recipeForm";
+import {IRecipeType} from "@src/modules/recipeForm";
 
 export interface IRecipeTypesStore {
   isError: boolean;

@@ -1,11 +1,11 @@
-import {TextUI} from "../../UI/TextUI";
-import {Neutral} from "../../config/themes";
-import FilterIcon from "../../assets/icons/filter";
+import {TextUI} from "@src/UI/TextUI";
+import {Neutral} from "@src/config/themes";
+import FilterIcon from "@src/assets/icons/filter";
 import React, {ReactElement, useState} from "react";
-import {PopUpMenu} from "../../components/popUpMenu";
-import {Header} from "../../components/headers/header";
+import {PopUpMenu} from "@src/components/popUpMenu";
+import {Header} from "@src/components/headers/header";
+import {PageScroll} from "@src/components/wrappers/pageScroll";
 import {StyleSheet, TouchableOpacity, View} from "react-native";
-import {PageScroll} from "../../components/wrappers/pageScroll";
 
 export default function Page(): ReactElement {
   const [menu, setMenu] = useState<boolean>(false);

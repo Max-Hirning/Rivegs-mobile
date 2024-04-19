@@ -1,4 +1,4 @@
-import {IRecipe} from "../../recipe";
+import {IRecipe} from "@src/modules/recipe";
 
 export interface IStepIngredient {
   _id: string;

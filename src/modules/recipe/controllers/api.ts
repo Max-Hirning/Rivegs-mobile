@@ -1,6 +1,6 @@
 import axios, {AxiosError} from "axios";
 import {IRecipe} from "../types/recipe";
-import {IResponse} from "../../../types/api";
+import {IResponse} from "@src/types/api";
 
 class RecipeAPI {
   constructor(protected readonly url: string) {}

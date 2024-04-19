@@ -1,12 +1,12 @@
+import {TextUI} from "@src/UI/TextUI";
 import React, {ReactElement} from "react";
-import {TextUI} from "../../../UI/TextUI";
-import {Routes} from "../../../config/routes";
-import {Primary} from "../../../config/themes";
-import {SignUpForm} from "../../../modules/authForm";
+import {Routes} from "@src/config/routes";
+import {Primary} from "@src/config/themes";
+import {SignUpForm} from "@src/modules/authForm";
+import {AuthRouteProp} from "@src/types/navigation";
 import {useNavigation} from "@react-navigation/native";
-import {AuthRouteProp} from "../../../types/navigation";
+import {PageScroll} from "@src/components/wrappers/pageScroll";
 import {StyleSheet, TouchableOpacity, View} from "react-native";
-import {PageScroll} from "../../../components/wrappers/pageScroll";
 
 export default function Page(): ReactElement {
   const {navigate} = useNavigation<AuthRouteProp>();

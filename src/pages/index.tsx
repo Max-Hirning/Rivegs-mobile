@@ -1,9 +1,9 @@
-import {Routes} from "../config/routes";
-import {Neutral} from "../config/themes";
+import {Routes} from "@src/config/routes";
 import React, {ReactElement} from "react";
-import {ScreenRouteProp} from "../types/navigation";
+import {Neutral} from "@src/config/themes";
+import {ScreenRouteProp} from "@src/types/navigation";
 import {useNavigation} from "@react-navigation/native";
-import {SearchHeader} from "../components/headers/search";
+import {SearchHeader} from "@src/components/headers/search";
 import {FlatList, StyleSheet, Text, TouchableOpacity, View} from "react-native";
 
 const ListDivider = (): ReactElement => <View style={styles.listDivider} />;

@@ -1,11 +1,11 @@
 import {useSelector} from "react-redux";
-import {Neutral} from "../../config/themes";
-import {RootState} from "../../modules/store";
-import MoreIcon from "../../assets/icons/more";
+import {Neutral} from "@src/config/themes";
+import {RootState} from "@src/modules/store";
+import MoreIcon from "@src/assets/icons/more";
 import React, {ReactElement, useState} from "react";
-import {RecipesList} from "../../modules/recipesList";
-import {Header} from "../../components/headers/header";
-import {ProfileInfo, ProfileMenu} from "../../modules/profile";
+import {RecipesList} from "@src/modules/recipesList";
+import {Header} from "@src/components/headers/header";
+import {ProfileInfo, ProfileMenu} from "@src/modules/profile";
 import {StyleSheet, TouchableOpacity, View} from "react-native";
 
 export default function Page(): ReactElement {
