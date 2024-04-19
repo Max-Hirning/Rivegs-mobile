@@ -13,7 +13,11 @@ export function SearchHeader(): ReactElement {
         />
       </View>
       <TouchableOpacity style={styles.button}>
-        <FilterIcon width={24} height={24} color={Neutral.Neutral0}/>
+        <FilterIcon
+          width={24}
+          height={24}
+          color={Neutral.Neutral0}
+        />
       </TouchableOpacity>
     </View>
   );

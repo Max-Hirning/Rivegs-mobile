@@ -19,7 +19,11 @@ export default function Page(): ReactElement {
       <Header
         leftIcon={
           <TouchableOpacity onPress={(): void => goBack()}>
-            <ArrowLeftIcon width={24} height={24} color={Neutral.Neutral100}/>
+            <ArrowLeftIcon
+              width={24}
+              height={24}
+              color={Neutral.Neutral100}
+            />
           </TouchableOpacity>
         }
       />

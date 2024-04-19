@@ -5,7 +5,6 @@ import {ButtonUI} from "../../../UI/ButtonUI";
 import {AvatarUI} from "../../../UI/AvatarUI";
 import {Routes} from "../../../config/routes";
 import {StyleSheet, View} from "react-native";
-import {Neutral} from "../../../config/themes";
 import {useNavigation} from "@react-navigation/native";
 import {ScreenRouteProp} from "../../../types/navigation";
 
@@ -108,11 +107,5 @@ const styles = StyleSheet.create({
     marginTop: 25,
     display: "flex",
     flexDirection: "row",
-  },
-  verticalDivider: {
-    width: 1,
-    height: "100%",
-    marginHorizontal: 10,
-    backgroundColor: Neutral.Neutral30,
   },
 });

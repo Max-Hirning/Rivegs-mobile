@@ -42,15 +42,15 @@ export function RecipeCard({image, title, rate, _id, authorLogin}: IProps): Reac
             <TextUI
               variant="h5"
               isBold={true}
-              style={{color: Neutral.Neutral0}}
               numberOfLines={1}
               ellipsizeMode="tail"
+              style={{color: Neutral.Neutral0}}
             >{title}</TextUI>
             <TextUI
               variant="label"
-              style={{color: Neutral.Neutral30}}
               numberOfLines={1}
               ellipsizeMode="tail"
+              style={{color: Neutral.Neutral30}}
             >By {authorLogin}</TextUI>
           </View>
         </LinearGradient>

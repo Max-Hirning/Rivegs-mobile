@@ -15,7 +15,11 @@ export default function Page(): ReactElement {
       <Header
         rightIcon={
           <TouchableOpacity onPress={(): void => setMenu(true)}>
-            <FilterIcon width={24} height={24} color={Neutral.Neutral100}/>
+            <FilterIcon
+              width={24}
+              height={24}
+              color={Neutral.Neutral100}
+            />
           </TouchableOpacity>
         }
         title="Notifications"

@@ -19,7 +19,11 @@ export default function Page(): ReactElement {
       <Header
         rightIcon={
           <TouchableOpacity onPress={(): void => setMenu(true)}>
-            <MoreIcon width={24} height={24} color={Neutral.Neutral100}/>
+            <MoreIcon
+              width={24}
+              height={24}
+              color={Neutral.Neutral100}
+            />
           </TouchableOpacity>
         }
         title="My profile"
