@@ -3,7 +3,7 @@ import {Neutral} from "@src/config/themes";
 import {Header} from "@src/components/headers/header";
 import {ScreenRouteProp} from "@src/types/navigation";
 import {useNavigation} from "@react-navigation/native";
-import ArrowLeftIcon from "@src/assets/icons/arrows/left";
+import ArrowLeftIcon from "@src/assets/icons/arrow/left";
 import {ProfileInfo, useGetUser} from "@src/modules/profile";
 import {StyleSheet, TouchableOpacity, View} from "react-native";
 import {RecipesList, useGetRecipes} from "@src/modules/recipesList";

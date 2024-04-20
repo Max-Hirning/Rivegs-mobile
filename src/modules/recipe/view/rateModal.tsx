@@ -1,10 +1,10 @@
 import {TextUI} from "@src/UI/TextUI";
 import {ButtonUI} from "@src/UI/ButtonUI";
-import {Rating} from "@src/config/themes";
+import {Neutral, Rating} from "@src/config/themes";
 import StarIcon from "@src/assets/icons/star";
 import {PopUpMenu} from "@src/components/popUpMenu";
-import React, {ReactElement, useEffect, useState} from "react";
 import {useUpdateRecipeRate} from "../hooks/updateRecipeRate";
+import React, {ReactElement, useEffect, useState} from "react";
 import {StyleSheet, TouchableOpacity, View} from "react-native";
 
 interface IProps {
@@ -39,9 +39,10 @@ export function RateModal({menu, closeMenu, initialRate}: IProps): ReactElement 
                   }}
                 >
                   <StarIcon
-                    width={24}
-                    height={24}
+                    width={30}
+                    height={30}
                     color={Rating.Rating100}
+                    fill={(rate >= el) ? Rating.Rating100 : Neutral.Neutral0}
                   />
                 </TouchableOpacity>
               );

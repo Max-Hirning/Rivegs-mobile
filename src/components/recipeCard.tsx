@@ -31,9 +31,10 @@ export function RecipeCard({image, title, rate, _id, authorLogin}: IProps): Reac
         >
           <View style={styles.rateBox}>
             <StartIcon
-              width={24}
-              height={24}
+              width={20}
+              height={20}
               style={styles.icon}
+              fill={Secondary.Secondary50}
               color={Secondary.Secondary50}
             />
             <TextUI variant="p">{`${rate}`}</TextUI>

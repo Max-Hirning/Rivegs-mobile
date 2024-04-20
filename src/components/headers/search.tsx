@@ -3,7 +3,7 @@ import {PopUpMenu} from "../popUpMenu";
 import {InputUI} from "@src/UI/InputUI";
 import {useDispatch} from "react-redux";
 import {ButtonUI} from "@src/UI/ButtonUI";
-import FilterIcon from "@src/assets/icons/filter";
+import FilterIcon from "@src/assets/icons/filters";
 import {Neutral, Primary} from "@src/config/themes";
 import React, {ReactElement, useState} from "react";
 import {AppDispatch, setFilter} from "@src/modules/store";

@@ -10,13 +10,13 @@ import PlusIcon from "@src/assets/icons/plus";
 import Toast from "react-native-toast-message";
 import {useSession} from "@src/modules/authForm";
 import RecipePage from "@src/pages/recipe/index";
+import BookmarkIcon from "@src/assets/icons/saved";
 import {ScreenRouteProp} from "./types/navigation";
 import ProfilePage from "@src/pages/profile/index";
 import ProfileIcon from "@src/assets/icons/profile";
 import {Neutral, Primary} from "@src/config/themes";
 import {getVersion} from "react-native-device-info";
 import SettingsPage from "@src/pages/settings/index";
-import BookmarkIcon from "@src/assets/icons/bookmark";
 import SplashScreen from "react-native-splash-screen";
 import NetInfo from "@react-native-community/netinfo";
 import SignInPage from "@src/pages/auth/sign-in/index";
@@ -61,7 +61,7 @@ const AddRecipeTabBarIcon = (): ReactElement => {
         justifyContent: "center",
         backgroundColor: Primary.Primary50,
       }}>
-        <PlusIcon width={24} height={24} color="white"/>
+        <PlusIcon width={45} height={45} color="white"/>
       </View>
       <TextUI
         style={{
@@ -72,10 +72,10 @@ const AddRecipeTabBarIcon = (): ReactElement => {
     </View>
   );
 };
-const HomeTabBarIcon = ({focused}: ITabBarIconArg): ReactElement => <HomeIcon width={24} height={24} color={focused ? Primary.Primary50 : Neutral.Neutral30} fill={focused ? "#F9D8D8" : Neutral.Neutral0}/>;
-const ProfileTabBarIcon = ({focused}: ITabBarIconArg): ReactElement => <ProfileIcon width={24} height={24} color={focused ? Primary.Primary50 : Neutral.Neutral30} fill={focused ? "#F9D8D8" : Neutral.Neutral0}/>;
-const NotificationTabBarIcon = ({focused}: ITabBarIconArg): ReactElement => <NotificationIcon width={24} height={24} color={focused ? Primary.Primary50 : Neutral.Neutral30} fill={focused ? "#F9D8D8" : Neutral.Neutral0}/>;
-const SavedRecipesTabBarIcon = ({focused}: ITabBarIconArg): ReactElement => <BookmarkIcon width={24} height={24} color={focused ? Primary.Primary50 : Neutral.Neutral30} stroke={focused ? Primary.Primary50 : Neutral.Neutral30} fill={focused ? "#F9D8D8" : Neutral.Neutral0}/>;
+const HomeTabBarIcon = ({focused}: ITabBarIconArg): ReactElement => <HomeIcon width={30} height={30} color={focused ? Primary.Primary50 : Neutral.Neutral30} fill={focused ? "#F9D8D8" : Neutral.Neutral0}/>;
+const ProfileTabBarIcon = ({focused}: ITabBarIconArg): ReactElement => <ProfileIcon width={30} height={30} color={focused ? Primary.Primary50 : Neutral.Neutral30} fill={focused ? "#F9D8D8" : Neutral.Neutral0}/>;
+const SavedRecipesTabBarIcon = ({focused}: ITabBarIconArg): ReactElement => <BookmarkIcon width={30} height={30} color={focused ? Primary.Primary50 : Neutral.Neutral30} fill={focused ? "#F9D8D8" : Neutral.Neutral0}/>;
+const NotificationTabBarIcon = ({focused}: ITabBarIconArg): ReactElement => <NotificationIcon width={30} height={30} color={focused ? Primary.Primary50 : Neutral.Neutral30} fill={focused ? "#F9D8D8" : Neutral.Neutral0}/>;
 
 function AppScreens(): ReactElement {
   return (

@@ -1,6 +1,6 @@
 import {TextUI} from "@src/UI/TextUI";
 import {Neutral} from "@src/config/themes";
-import FilterIcon from "@src/assets/icons/filter";
+import FilterIcon from "@src/assets/icons/filters";
 import React, {ReactElement, useState} from "react";
 import {PopUpMenu} from "@src/components/popUpMenu";
 import {Header} from "@src/components/headers/header";
@@ -16,8 +16,8 @@ export default function Page(): ReactElement {
         rightIcon={
           <TouchableOpacity onPress={(): void => setMenu(true)}>
             <FilterIcon
-              width={24}
-              height={24}
+              width={30}
+              height={30}
               color={Neutral.Neutral100}
             />
           </TouchableOpacity>

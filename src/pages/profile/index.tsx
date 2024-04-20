@@ -1,7 +1,7 @@
 import {useSelector} from "react-redux";
 import {Neutral} from "@src/config/themes";
 import {RootState} from "@src/modules/store";
-import MoreIcon from "@src/assets/icons/more";
+import MoreIcon from "@src/assets/icons/menu";
 import React, {ReactElement, useState} from "react";
 import {Header} from "@src/components/headers/header";
 import {ProfileInfo, ProfileMenu} from "@src/modules/profile";
@@ -21,8 +21,8 @@ export default function Page(): ReactElement {
         rightIcon={
           <TouchableOpacity onPress={(): void => setMenu(true)}>
             <MoreIcon
-              width={24}
-              height={24}
+              width={30}
+              height={30}
               color={Neutral.Neutral100}
             />
           </TouchableOpacity>

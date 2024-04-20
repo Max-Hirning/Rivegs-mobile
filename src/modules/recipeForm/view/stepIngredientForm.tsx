@@ -49,8 +49,8 @@ export function StepIngredientForm({title, placeholder, containerStyle, values, 
             disabled={value.length === 0}
           >
             <AddBorderIcon
-              width={24}
-              height={24}
+              width={30}
+              height={30}
               color={(value.length === 0) ? Neutral.Neutral50 : Neutral.Neutral100}
             />
           </TouchableOpacity>
@@ -84,8 +84,8 @@ export function StepIngredientForm({title, placeholder, containerStyle, values, 
                   onPress={(): void => removeEntry(el._id)}
                 >
                   <RemoveBorderIcon
-                    width={24}
-                    height={24}
+                    width={30}
+                    height={30}
                     color={Neutral.Neutral100}
                   />
                 </TouchableOpacity>

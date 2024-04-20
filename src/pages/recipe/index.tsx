@@ -2,11 +2,11 @@ import {useSelector} from "react-redux";
 import {Routes} from "@src/config/routes";
 import {Neutral} from "@src/config/themes";
 import {RootState} from "@src/modules/store";
-import MoreIcon from "@src/assets/icons/more";
+import MoreIcon from "@src/assets/icons/menu";
 import React, {ReactElement, useState} from "react";
 import {Header} from "@src/components/headers/header";
 import {IStepIngredient} from "@src/modules/recipeForm";
-import ArrowLeftIcon from "@src/assets/icons/arrows/left";
+import ArrowLeftIcon from "@src/assets/icons/arrow/left";
 import {TabsNavigation} from "@src/components/tabsNavigation";
 import {PageScroll} from "@src/components/wrappers/pageScroll";
 import {AuthorInfo, RecipeMenu, useGetRecipe} from "@src/modules/recipe";
@@ -37,8 +37,8 @@ export default function Page(): ReactElement {
         leftIcon={
           <TouchableOpacity onPress={(): void => goBack()}>
             <ArrowLeftIcon
-              width={24}
-              height={24}
+              width={30}
+              height={30}
               color={Neutral.Neutral100}
             />
           </TouchableOpacity>
@@ -46,8 +46,8 @@ export default function Page(): ReactElement {
         rightIcon={
           <TouchableOpacity onPress={(): void => setMenu(true)}>
             <MoreIcon
-              width={24}
-              height={24}
+              width={30}
+              height={30}
               color={Neutral.Neutral100}
             />
           </TouchableOpacity>

@@ -25,6 +25,7 @@ export function AuthorInfo({rate, authorLogin, authorAvatar, authorId}: IProps):
         <StarIcon
           width={24}
           height={24}
+          fill={Rating.Rating100}
           color={Rating.Rating100}
         />
         <TextUI

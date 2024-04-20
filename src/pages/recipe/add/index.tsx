@@ -3,7 +3,7 @@ import {Neutral} from "@src/config/themes";
 import {ScreenRouteProp} from "@src/types/navigation";
 import {Header} from "@src/components/headers/header";
 import {useNavigation} from "@react-navigation/native";
-import ArrowLeftIcon from "@src/assets/icons/arrows/left";
+import ArrowLeftIcon from "@src/assets/icons/arrow/left";
 import {PageScroll} from "@src/components/wrappers/pageScroll";
 import {StyleSheet, TouchableOpacity, View} from "react-native";
 import {RecipeForm, recipeFormInitialValue} from "@src/modules/recipeForm";
@@ -17,8 +17,8 @@ export default function Page(): ReactElement {
         leftIcon={
           <TouchableOpacity onPress={(): void => goBack()}>
             <ArrowLeftIcon
-              width={24}
-              height={24}
+              width={30}
+              height={30}
               color={Neutral.Neutral100}
             />
           </TouchableOpacity>

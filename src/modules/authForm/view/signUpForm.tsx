@@ -9,7 +9,7 @@ import {signUpModel} from "../models/signUp";
 import {signUpSchema} from "../schemas/signUp";
 import {TouchableOpacity, View} from "react-native";
 import {Neutral, Primary} from "@src/config/themes";
-import ArrowRightIcon from "@src/assets/icons/arrows/right";
+import ArrowRightIcon from "@src/assets/icons/arrow/right";
 
 export function SignUpForm(): ReactElement {
   const formik = useFormik({
@@ -98,7 +98,7 @@ export function SignUpForm(): ReactElement {
           formik.submitForm();
         }}
         disabled={!formik.isValid || !(Object.values(formik.values) as string[]).some((value: string) => value.length)}
-        rightIcon={<ArrowRightIcon width={24} height={24} color={(!formik.isValid || !(Object.values(formik.values) as string[]).some((value: string) => value.length)) ? Neutral.Neutral50 : Neutral.Neutral0}/>}
+        rightIcon={<ArrowRightIcon width={30} height={30} color={(!formik.isValid || !(Object.values(formik.values) as string[]).some((value: string) => value.length)) ? Neutral.Neutral50 : Neutral.Neutral0}/>}
       />
     </View>
   );
