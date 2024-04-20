@@ -3,14 +3,15 @@ import {Neutral} from "@src/config/themes";
 import {RootState} from "@src/modules/store";
 import MoreIcon from "@src/assets/icons/more";
 import React, {ReactElement, useState} from "react";
-import {RecipesList} from "@src/modules/recipesList";
 import {Header} from "@src/components/headers/header";
 import {ProfileInfo, ProfileMenu} from "@src/modules/profile";
 import {StyleSheet, TouchableOpacity, View} from "react-native";
+import {RecipesList, useGetRecipes} from "@src/modules/recipesList";
 
 export default function Page(): ReactElement {
   const [menu, setMenu] = useState<boolean>(false);
   const profile = useSelector((state: RootState) => state.profile);
+  const {data, isError, isLoading, refetch} = useGetRecipes({recipesIds: profile.data?.recipeIds || []});
 
   if(!profile.data) {return <></>;}
 
@@ -40,9 +41,13 @@ export default function Page(): ReactElement {
         recipesAmount={profile.data.recipeIds.length}
       />
       <View style={styles.horizontalDivider}/>
-      <RecipesList filters={{
-        recipesIds: profile.data.recipeIds,
-      }}/>
+      <RecipesList
+        refetch={refetch}
+        isError={isError}
+        isLoading={isLoading}
+        nextPage={data?.data.next}
+        data={data?.data.data || []}
+      />
     </View>
   );
 }

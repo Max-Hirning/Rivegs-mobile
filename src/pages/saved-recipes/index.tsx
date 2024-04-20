@@ -3,20 +3,25 @@ import React, {ReactElement} from "react";
 import {Neutral} from "@src/config/themes";
 import {RootState} from "@src/modules/store";
 import {StyleSheet, View} from "react-native";
-import {RecipesList} from "@src/modules/recipesList";
 import {Header} from "@src/components/headers/header";
+import {RecipesList, useGetRecipes} from "@src/modules/recipesList";
 
 export default function Page(): ReactElement {
   const profile = useSelector((state: RootState) => state.profile);
+  const {data, isError, isLoading, refetch} = useGetRecipes({recipesIds: profile.data?.savedRecipes || []});
 
   if(!profile.data) {return <></>;}
 
   return (
     <View style={styles.container}>
       <Header title="Saved recipes"/>
-      <RecipesList filters={{
-        recipesIds: profile.data.savedRecipes,
-      }}/>
+      <RecipesList
+        refetch={refetch}
+        isError={isError}
+        isLoading={isLoading}
+        nextPage={data?.data.next}
+        data={data?.data.data || []}
+      />
     </View>
   );
 }

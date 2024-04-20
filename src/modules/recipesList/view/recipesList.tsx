@@ -2,13 +2,16 @@ import {TextUI} from "@src/UI/TextUI";
 import {Error} from "@src/config/themes";
 import React, {ReactElement} from "react";
 import {IRecipe} from "@src/modules/recipe";
-import {IFiltersStore} from "@src/modules/store";
-import {useGetRecipes} from "../hooks/getRecipes";
 import {RecipeCard} from "@src/components/recipeCard";
 import {ActivityIndicator, FlatList, StyleSheet, View} from "react-native";
 
 interface IProps {
-  filters: Partial<IFiltersStore>;
+  data: IRecipe[];
+  isError: boolean;
+  isLoading: boolean;
+  refetch: () => void;
+  fetchNextPage?: () => void;
+  nextPage: number|null|undefined;
 }
 
 const EmptyListComponnet = (isError: boolean): ReactElement => {
@@ -36,12 +39,18 @@ const ListFooterComponent = (isLoading: boolean, nextPage: boolean): ReactElemen
 };
 const ListDivider = (): ReactElement => <View style={styles.listDivider} />;
 
-export function RecipesList({filters}: IProps): ReactElement {
-  const {data, isError, isLoading} = useGetRecipes(filters);
-
+export function RecipesList({data, isError, nextPage, fetchNextPage, refetch, isLoading}: IProps): ReactElement {
   return (
     <FlatList
-      data={data?.data.data || []}
+      data={data || []}
+      onRefresh={refetch}
+      onEndReachedThreshold={0.1}
+      onEndReached={(): void => {
+        if(fetchNextPage && nextPage && !isLoading && !isError) {
+          fetchNextPage();
+        }
+      }}
+      refreshing={true && isLoading}
       contentContainerStyle={styles.list}
       ItemSeparatorComponent={ListDivider}
       keyExtractor={(item): string => item._id}
@@ -57,7 +66,8 @@ export function RecipesList({filters}: IProps): ReactElement {
         );
       }}
       ListEmptyComponent={(): ReactElement => EmptyListComponnet(isError)}
-      ListFooterComponent={(): ReactElement => ListFooterComponent(isLoading, !!(data?.data.next))}
+      ListFooterComponent={(): ReactElement => ListFooterComponent(isLoading, !!nextPage)}
+      // data={data?.pages.reduceRight((res: IRecipe[], el: IResponse<IPagination>) => res.concat(el.data.data), []) || []}
     />
   );
 }
