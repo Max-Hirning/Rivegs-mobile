@@ -24,26 +24,37 @@ export function SecurityForm(): ReactElement {
         label="Old password"
         secureTextEntry={true}
         placeholder="Old password"
+        onBlurAction={(): void => {
+          formik.setFieldTouched("oldPassword", true);
+        }}
         value={formik.values.oldPassword}
         errorMsg={formik.errors.oldPassword}
         onChangeText={(value: string): void => {
           formik.setFieldValue("oldPassword", value);
         }}
+        error={!!(formik.touched.oldPassword && formik.errors.oldPassword)}
       />
       <InputUI
         label="New password"
         secureTextEntry={true}
         placeholder="New password"
+        onBlurAction={(): void => {
+          formik.setFieldTouched("newPassword", true);
+        }}
         containerStyle={styles.input}
         value={formik.values.newPassword}
         errorMsg={formik.errors.newPassword}
         onChangeText={(value: string): void => {
           formik.setFieldValue("newPassword", value);
         }}
+        error={!!(formik.touched.newPassword && formik.errors.newPassword)}
       />
       <InputUI
         secureTextEntry={true}
         label="Confirm password"
+        onBlurAction={(): void => {
+          formik.setFieldTouched("confirmPassword", true);
+        }}
         containerStyle={styles.input}
         placeholder="Confirm new password"
         value={formik.values.confirmPassword}
@@ -51,6 +62,7 @@ export function SecurityForm(): ReactElement {
         onChangeText={(value: string): void => {
           formik.setFieldValue("confirmPassword", value);
         }}
+        error={!!(formik.touched.confirmPassword && formik.errors.confirmPassword)}
       />
       <ButtonUI
         size="large"

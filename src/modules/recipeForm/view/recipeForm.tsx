@@ -1,23 +1,29 @@
 import {useFormik} from "formik";
 import {InputUI} from "@src/UI/InputUI";
 import {IImage} from "@src/types/image";
+import {useSelector} from "react-redux";
 import {ImagePicker} from "./ImagePicker";
 import {ButtonUI} from "@src/UI/ButtonUI";
-import {StyleSheet, View} from "react-native";
+import {RootState} from "@src/modules/store";
+import {IRecipeType} from "../types/recipeTypes";
 import React, {ReactElement, useState} from "react";
 import {useUpdateRecipe} from "../hooks/updateRecipe";
 import {useCreateRecipe} from "../hooks/createRecipe";
 import {useNavigation} from "@react-navigation/native";
 import {recipeFormSchema} from "../schemas/recipeForm";
+import {FlatList, StyleSheet, View} from "react-native";
 import {StepIngredientForm} from "./stepIngredientForm";
 import {recipeFormInitialValue} from "../models/recipeForm";
 import {IRecipeForm, IStepIngredient} from "../types/recipeForm";
 
 interface IProps {
+  initialImageUrl?: string;
   initialState: IRecipeForm;
 }
 
-export function RecipeForm({initialState}: IProps): ReactElement {
+const ListDivider = (): ReactElement => <View style={styles.listDivider} />;
+
+export function RecipeForm({initialState, initialImageUrl}: IProps): ReactElement {
   const formik = useFormik({
     onSubmit: (values, {setValues}) => {
       const formData = new FormData();
@@ -48,6 +54,7 @@ export function RecipeForm({initialState}: IProps): ReactElement {
   const updateRecipe = useUpdateRecipe();
   const createRecipe = useCreateRecipe();
   const [imageFile, setImageFile] = useState<null|IImage>(null);
+  const recipeTypes = useSelector((state: RootState) => state.recipeTypes);
 
   React.useEffect(() => {
     const unsubscribe = navigation.addListener("focus", () => {
@@ -60,23 +67,52 @@ export function RecipeForm({initialState}: IProps): ReactElement {
   return (
     <View style={styles.form}>
       <ImagePicker
-        image={imageFile?.uri || undefined}
         chooseImage={(image: IImage): void => {
           setImageFile(image);
+        }}
+        image={imageFile?.uri || initialImageUrl || undefined}
+      />
+      <FlatList
+        horizontal={true}
+        data={recipeTypes.data || []}
+        ItemSeparatorComponent={ListDivider}
+        keyExtractor={({_id}: IRecipeType): string => _id}
+        contentContainerStyle={[styles.divider, styles.list]}
+        renderItem={({item}: {item: IRecipeType}): ReactElement => {
+          return (
+            <ButtonUI
+              size="small"
+              title={item.title}
+              onPress={(): void => {
+                formik.setFieldValue("typeId", item._id);
+              }}
+              variant={(formik.values.typeId === item._id) ? "primary" : "secondary"}
+            />
+          );
         }}
       />
       <InputUI
         label="Title"
         placeholder="Recipe Title"
         value={formik.values.title}
+        onBlurAction={(): void => {
+          formik.setFieldTouched("title", true);
+        }}
+        errorMsg={formik.errors.title}
         containerStyle={styles.divider}
         onChangeText={(title: string): void => {
           formik.setFieldValue("title", title);
         }}
+        error={!!(formik.touched.title && formik.errors.title)}
       />
       <InputUI
         multiline={true}
         label="Description"
+        onBlurAction={(): void => {
+          formik.setFieldTouched("description", true);
+        }}
+        errorMsg={formik.errors.description}
+        error={!!(formik.touched.description && formik.errors.description)}
         containerStyle={styles.divider}
         placeholder="Recipe Description"
         value={formik.values.description}
@@ -126,7 +162,7 @@ export function RecipeForm({initialState}: IProps): ReactElement {
         onPress={(): void => {
           formik.submitForm();
         }}
-        disabled={(!formik.isValid) || !(imageFile) || formik.values.steps.length === 0 || formik.values.ingredients.length === 0}
+        disabled={(!formik.isValid) || !(imageFile || initialImageUrl) || formik.values.steps.length === 0 || formik.values.ingredients.length === 0}
       />
     </View>
   );
@@ -142,5 +178,11 @@ const styles = StyleSheet.create({
   },
   button: {
     marginTop: 30,
+  },
+  list: {
+    paddingBottom: 10,
+  },
+  listDivider: {
+    marginHorizontal: 5,
   },
 });

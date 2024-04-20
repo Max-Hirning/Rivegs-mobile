@@ -3,6 +3,7 @@ import {RateModal} from "./rateModal";
 import {Routes} from "@src/config/routes";
 import {PopUpMenu} from "@src/components/popUpMenu";
 import React, {ReactElement, useState} from "react";
+import {IRecipeForm} from "@src/modules/recipeForm";
 import {ScreenRouteProp} from "@src/types/navigation";
 import {useNavigation} from "@react-navigation/native";
 import {useUpdateSavedRecipes} from "@src/modules/profile";
@@ -13,11 +14,13 @@ interface IProps {
   rate: number;
   menu: boolean;
   isAuthed: boolean;
+  recipeImage: string;
   closeMenu: () => void;
   savedRecipes: string[];
+  recipeState: IRecipeForm;
 }
 
-export function RecipeMenu({menu, closeMenu, rate, isAuthed, savedRecipes, _id}: IProps): ReactElement {
+export function RecipeMenu({menu, closeMenu, rate, recipeImage, recipeState, isAuthed, savedRecipes, _id}: IProps): ReactElement {
   const deleteRecipe = useUpdateSavedRecipes();
   const saveUnSaveRecipe = useUpdateSavedRecipes();
   const {navigate} = useNavigation<ScreenRouteProp>();
@@ -65,7 +68,11 @@ export function RecipeMenu({menu, closeMenu, rate, isAuthed, savedRecipes, _id}:
               <TouchableOpacity
                 onPress={(): void => {
                   closeMenu();
-                  navigate(Routes.EditRecipe, {recipeId: _id});
+                  navigate(Routes.EditRecipe, {
+                    recipeId: _id,
+                    initialState: recipeState,
+                    initialImageUrl: recipeImage,
+                  });
                 }}
                 style={styles.menuItem}
               >

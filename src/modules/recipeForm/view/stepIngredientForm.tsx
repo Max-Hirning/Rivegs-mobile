@@ -27,6 +27,34 @@ export function StepIngredientForm({title, placeholder, containerStyle, values, 
         isBold={true}
       >{title}</TextUI>
       <View style={styles.list}>
+        <View style={styles.form}>
+          <InputUI
+            value={value}
+            onChangeText={setValue}
+            placeholder="Ingerdient"
+            containerStyle={styles.input}
+          />
+          <TouchableOpacity
+            style={styles.button}
+            onPress={(): void => {
+              addEntry({
+                value,
+                bold: false,
+                italic: false,
+                underlined: false,
+                _id: Date.now().toString(),
+              });
+              setValue("");
+            }}
+            disabled={value.length === 0}
+          >
+            <AddBorderIcon
+              width={24}
+              height={24}
+              color={(value.length === 0) ? Neutral.Neutral50 : Neutral.Neutral100}
+            />
+          </TouchableOpacity>
+        </View>
         {
           values.map((el: IStepIngredient, index: number): ReactElement => {
             return (
@@ -38,6 +66,11 @@ export function StepIngredientForm({title, placeholder, containerStyle, values, 
                   value={el.value}
                   multiline={true}
                   placeholder={placeholder}
+                  onBlurAction={(): void => {
+                    if(el.value.length === 0) {
+                      removeEntry(el._id);
+                    }
+                  }}
                   containerStyle={styles.input}
                   onChangeText={(newValue: string): void => {
                     updateEntry({
@@ -60,33 +93,6 @@ export function StepIngredientForm({title, placeholder, containerStyle, values, 
             );
           })
         }
-        <View style={styles.form}>
-          <InputUI
-            value={value}
-            onChangeText={setValue}
-            placeholder="Ingerdient"
-            containerStyle={styles.input}
-          />
-          <TouchableOpacity
-            style={styles.button}
-            onPress={(): void => {
-              addEntry({
-                value,
-                bold: false,
-                italic: false,
-                underlined: false,
-                _id: Date.now().toString(),
-              });
-              setValue("");
-            }}
-          >
-            <AddBorderIcon
-              width={24}
-              height={24}
-              color={Neutral.Neutral100}
-            />
-          </TouchableOpacity>
-        </View>
       </View>
     </View>
   );

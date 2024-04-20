@@ -26,35 +26,37 @@ export function SignUpForm(): ReactElement {
     <View style={styles.form}>
       <InputUI
         label="Login"
-        onBlur={(): void => {
-          formik.setFieldTouched("login", true);
-        }}
         placeholder="Enter Login"
         value={formik.values.login}
+        onBlurAction={(): void => {
+          formik.setFieldTouched("login", true);
+        }}
         errorMsg={formik.errors.login}
         onChangeText={(value: string): void => {
           formik.setFieldValue("login", value);
         }}
+        error={!!(formik.touched.login && formik.errors.login)}
       />
       <InputUI
         label="Email"
-        onBlur={(): void => {
-          formik.setFieldTouched("email", true);
-        }}
         placeholder="Enter Email"
         value={formik.values.email}
+        onBlurAction={(): void => {
+          formik.setFieldTouched("email", true);
+        }}
         containerStyle={styles.input}
         errorMsg={formik.errors.email}
         onChangeText={(value: string): void => {
           formik.setFieldValue("email", value);
         }}
+        error={!!(formik.touched.email && formik.errors.email)}
       />
       <InputUI
-        onBlur={(): void => {
-          formik.setFieldTouched("password", true);
-        }}
         label="Enter Password"
         secureTextEntry={true}
+        onBlurAction={(): void => {
+          formik.setFieldTouched("password", true);
+        }}
         placeholder="Enter Password"
         containerStyle={styles.input}
         value={formik.values.password}
@@ -62,13 +64,14 @@ export function SignUpForm(): ReactElement {
         onChangeText={(value: string): void => {
           formik.setFieldValue("password", value);
         }}
+        error={!!(formik.touched.password && formik.errors.password)}
       />
       <InputUI
-        onBlur={(): void => {
-          formik.setFieldTouched("confirmPassword", true);
-        }}
         secureTextEntry={true}
         label="Confirm Password"
+        onBlurAction={(): void => {
+          formik.setFieldTouched("confirmPassword", true);
+        }}
         containerStyle={styles.input}
         placeholder="Confirm Password"
         value={formik.values.confirmPassword}
@@ -76,6 +79,7 @@ export function SignUpForm(): ReactElement {
         onChangeText={(value: string): void => {
           formik.setFieldValue("confirmPassword", value);
         }}
+        error={!!(formik.touched.confirmPassword && formik.errors.confirmPassword)}
       />
       <View style={styles.linkContainer}>
         <TouchableOpacity onPress={(): void => console.log("open web page")}>

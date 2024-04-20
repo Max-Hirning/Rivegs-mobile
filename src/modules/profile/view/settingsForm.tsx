@@ -69,32 +69,44 @@ export function SettingsForm(): ReactElement {
         label="Login"
         placeholder="Login"
         value={formik.values.login}
+        onBlurAction={(): void => {
+          formik.setFieldTouched("login", true);
+        }}
         containerStyle={styles.input}
         errorMsg={formik.errors.login}
         onChangeText={(value: string): void => {
           formik.setFieldValue("login", value);
         }}
+        error={!!(formik.touched.login && formik.errors.login)}
       />
       <InputUI
         label="Email"
         placeholder="Email"
         value={formik.values.email}
+        onBlurAction={(): void => {
+          formik.setFieldTouched("email", true);
+        }}
         containerStyle={styles.input}
         errorMsg={formik.errors.email}
         onChangeText={(value: string): void => {
           formik.setFieldValue("email", value);
         }}
+        error={!!(formik.touched.email && formik.errors.email)}
       />
       <InputUI
         multiline={true}
         label="Description"
+        onBlurAction={(): void => {
+          formik.setFieldTouched("description", true);
+        }}
         containerStyle={styles.input}
-        errorMsg={formik.errors.description}
         value={formik.values.description}
+        errorMsg={formik.errors.description}
         onChangeText={(value: string): void => {
           formik.setFieldValue("description", value);
         }}
         placeholder="Type something about you..."
+        error={!!(formik.touched.description && formik.errors.description)}
       />
       <ButtonUI
         size="large"

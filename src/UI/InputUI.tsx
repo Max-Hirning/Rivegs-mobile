@@ -5,11 +5,13 @@ import {StyleSheet, TextInput, TextInputProps, View, ViewStyle} from "react-nati
 
 interface IProps extends TextInputProps {
   label?: string;
+  error?: boolean;
   errorMsg?: string;
+  onBlurAction?: () => void;
   containerStyle?: ViewStyle;
 }
 
-export function InputUI({label, containerStyle, errorMsg, ...props}: IProps): ReactElement {
+export function InputUI({label, containerStyle, onBlurAction, error, errorMsg, ...props}: IProps): ReactElement {
   const [status, setStatus] = useState<"default"|"focus">("default");
 
   return (
@@ -23,13 +25,16 @@ export function InputUI({label, containerStyle, errorMsg, ...props}: IProps): Re
       }
       <TextInput
         {...props}
+        onBlur={(): void => {
+          (onBlurAction) && onBlurAction();
+          setStatus("default");
+        }}
         style={[styles[status], styles.input]}
         placeholderTextColor={Neutral.Neutral30}
         onFocus={(): void => setStatus("focus")}
-        onBlur={(): void => setStatus("default")}
       />
       {
-        errorMsg &&
+        error &&
         <TextUI
           variant="small"
           style={styles.error}

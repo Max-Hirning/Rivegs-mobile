@@ -26,22 +26,23 @@ export function SignInForm(): ReactElement {
     <View style={styles.form}>
       <InputUI
         label="Email"
-        onBlur={(): void => {
-          formik.setFieldTouched("email", true);
-        }}
         placeholder="Enter Email"
         value={formik.values.email}
+        onBlurAction={(): void => {
+          formik.setFieldTouched("email", true);
+        }}
         errorMsg={formik.errors.email}
         onChangeText={(value: string): void => {
           formik.setFieldValue("email", value);
         }}
+        error={!!(formik.touched.email && formik.errors.email)}
       />
       <InputUI
-        onBlur={(): void => {
-          formik.setFieldTouched("password", true);
-        }}
         label="Enter Password"
         secureTextEntry={true}
+        onBlurAction={(): void => {
+          formik.setFieldTouched("password", true);
+        }}
         placeholder="Enter Password"
         containerStyle={styles.input}
         value={formik.values.password}
@@ -49,6 +50,7 @@ export function SignInForm(): ReactElement {
         onChangeText={(value: string): void => {
           formik.setFieldValue("password", value);
         }}
+        error={!!(formik.touched.password && formik.errors.password)}
       />
       <TouchableOpacity
         style={styles.link}

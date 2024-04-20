@@ -48,7 +48,7 @@ export default function Page(): ReactElement {
         </View>
       </PopUpMenu>
       <PageScroll listStyle={styles.list}>
-        <></>
+        <TextUI variant="p">Comming soon...</TextUI>
       </PageScroll>
     </View>
   );

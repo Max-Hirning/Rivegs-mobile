@@ -1,4 +1,5 @@
 import {Routes} from "@src/config/routes";
+import {IRecipeForm} from "@src/modules/recipeForm";
 import type {NavigationProp} from "@react-navigation/native";
 
 type AppParamList = {
@@ -20,6 +21,8 @@ export type NavigationParamList = {
   };
   [Routes.EditRecipe]: {
     recipeId: string;
+    initialImageUrl: string;
+    initialState: IRecipeForm;
   };
 	[Routes.App]: undefined;
   [Routes.Auth]: undefined;
