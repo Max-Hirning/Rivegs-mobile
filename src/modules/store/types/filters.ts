@@ -1,4 +1,4 @@
-export interface IFilters {
+export interface IFiltersStore {
   page: number;
   title: string;
   typeId: string;

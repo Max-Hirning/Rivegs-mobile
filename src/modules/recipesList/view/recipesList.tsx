@@ -1,14 +1,14 @@
 import {TextUI} from "@src/UI/TextUI";
 import {Error} from "@src/config/themes";
 import React, {ReactElement} from "react";
-import {IFilters} from "../types/filters";
 import {IRecipe} from "@src/modules/recipe";
+import {IFiltersStore} from "@src/modules/store";
 import {useGetRecipes} from "../hooks/getRecipes";
 import {RecipeCard} from "@src/components/recipeCard";
 import {ActivityIndicator, FlatList, StyleSheet, View} from "react-native";
 
 interface IProps {
-  filters: Partial<IFilters>;
+  filters: Partial<IFiltersStore>;
 }
 
 const EmptyListComponnet = (isError: boolean): ReactElement => {
@@ -24,15 +24,15 @@ const EmptyListComponnet = (isError: boolean): ReactElement => {
   return <></>;
 };
 const ListFooterComponent = (isLoading: boolean, nextPage: boolean): ReactElement => {
-  if(nextPage === null || !isLoading) {
-    return <></>;
+  if(isLoading || nextPage) {
+    return (
+      <ActivityIndicator
+        size="large"
+        style={styles.loader}
+      />
+    );
   }
-  return (
-    <ActivityIndicator
-      size="large"
-      style={styles.loader}
-    />
-  );
+  return <></>;
 };
 const ListDivider = (): ReactElement => <View style={styles.listDivider} />;
 

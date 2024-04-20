@@ -1,3 +1,4 @@
+import {changeTypeId} from "./filters";
 import type {PayloadAction} from "@reduxjs/toolkit";
 import {IRecipeTypesStore} from "../types/recipeTypes";
 import {recipeTypesStoreModel} from "../models/recipeTypes";
@@ -29,8 +30,9 @@ export const recipeTypesSlice = createSlice({
   },
 });
 
-export const fetchRecipeTypes = createAsyncThunk("recipeTypes/fetchUser", async () => {
+export const fetchRecipeTypes = createAsyncThunk("recipeTypes/fetchRecipeTypes", async (_, thunkAPI) => {
   const response = await recipeTypesAPI.get();
+  thunkAPI.dispatch(changeTypeId(response.data[0]._id));
   return response.data;
 });
 export const {setRecipeTypes} = recipeTypesSlice.actions;

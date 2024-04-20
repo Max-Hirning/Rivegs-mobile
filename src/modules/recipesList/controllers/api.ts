@@ -1,12 +1,12 @@
 import axios, {AxiosError} from "axios";
 import {IResponse} from "@src/types/api";
-import {IFilters} from "../types/filters";
 import {IPagination} from "../types/pagination";
+import {IFiltersStore} from "@src/modules/store";
 
 class RecipeAPI {
   constructor(protected readonly url: string) {}
 
-  async get({page, recipesIds, typeId, rate, title, authorLogin}: Partial<IFilters>): Promise<IResponse<IPagination>> {
+  async get({page, recipesIds, typeId, rate, title, authorLogin}: Partial<IFiltersStore>): Promise<IResponse<IPagination>> {
     try {
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       const params: any = {};

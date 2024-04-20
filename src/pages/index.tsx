@@ -1,35 +1,34 @@
-import {Routes} from "@src/config/routes";
 import React, {ReactElement} from "react";
 import {Neutral} from "@src/config/themes";
-import {ScreenRouteProp} from "@src/types/navigation";
-import {useNavigation} from "@react-navigation/native";
+import {StyleSheet, View} from "react-native";
+import {useDispatch, useSelector} from "react-redux";
+import {RecipesList} from "@src/modules/recipesList";
+import {RecipeTypes} from "@src/components/recipeTypes";
+import {AppDispatch, RootState} from "@src/modules/store";
 import {SearchHeader} from "@src/components/headers/search";
-import {FlatList, StyleSheet, Text, TouchableOpacity, View} from "react-native";
-
-const ListDivider = (): ReactElement => <View style={styles.listDivider} />;
+import {changeTypeId} from "@src/modules/store/controllers/filters";
 
 export default function Page(): ReactElement {
-  const {navigate} = useNavigation<ScreenRouteProp>();
+  const dispatch: AppDispatch = useDispatch();
+  const filters = useSelector((state: RootState) => state.filters);
+  const recipeTypes = useSelector((state: RootState) => state.recipeTypes);
 
   return (
     <View style={styles.container}>
       <SearchHeader/>
-      <FlatList
-        data={[1,2,3,4,5,6,7,8,9,10]}
-        contentContainerStyle={styles.list}
-        ItemSeparatorComponent={ListDivider}
-        keyExtractor={(item): string => item.toString()}
-        renderItem={({item}: {item: number}): ReactElement => {
-          return (
-            <TouchableOpacity
-              style={styles.recipeCard}
-              onPress={(): void => navigate(Routes.Recipe, {recipeId: item.toString()})}
-            >
-              <Text>{item}</Text>
-            </TouchableOpacity>
-          );
-        }}
-      />
+      <View style={styles.recipeTypesListContainer}>
+        <RecipeTypes
+          value={filters.typeId}
+          data={recipeTypes.data || []}
+          style={styles.recipeTypesList}
+          onChange={(typeId: string): void => {
+            dispatch(changeTypeId(typeId));
+          }}
+        />
+      </View>
+      <RecipesList filters={{
+        ...filters,
+      }}/>
     </View>
   );
 }
@@ -39,18 +38,12 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: Neutral.Neutral0,
   },
-  list: {
-    marginTop: 15,
-    paddingBottom: 40,
-    alignItems: "center",
+  recipeTypesListContainer: {
+    height: 50,
   },
-  listDivider: {
-    marginVertical: 5,
-  },
-  recipeCard: {
-    width: 335,
-    height: 223,
-    borderRadius: 10,
-    backgroundColor: Neutral.Neutral30,
+  recipeTypesList: {
+    height: 45,
+    marginBottom: 10,
+    paddingHorizontal: 25,
   },
 });

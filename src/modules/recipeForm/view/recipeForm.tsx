@@ -5,23 +5,21 @@ import {useSelector} from "react-redux";
 import {ImagePicker} from "./ImagePicker";
 import {ButtonUI} from "@src/UI/ButtonUI";
 import {RootState} from "@src/modules/store";
-import {IRecipeType} from "../types/recipeTypes";
-import React, {ReactElement, useState} from "react";
+import {StyleSheet, View} from "react-native";
 import {useUpdateRecipe} from "../hooks/updateRecipe";
 import {useCreateRecipe} from "../hooks/createRecipe";
 import {useNavigation} from "@react-navigation/native";
 import {recipeFormSchema} from "../schemas/recipeForm";
-import {FlatList, StyleSheet, View} from "react-native";
+import {RecipeTypes} from "@src/components/recipeTypes";
 import {StepIngredientForm} from "./stepIngredientForm";
 import {recipeFormInitialValue} from "../models/recipeForm";
+import React, {ReactElement, useEffect, useState} from "react";
 import {IRecipeForm, IStepIngredient} from "../types/recipeForm";
 
 interface IProps {
   initialImageUrl?: string;
   initialState: IRecipeForm;
 }
-
-const ListDivider = (): ReactElement => <View style={styles.listDivider} />;
 
 export function RecipeForm({initialState, initialImageUrl}: IProps): ReactElement {
   const formik = useFormik({
@@ -56,9 +54,17 @@ export function RecipeForm({initialState, initialImageUrl}: IProps): ReactElemen
   const [imageFile, setImageFile] = useState<null|IImage>(null);
   const recipeTypes = useSelector((state: RootState) => state.recipeTypes);
 
-  React.useEffect(() => {
+  useEffect(() => {
     const unsubscribe = navigation.addListener("focus", () => {
       formik.setValues(initialState);
+    });
+
+    return unsubscribe;
+  }, [navigation, initialState, formik]);
+
+  useEffect(() => {
+    const unsubscribe = navigation.addListener("blur", () => {
+      setImageFile(null);
     });
 
     return unsubscribe;
@@ -72,23 +78,12 @@ export function RecipeForm({initialState, initialImageUrl}: IProps): ReactElemen
         }}
         image={imageFile?.uri || initialImageUrl || undefined}
       />
-      <FlatList
-        horizontal={true}
+      <RecipeTypes
+        style={styles.divider}
+        value={formik.values.typeId}
         data={recipeTypes.data || []}
-        ItemSeparatorComponent={ListDivider}
-        keyExtractor={({_id}: IRecipeType): string => _id}
-        contentContainerStyle={[styles.divider, styles.list]}
-        renderItem={({item}: {item: IRecipeType}): ReactElement => {
-          return (
-            <ButtonUI
-              size="small"
-              title={item.title}
-              onPress={(): void => {
-                formik.setFieldValue("typeId", item._id);
-              }}
-              variant={(formik.values.typeId === item._id) ? "primary" : "secondary"}
-            />
-          );
+        onChange={(typeId: string): void => {
+          formik.setFieldValue("typeId", typeId);
         }}
       />
       <InputUI
@@ -178,11 +173,5 @@ const styles = StyleSheet.create({
   },
   button: {
     marginTop: 30,
-  },
-  list: {
-    paddingBottom: 10,
-  },
-  listDivider: {
-    marginHorizontal: 5,
   },
 });
