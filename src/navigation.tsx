@@ -24,9 +24,12 @@ import {useNavigation} from "@react-navigation/native";
 import SignUpPage from "@src/pages/auth/sign-up/index";
 import AddRecipePage from "@src/pages/recipe/add/index";
 import EditRecipePage from "@src/pages/recipe/edit/index";
+import ConfirmCodePage from "@src/pages/auth/confirm-code";
 import NotificationPage from "@src/pages/notifications/index";
 import SavedRecipesPage from "@src/pages/saved-recipes/index";
 import NotificationIcon from "@src/assets/icons/notification";
+import ResetPasswordPage from "@src/pages/auth/reset-password";
+import ForgotPasswordPage from "@src/pages/auth/forgot-password";
 import {AppDispatch, fetchRecipeTypes} from "@src/modules/store";
 import AuthorProfilePage from "@src/pages/profile/[userId]/index";
 import React, {ReactElement, useCallback, useEffect} from "react";
@@ -127,25 +130,6 @@ function AppScreens(): ReactElement {
     </Tab.Navigator>
   );
 }
-function AuthScreens(): ReactElement {
-  return (
-    <Stack.Navigator
-      screenOptions={{
-        headerShown: false,
-      }}
-      initialRouteName={Routes.SignIn}
-    >
-      <Stack.Screen
-        name={Routes.SignIn}
-        component={SignInPage}
-      />
-      <Stack.Screen
-        name={Routes.SignUp}
-        component={SignUpPage}
-      />
-    </Stack.Navigator>
-  );
-}
 
 export default function Navigation(): ReactElement {
   const {update} = useSession();
@@ -184,11 +168,27 @@ export default function Navigation(): ReactElement {
       screenOptions={{
         headerShown: false,
       }}
-      initialRouteName={Routes.Auth}
+      initialRouteName={Routes.SignIn}
     >
       <Stack.Screen
-        name={Routes.Auth}
-        component={AuthScreens}
+        name={Routes.SignIn}
+        component={SignInPage}
+      />
+      <Stack.Screen
+        name={Routes.SignUp}
+        component={SignUpPage}
+      />
+      <Stack.Screen
+        name={Routes.ForgotPassword}
+        component={ForgotPasswordPage}
+      />
+      <Stack.Screen
+        name={Routes.ResetPassword}
+        component={ResetPasswordPage}
+      />
+      <Stack.Screen
+        name={Routes.ConfirmCode}
+        component={ConfirmCodePage}
       />
       <Stack.Screen
         name={Routes.App}

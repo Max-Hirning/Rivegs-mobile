@@ -3,13 +3,13 @@ import React, {ReactElement} from "react";
 import {Routes} from "@src/config/routes";
 import {Primary} from "@src/config/themes";
 import {SignInForm} from "@src/modules/authForm";
-import {AuthRouteProp} from "@src/types/navigation";
+import {ScreenRouteProp} from "@src/types/navigation";
 import {useNavigation} from "@react-navigation/native";
 import {PageScroll} from "@src/components/wrappers/pageScroll";
 import {StyleSheet, TouchableOpacity, View} from "react-native";
 
 export default function Page(): ReactElement {
-  const {navigate} = useNavigation<AuthRouteProp>();
+  const {navigate} = useNavigation<ScreenRouteProp>();
 
   return (
     <PageScroll listStyle={styles.list}>
@@ -27,6 +27,7 @@ export default function Page(): ReactElement {
           <TouchableOpacity
             style={styles.link}
             onPress={(): void => navigate(Routes.SignUp)}
+            // onPress={(): void => navigate(Routes.ConfirmCode, {email: 'sadf', route: Routes.SignIn})}
           >
             <TextUI
               isBold={true}

@@ -10,11 +10,6 @@ type AppParamList = {
   [Routes.SavedRecipes]: undefined;
 };
 
-type AuthParamList = {
-  [Routes.SignIn]: undefined;
-  [Routes.SignUp]: undefined;
-};
-
 export type NavigationParamList = {
   [Routes.Recipe]: {
     recipeId: string;
@@ -24,14 +19,23 @@ export type NavigationParamList = {
     initialImageUrl: string;
     initialState: IRecipeForm;
   };
-	[Routes.App]: undefined;
-  [Routes.Auth]: undefined;
+  [Routes.ConfirmCode]: {
+    email: string;
+    route: Routes.SignIn|Routes.ResetPassword;
+  };
+  [Routes.App]: undefined;
+  [Routes.ResetPassword]: {
+    code: string;
+    email: string;
+  };
   [Routes.AuthorProfile]: {
     userId: string;
   };
+  [Routes.SignIn]: undefined;
+  [Routes.SignUp]: undefined;
   [Routes.Settings]: undefined;
   [Routes.Security]: undefined;
+  [Routes.ForgotPassword]: undefined;
 };
 export type AppRouteProp = NavigationProp<AppParamList, Routes.Home>;
-export type AuthRouteProp = NavigationProp<AuthParamList, Routes.SignIn>;
 export type ScreenRouteProp = NavigationProp<NavigationParamList, Routes.App>;

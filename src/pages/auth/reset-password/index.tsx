@@ -2,9 +2,9 @@ import {TextUI} from "@src/UI/TextUI";
 import React, {ReactElement} from "react";
 import {Routes} from "@src/config/routes";
 import {Primary} from "@src/config/themes";
-import {SignUpForm} from "@src/modules/authForm";
 import {ScreenRouteProp} from "@src/types/navigation";
 import {useNavigation} from "@react-navigation/native";
+import {ResetPasswordForm} from "@src/modules/authForm";
 import {PageScroll} from "@src/components/wrappers/pageScroll";
 import {StyleSheet, TouchableOpacity, View} from "react-native";
 
@@ -18,23 +18,20 @@ export default function Page(): ReactElement {
           <TextUI
             variant="h4"
             isBold={true}
-          >Create an account</TextUI>
-          <TextUI variant="p">Let’s help you set up your account, it won’t take long.</TextUI>
+          >Reset your password,</TextUI>
+          <TextUI variant="p">Let’s reset your password, it won’t take long.</TextUI>
         </View>
-        <SignUpForm/>
-        <View style={styles.linkContainer}>
-          <TextUI variant="label">Already a member?</TextUI>
-          <TouchableOpacity
-            style={styles.link}
-            onPress={(): void => navigate(Routes.SignIn)}
-          >
-            <TextUI
-              isBold={true}
-              variant="label"
-              style={styles.linkText}
-            >Sign In</TextUI>
-          </TouchableOpacity>
-        </View>
+        <ResetPasswordForm/>
+        <TouchableOpacity
+          style={styles.link}
+          onPress={(): void => navigate(Routes.SignIn)}
+        >
+          <TextUI
+            isBold={true}
+            variant="label"
+            style={styles.linkText}
+          >Go back?</TextUI>
+        </TouchableOpacity>
       </>
     </PageScroll>
   );
@@ -51,12 +48,8 @@ const styles = StyleSheet.create({
     maxWidth: 360,
     marginBottom: 40,
   },
-  linkContainer: {
-    marginTop: 20,
-    alignItems: "center",
-    flexDirection: "row",
-  },
   link: {
+    marginTop: 20,
     marginLeft: 10,
   },
   linkText: {

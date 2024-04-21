@@ -1,30 +1,25 @@
 import {useFormik} from "formik";
-import {TextUI} from "@src/UI/TextUI";
+import {View} from "react-native";
 import {StyleSheet} from "react-native";
 import {InputUI} from "@src/UI/InputUI";
 import React, {ReactElement} from "react";
-import {useSignIn} from "../hooks/signIn";
 import {ButtonUI} from "@src/UI/ButtonUI";
-import {Routes} from "@src/config/routes";
-import {signInModel} from "../models/signIn";
-import {signInSchema} from "../schemas/signIn";
-import {Neutral, Primary} from "@src/config/themes";
-import {TouchableOpacity, View} from "react-native";
-import {ScreenRouteProp} from "@src/types/navigation";
-import {useNavigation} from "@react-navigation/native";
+import {Neutral} from "@src/config/themes";
+import {useForgotPassword} from "../hooks/forgotPassword";
 import ArrowRightIcon from "@src/assets/icons/arrow/right";
+import {forgotPasswordModel} from "../models/forgotPassword";
+import {forgotPasswordSchema} from "../schemas/forgotPassword";
 
-export function SignInForm(): ReactElement {
+export function ForgotPasswordForm(): ReactElement {
   const formik = useFormik({
-    initialValues: signInModel,
-    validationSchema: signInSchema,
+    initialValues: forgotPasswordModel,
+    validationSchema: forgotPasswordSchema,
     onSubmit: (values, {resetForm}) => {
       mutate(values);
       resetForm();
     },
   });
-  const {mutate} = useSignIn();
-  const {navigate} = useNavigation<ScreenRouteProp>();
+  const {mutate} = useForgotPassword();
 
   return (
     <View style={styles.form}>
@@ -41,34 +36,10 @@ export function SignInForm(): ReactElement {
         }}
         error={!!(formik.touched.email && formik.errors.email)}
       />
-      <InputUI
-        label="Enter Password"
-        secureTextEntry={true}
-        onBlurAction={(): void => {
-          formik.setFieldTouched("password", true);
-        }}
-        placeholder="Enter Password"
-        containerStyle={styles.input}
-        value={formik.values.password}
-        errorMsg={formik.errors.password}
-        onChangeText={(value: string): void => {
-          formik.setFieldValue("password", value);
-        }}
-        error={!!(formik.touched.password && formik.errors.password)}
-      />
-      <TouchableOpacity
-        style={styles.link}
-        onPress={(): void => navigate(Routes.ForgotPassword)}
-      >
-        <TextUI
-          variant="p"
-          style={styles.linkText}
-        >Forgot Password?</TextUI>
-      </TouchableOpacity>
       <ButtonUI
         size="large"
-        title="Sign in"
         variant="primary"
+        title="Send email"
         style={styles.button}
         onPress={(): void => {
           formik.submitForm();
@@ -84,16 +55,6 @@ const styles = StyleSheet.create({
   form: {
     width: "100%",
     maxWidth: 360,
-  },
-  input: {
-    marginTop: 10,
-  },
-  link: {
-    marginTop: 10,
-    alignSelf: "flex-start",
-  },
-  linkText: {
-    color: Primary.Primary50,
   },
   button: {
     height: 60,

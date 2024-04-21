@@ -7,6 +7,9 @@ import {StyleSheet, ActivityIndicator, View, Modal} from "react-native";
 export function Loader(): ReactElement {
   const isSignIn = useIsMutating({mutationKey: [QueryKeys.SignIn]});
   const isSignUp = useIsMutating({mutationKey: [QueryKeys.SignUp]});
+  const isConfirmCode = useIsMutating({mutationKey: [QueryKeys.ConfirmCode]});
+  const isResetPassword = useIsMutating({mutationKey: [QueryKeys.ResetPassword]});
+  const isForgotPassword = useIsMutating({mutationKey: [QueryKeys.ForgotPassword]});
 
   const isGetingUser = useIsMutating({mutationKey: [QueryKeys.GetUser]});
   const isDeletingUser = useIsMutating({mutationKey: [QueryKeys.DeleteUser]});
@@ -25,7 +28,7 @@ export function Loader(): ReactElement {
     <Modal
       transparent={true}
       animationType="fade"
-      visible={!!(isSignIn || isDeletingUserAvatar || isGetingUser || isGetingRecipe || isUpdatingSecurity || isUpdatingRecipeRate || isDeletingUser || isSaveUnSaveRecipe || isDeletingRecipe || isUpdatingRecipe || isCreatingRecipe || isSignUp || isUpdatingProfile)}
+      visible={!!(isSignIn || isForgotPassword || isResetPassword || isConfirmCode || isDeletingUserAvatar || isGetingUser || isGetingRecipe || isUpdatingSecurity || isUpdatingRecipeRate || isDeletingUser || isSaveUnSaveRecipe || isDeletingRecipe || isUpdatingRecipe || isCreatingRecipe || isSignUp || isUpdatingProfile)}
     >
       <View style={styles.modalContainer}>
         <ActivityIndicator

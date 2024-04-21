@@ -18,6 +18,7 @@ class UserAPI {
 
   async delete(userId: string, token: string): Promise<IResponse<undefined>> {
     try {
+      console.log(token);
       const response = await axios.delete(`${this.url}/${userId}`, {
         headers: {
           Authorization: `Bearer ${token}`,

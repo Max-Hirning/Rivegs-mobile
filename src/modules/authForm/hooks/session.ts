@@ -20,7 +20,7 @@ export function useSession(): IHookResponse {
 
   const logOut = async (): Promise<void> => {
     try {
-      navigate(Routes.Auth);
+      navigate(Routes.SignIn);
       dispatch(resetProfile());
       await AsyncStorage.removeItem(Token);
       await AsyncStorage.removeItem(UserId);
@@ -42,7 +42,7 @@ export function useSession(): IHookResponse {
         await dispatch(fetchUser(userId));
         (successCallback) && successCallback();
       } else {
-        navigate(Routes.Auth);
+        navigate(Routes.SignIn);
       }
     } catch {
       Toast.show({

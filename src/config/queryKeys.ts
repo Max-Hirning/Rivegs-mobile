@@ -3,6 +3,9 @@ export enum QueryKeys {
 
   SignUp = "sign-up",
   SignIn = "sign-in",
+  ConfirmCode = "confirm-code",
+  ResetPassword = "reset-password",
+  ForgotPassword = "forgot-password",
 
   GetRecipe = "get-recipe",
   DeleteRecipe = "delete-recipe",

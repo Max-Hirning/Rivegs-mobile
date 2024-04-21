@@ -10,7 +10,10 @@ export enum Routes {
   Settings = "settings",
   AddRecipe = "add-recipe",
   EditRecipe = "edit-recipe",
+  ConfirmCode = "confirm-code",
   Notification = "notification",
   SavedRecipes = "saved-recipes",
   AuthorProfile = "author-profile",
+  ResetPassword = "reset-password",
+  ForgotPassword = "forgot-password",
 }

@@ -39,11 +39,10 @@ const ListFooterComponent = (isLoading: boolean, nextPage: boolean): ReactElemen
 };
 const ListDivider = (): ReactElement => <View style={styles.listDivider} />;
 
-export function RecipesList({data, isError, nextPage, fetchNextPage, refetch, isLoading}: IProps): ReactElement {
+export function RecipesList({data, isError, nextPage, fetchNextPage, isLoading}: IProps): ReactElement {
   return (
     <VirtualizedList
       data={data || []}
-      onRefresh={refetch}
       initialNumToRender={10}
       onEndReachedThreshold={0.1}
       onEndReached={(): void => {
@@ -51,7 +50,6 @@ export function RecipesList({data, isError, nextPage, fetchNextPage, refetch, is
           fetchNextPage();
         }
       }}
-      refreshing={true && isLoading}
       contentContainerStyle={styles.list}
       ItemSeparatorComponent={ListDivider}
       keyExtractor={(item): string => item._id}
@@ -70,7 +68,6 @@ export function RecipesList({data, isError, nextPage, fetchNextPage, refetch, is
       getItem={(arr: IRecipe[], index: number): IRecipe => arr[index]}
       ListEmptyComponent={(): ReactElement => EmptyListComponnet(isError)}
       ListFooterComponent={(): ReactElement => ListFooterComponent(isLoading, !!nextPage)}
-      // data={data?.pages.reduceRight((res: IRecipe[], el: IResponse<IPagination>) => res.concat(el.data.data), []) || []}
     />
   );
 }
