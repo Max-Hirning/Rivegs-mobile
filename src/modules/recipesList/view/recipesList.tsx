@@ -3,7 +3,7 @@ import {Error} from "@src/config/themes";
 import React, {ReactElement} from "react";
 import {IRecipe} from "@src/modules/recipe";
 import {RecipeCard} from "@src/components/recipeCard";
-import {ActivityIndicator, FlatList, StyleSheet, View} from "react-native";
+import {ActivityIndicator, StyleSheet, View, VirtualizedList} from "react-native";
 
 interface IProps {
   data: IRecipe[];
@@ -41,9 +41,10 @@ const ListDivider = (): ReactElement => <View style={styles.listDivider} />;
 
 export function RecipesList({data, isError, nextPage, fetchNextPage, refetch, isLoading}: IProps): ReactElement {
   return (
-    <FlatList
+    <VirtualizedList
       data={data || []}
       onRefresh={refetch}
+      initialNumToRender={10}
       onEndReachedThreshold={0.1}
       onEndReached={(): void => {
         if(fetchNextPage && nextPage && !isLoading && !isError) {
@@ -54,6 +55,7 @@ export function RecipesList({data, isError, nextPage, fetchNextPage, refetch, is
       contentContainerStyle={styles.list}
       ItemSeparatorComponent={ListDivider}
       keyExtractor={(item): string => item._id}
+      getItemCount={(arr): number => arr.length}
       renderItem={({item}: {item: IRecipe}): ReactElement => {
         return (
           <RecipeCard
@@ -65,6 +67,7 @@ export function RecipesList({data, isError, nextPage, fetchNextPage, refetch, is
           />
         );
       }}
+      getItem={(arr: IRecipe[], index: number): IRecipe => arr[index]}
       ListEmptyComponent={(): ReactElement => EmptyListComponnet(isError)}
       ListFooterComponent={(): ReactElement => ListFooterComponent(isLoading, !!nextPage)}
       // data={data?.pages.reduceRight((res: IRecipe[], el: IResponse<IPagination>) => res.concat(el.data.data), []) || []}
