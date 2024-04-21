@@ -1,5 +1,5 @@
 export enum QueryKeys {
-  GetRecipes = "get-recipes",
+  ContactUs = "contact-us",
 
   SignUp = "sign-up",
   SignIn = "sign-in",
@@ -8,6 +8,7 @@ export enum QueryKeys {
   ForgotPassword = "forgot-password",
 
   GetRecipe = "get-recipe",
+  GetRecipes = "get-recipes",
   DeleteRecipe = "delete-recipe",
   UpdateRecipe = "update-recipe",
   CreateRecipe = "create-recipe",

@@ -22,6 +22,7 @@ import NetInfo from "@react-native-community/netinfo";
 import SignInPage from "@src/pages/auth/sign-in/index";
 import {useNavigation} from "@react-navigation/native";
 import SignUpPage from "@src/pages/auth/sign-up/index";
+import ContactUsPage from "@src/pages/contact-us/index";
 import AddRecipePage from "@src/pages/recipe/add/index";
 import EditRecipePage from "@src/pages/recipe/edit/index";
 import ConfirmCodePage from "@src/pages/auth/confirm-code";
@@ -201,6 +202,10 @@ export default function Navigation(): ReactElement {
       <Stack.Screen
         name={Routes.AuthorProfile}
         component={AuthorProfilePage}
+      />
+      <Stack.Screen
+        name={Routes.ContactUs}
+        component={ContactUsPage}
       />
       <Stack.Screen
         name={Routes.Settings}

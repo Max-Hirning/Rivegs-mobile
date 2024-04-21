@@ -2,6 +2,7 @@ import {IUser} from "../types/user";
 import axios, {AxiosError} from "axios";
 import {IResponse} from "@src/types/api";
 import {ISecurityForm} from "../types/securityForm";
+import {IContactUsForm} from "../types/contactUsForm";
 
 class UserAPI {
   constructor(protected readonly url: string) {}
@@ -18,7 +19,6 @@ class UserAPI {
 
   async delete(userId: string, token: string): Promise<IResponse<undefined>> {
     try {
-      console.log(token);
       const response = await axios.delete(`${this.url}/${userId}`, {
         headers: {
           Authorization: `Bearer ${token}`,
@@ -51,6 +51,20 @@ class UserAPI {
         headers: {
           Authorization: `Bearer ${token}`,
           "Content-type": "multipart/form-data",
+        },
+      });
+      return response.data;
+    } catch (error) {
+      if(error instanceof Error) {throw (error as AxiosError).response?.data;}
+      throw (error as AxiosError);
+    }
+  }
+
+  async contactUs(userId: string, data: IContactUsForm, token: string): Promise<IResponse<undefined>> {
+    try {
+      const response = await axios.post(`${process.env.API_URL}/contact-us`, {...data, userId}, {
+        headers: {
+          Authorization: `Bearer ${token}`,
         },
       });
       return response.data;

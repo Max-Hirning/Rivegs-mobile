@@ -41,7 +41,6 @@ export function ProfileMenu({menu, closeMenu}: IProps): ReactElement {
               {
                 text: "Cancel",
                 style: "cancel",
-                onPress: () => console.log("Cancel Pressed"),
               },
               {
                 text: "Delete",

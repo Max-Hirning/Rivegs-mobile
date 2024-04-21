@@ -40,7 +40,6 @@ export function ConfirmCodeForm(): ReactElement {
               <Pressable
                 key={el}
                 onPress={(): void => {
-                  console.log(textInputRef.current);
                   (textInputRef.current) && textInputRef.current.focus();
                 }}
                 style={[styles.inputBox, {

@@ -5,6 +5,8 @@ import {useIsFetching, useIsMutating} from "@tanstack/react-query";
 import {StyleSheet, ActivityIndicator, View, Modal} from "react-native";
 
 export function Loader(): ReactElement {
+  const isContactUs = useIsMutating({mutationKey: [QueryKeys.ContactUs]});
+
   const isSignIn = useIsMutating({mutationKey: [QueryKeys.SignIn]});
   const isSignUp = useIsMutating({mutationKey: [QueryKeys.SignUp]});
   const isConfirmCode = useIsMutating({mutationKey: [QueryKeys.ConfirmCode]});
@@ -28,7 +30,7 @@ export function Loader(): ReactElement {
     <Modal
       transparent={true}
       animationType="fade"
-      visible={!!(isSignIn || isForgotPassword || isResetPassword || isConfirmCode || isDeletingUserAvatar || isGetingUser || isGetingRecipe || isUpdatingSecurity || isUpdatingRecipeRate || isDeletingUser || isSaveUnSaveRecipe || isDeletingRecipe || isUpdatingRecipe || isCreatingRecipe || isSignUp || isUpdatingProfile)}
+      visible={!!(isSignIn || isContactUs || isForgotPassword || isResetPassword || isConfirmCode || isDeletingUserAvatar || isGetingUser || isGetingRecipe || isUpdatingSecurity || isUpdatingRecipeRate || isDeletingUser || isSaveUnSaveRecipe || isDeletingRecipe || isUpdatingRecipe || isCreatingRecipe || isSignUp || isUpdatingProfile)}
     >
       <View style={styles.modalContainer}>
         <ActivityIndicator

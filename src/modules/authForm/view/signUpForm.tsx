@@ -82,7 +82,7 @@ export function SignUpForm(): ReactElement {
         error={!!(formik.touched.confirmPassword && formik.errors.confirmPassword)}
       />
       <View style={styles.linkContainer}>
-        <TouchableOpacity onPress={(): void => console.log("open web page")}>
+        <TouchableOpacity>
           <TextUI
             variant="p"
             style={styles.link}

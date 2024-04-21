@@ -35,6 +35,7 @@ export type NavigationParamList = {
   [Routes.SignUp]: undefined;
   [Routes.Settings]: undefined;
   [Routes.Security]: undefined;
+  [Routes.ContactUs]: undefined;
   [Routes.ForgotPassword]: undefined;
 };
 export type AppRouteProp = NavigationProp<AppParamList, Routes.Home>;

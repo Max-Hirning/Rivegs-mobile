@@ -85,7 +85,6 @@ export function RecipeMenu({menu, closeMenu, rate, recipeImage, recipeState, isA
                     {
                       text: "Cancel",
                       style: "cancel",
-                      onPress: () => console.log("Cancel Pressed"),
                     },
                     {
                       text: "Delete",

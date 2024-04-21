@@ -3,9 +3,13 @@ import {PopUpMenu} from "../popUpMenu";
 import {InputUI} from "@src/UI/InputUI";
 import {useDispatch} from "react-redux";
 import {ButtonUI} from "@src/UI/ButtonUI";
+import {Routes} from "@src/config/routes";
 import FilterIcon from "@src/assets/icons/filters";
+import MessageIcon from "@src/assets/icons/message";
 import {Neutral, Primary} from "@src/config/themes";
 import React, {ReactElement, useState} from "react";
+import {ScreenRouteProp} from "@src/types/navigation";
+import {useNavigation} from "@react-navigation/native";
 import {AppDispatch, setFilter} from "@src/modules/store";
 import {FlatList, StyleSheet, TouchableOpacity, View} from "react-native";
 
@@ -14,11 +18,18 @@ const ListDivider = (): ReactElement => <View style={styles.listDivider} />;
 export function SearchHeader(): ReactElement {
   const dispatch: AppDispatch = useDispatch();
   const [menu, setMenu] = useState<boolean>(false);
+  const {navigate} = useNavigation<ScreenRouteProp>();
   const [authorLogin, setAuthorLogin] = useState<string>("");
   const [rates, setRates] = useState<[number, number]>([1,5]);
 
   return (
     <>
+      <TouchableOpacity
+        style={styles.messageIcon}
+        onPress={(): void => navigate(Routes.ContactUs)}
+      >
+        <MessageIcon width={28} height={28} color={Neutral.Neutral100} fill={Neutral.Neutral0}/>
+      </TouchableOpacity>
       <View style={styles.container}>
         <View style={styles.input}>
           <InputUI
@@ -128,9 +139,15 @@ export function SearchHeader(): ReactElement {
 }
 
 const styles = StyleSheet.create({
+  messageIcon: {
+    left: 25,
+    marginTop: 5,
+    position: "relative",
+  },
   container: {
+    paddingTop: 10,
     display: "flex",
-    paddingVertical: 20,
+    paddingBottom: 20,
     flexDirection: "row",
     alignItems: "center",
     paddingHorizontal: 25,

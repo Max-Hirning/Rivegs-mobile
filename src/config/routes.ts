@@ -9,6 +9,7 @@ export enum Routes {
   Security = "security",
   Settings = "settings",
   AddRecipe = "add-recipe",
+  ContactUs = "contact-us",
   EditRecipe = "edit-recipe",
   ConfirmCode = "confirm-code",
   Notification = "notification",

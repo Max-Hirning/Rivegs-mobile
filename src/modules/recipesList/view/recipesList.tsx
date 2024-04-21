@@ -14,17 +14,18 @@ interface IProps {
   nextPage: number|null|undefined;
 }
 
-const EmptyListComponnet = (isError: boolean): ReactElement => {
-  if(isError) {
-    return (
-      <TextUI
-        variant="h2"
-        isBold={true}
-        style={styles.error}
-      >No recipes</TextUI>
-    );
+const EmptyListComponnet = (isLoading: boolean): ReactElement => {
+  if(isLoading) {
+    return <></>;
   }
-  return <></>;
+
+  return (
+    <TextUI
+      variant="h2"
+      isBold={true}
+      style={styles.error}
+    >No recipes</TextUI>
+  );
 };
 const ListFooterComponent = (isLoading: boolean, nextPage: boolean): ReactElement => {
   if(isLoading || nextPage) {
@@ -65,8 +66,8 @@ export function RecipesList({data, isError, nextPage, fetchNextPage, isLoading}:
           />
         );
       }}
+      ListEmptyComponent={(): ReactElement => EmptyListComponnet(isLoading)}
       getItem={(arr: IRecipe[], index: number): IRecipe => arr[index]}
-      ListEmptyComponent={(): ReactElement => EmptyListComponnet(isError)}
       ListFooterComponent={(): ReactElement => ListFooterComponent(isLoading, !!nextPage)}
     />
   );

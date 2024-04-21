@@ -4,7 +4,7 @@ module.exports = {
     "browser": true,
   },
   "rules": {
-    // "no-console": 2,
+    "no-console": 2,
     "indent": ["error", 2],
     "prettier/prettier": 0,
     "space-before-blocks": 2,
