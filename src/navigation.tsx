@@ -18,7 +18,6 @@ import {Neutral, Primary} from "@src/config/themes";
 import {getVersion} from "react-native-device-info";
 import SettingsPage from "@src/pages/settings/index";
 import SplashScreen from "react-native-splash-screen";
-import NetInfo from "@react-native-community/netinfo";
 import SignInPage from "@src/pages/auth/sign-in/index";
 import {useNavigation} from "@react-navigation/native";
 import SignUpPage from "@src/pages/auth/sign-up/index";
@@ -26,6 +25,7 @@ import ContactUsPage from "@src/pages/contact-us/index";
 import AddRecipePage from "@src/pages/recipe/add/index";
 import EditRecipePage from "@src/pages/recipe/edit/index";
 import ConfirmCodePage from "@src/pages/auth/confirm-code";
+import {useNetInfo} from "@react-native-community/netinfo";
 import NotificationPage from "@src/pages/notifications/index";
 import SavedRecipesPage from "@src/pages/saved-recipes/index";
 import NotificationIcon from "@src/assets/icons/notification";
@@ -133,6 +133,7 @@ function AppScreens(): ReactElement {
 }
 
 export default function Navigation(): ReactElement {
+  const netInfo = useNetInfo();
   const {update} = useSession();
   const dispatch: AppDispatch = useDispatch();
   const {navigate} = useNavigation<ScreenRouteProp>();
@@ -150,19 +151,14 @@ export default function Navigation(): ReactElement {
   }, [start]);
 
   useEffect(() => {
-    const removeNetInfoSubscription = NetInfo.addEventListener((state) => {
-      const offline = !(state.isConnected && state.isInternetReachable);
-      if(offline) {
-        Toast.show({
-          type: "error",
-          text1: "Error",
-          text2: "No internet connection",
-        });
-      }
-    });
-
-    return () => removeNetInfoSubscription();
-  }, [navigate]);
+    if(!netInfo.isConnected) {
+      Toast.show({
+        type: "error",
+        text1: "Error",
+        text2: "No internet connection",
+      });
+    }
+  }, [netInfo.isConnected]);
 
   return (
     <Stack.Navigator

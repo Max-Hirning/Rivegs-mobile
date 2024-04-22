@@ -25,7 +25,7 @@ export function ProfileInfo({login, avatar, description, isUserProfile, recipesA
           login={login}
           source={avatar}
         />
-        {
+        {/* {
           (isUserProfile) ?
             <ButtonUI
               size="small"
@@ -39,6 +39,16 @@ export function ProfileInfo({login, avatar, description, isUserProfile, recipesA
               title="Follow"
               variant="primary"
               style={styles.button}
+            />
+        } */}
+        {
+          (isUserProfile) &&
+            <ButtonUI
+              size="small"
+              title="Edit"
+              variant="secondary"
+              style={styles.button}
+              onPress={(): void => navigate(Routes.Settings)}
             />
         }
       </View>

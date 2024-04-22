@@ -13,14 +13,14 @@ interface IProps {
   _id: string;
   rate: number;
   menu: boolean;
-  isAuthed: boolean;
+  isAuthor: boolean;
   recipeImage: string;
   closeMenu: () => void;
   savedRecipes: string[];
   recipeState: IRecipeForm;
 }
 
-export function RecipeMenu({menu, closeMenu, rate, recipeImage, recipeState, isAuthed, savedRecipes, _id}: IProps): ReactElement {
+export function RecipeMenu({menu, closeMenu, rate, recipeImage, recipeState, isAuthor, savedRecipes, _id}: IProps): ReactElement {
   const deleteRecipe = useUpdateSavedRecipes();
   const saveUnSaveRecipe = useUpdateSavedRecipes();
   const {navigate} = useNavigation<ScreenRouteProp>();
@@ -42,7 +42,7 @@ export function RecipeMenu({menu, closeMenu, rate, recipeImage, recipeState, isA
             <TextUI variant="p">Share</TextUI>
           </TouchableOpacity>
           {
-            (isAuthed) &&
+            (isAuthor) &&
             <TouchableOpacity
               onPress={(): void => {
                 closeMenu();
@@ -63,7 +63,7 @@ export function RecipeMenu({menu, closeMenu, rate, recipeImage, recipeState, isA
             <TextUI variant="p">Rate Recipe</TextUI>
           </TouchableOpacity>
           {
-            (isAuthed) &&
+            (isAuthor) &&
             <>
               <TouchableOpacity
                 onPress={(): void => {

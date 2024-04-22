@@ -51,7 +51,7 @@ const styles = StyleSheet.create({
     height: 50,
   },
   recipeTypesList: {
-    height: 45,
+    height: 50,
     marginBottom: 10,
     paddingHorizontal: 25,
   },

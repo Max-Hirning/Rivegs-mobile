@@ -64,10 +64,10 @@ export default function Page(): ReactElement {
         }}
         _id={data.data._id}
         rate={data.data.rate}
-        isAuthed={!!(profile.data)}
         recipeImage={data.data.image}
         closeMenu={(): void => setMenu(false)}
         savedRecipes={profile.data?.savedRecipes || []}
+        isAuthor={profile.data?._id === data.data.author._id}
       />
       <PageScroll listStyle={styles.list}>
         <>
@@ -140,6 +140,7 @@ const styles = StyleSheet.create({
   },
   elList: {
     gap: 10,
+    alignItems: "center",
   },
   el: {
     width: 335,

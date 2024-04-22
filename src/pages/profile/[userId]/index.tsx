@@ -20,8 +20,8 @@ export default function Page(): ReactElement {
         leftIcon={
           <TouchableOpacity onPress={(): void => goBack()}>
             <ArrowLeftIcon
-              width={24}
-              height={24}
+              width={30}
+              height={30}
               color={Neutral.Neutral100}
             />
           </TouchableOpacity>
