@@ -5,12 +5,13 @@ import {recipeAPI} from "../controllers/api";
 import {RootState} from "@src/modules/store";
 import Toast from "react-native-toast-message";
 import {QueryKeys} from "@src/config/queryKeys";
-import {NavigationParamList} from "@src/types/navigation";
-import {RouteProp, useRoute} from "@react-navigation/native";
+import {NavigationParamList, ScreenRouteProp} from "@src/types/navigation";
+import {RouteProp, useNavigation, useRoute} from "@react-navigation/native";
 import {UseMutationResult, useMutation, useQueryClient} from "@tanstack/react-query";
 
 export function useUpdateRecipe(): UseMutationResult<IResponse<undefined>, IResponse<undefined>, FormData, unknown> {
   const queryClient = useQueryClient();
+  const {navigate} = useNavigation<ScreenRouteProp>();
   const profile = useSelector((state: RootState) => state.profile);
   const {params} = useRoute<RouteProp<NavigationParamList, Routes.EditRecipe>>();
 
@@ -29,6 +30,7 @@ export function useUpdateRecipe(): UseMutationResult<IResponse<undefined>, IResp
         text1: "Success",
         text2: success.message,
       });
+      navigate(Routes.App);
       queryClient.invalidateQueries({queryKey: [QueryKeys.GetRecipe]});
       queryClient.invalidateQueries({queryKey: [QueryKeys.GetRecipes]});
     },

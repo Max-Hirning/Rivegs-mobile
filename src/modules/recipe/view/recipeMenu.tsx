@@ -4,6 +4,7 @@ import {Routes} from "@src/config/routes";
 import {PopUpMenu} from "@src/components/popUpMenu";
 import React, {ReactElement, useState} from "react";
 import {IRecipeForm} from "@src/modules/recipeForm";
+import {useDeleteRecipe} from "../hooks/deleteRecipe";
 import {ScreenRouteProp} from "@src/types/navigation";
 import {useNavigation} from "@react-navigation/native";
 import {useUpdateSavedRecipes} from "@src/modules/profile";
@@ -14,14 +15,15 @@ interface IProps {
   rate: number;
   menu: boolean;
   isAuthor: boolean;
+  isAuthed: boolean;
   recipeImage: string;
   closeMenu: () => void;
   savedRecipes: string[];
   recipeState: IRecipeForm;
 }
 
-export function RecipeMenu({menu, closeMenu, rate, recipeImage, recipeState, isAuthor, savedRecipes, _id}: IProps): ReactElement {
-  const deleteRecipe = useUpdateSavedRecipes();
+export function RecipeMenu({menu, closeMenu, rate, isAuthed, recipeImage, recipeState, isAuthor, savedRecipes, _id}: IProps): ReactElement {
+  const deleteRecipe = useDeleteRecipe();
   const saveUnSaveRecipe = useUpdateSavedRecipes();
   const {navigate} = useNavigation<ScreenRouteProp>();
   const [rateModal, setRateModal] = useState<boolean>(false);
@@ -42,7 +44,7 @@ export function RecipeMenu({menu, closeMenu, rate, recipeImage, recipeState, isA
             <TextUI variant="p">Share</TextUI>
           </TouchableOpacity>
           {
-            (isAuthor) &&
+            (isAuthed) &&
             <TouchableOpacity
               onPress={(): void => {
                 closeMenu();

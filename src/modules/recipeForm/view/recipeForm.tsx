@@ -18,7 +18,7 @@ import {IRecipeForm, IStepIngredient} from "../types/recipeForm";
 
 interface IProps {
   initialImageUrl?: string;
-  initialState: IRecipeForm;
+  initialState?: IRecipeForm;
 }
 
 export function RecipeForm({initialState, initialImageUrl}: IProps): ReactElement {
@@ -27,10 +27,10 @@ export function RecipeForm({initialState, initialImageUrl}: IProps): ReactElemen
       const formData = new FormData();
       (imageFile) && formData.append("file", (imageFile as IImage));
       (values.title && values.title.length > 0) && formData.append("title", values.title);
-      (values.steps.length > 0) && formData.append("steps", JSON.stringify(values.steps));
       (values.typeId && values.typeId.length > 0) && formData.append("typeId", values.typeId);
-      (values.ingredients.length > 0) && formData.append("ingredients", JSON.stringify(values.ingredients));
       (values.description && values.description.length > 0) && formData.append("description", values.description);
+      (values.steps.length > 0) && formData.append("steps", JSON.stringify(values.steps.map(({_id, ...el}: IStepIngredient) => el)));
+      (values.ingredients.length > 0) && formData.append("ingredients", JSON.stringify(values.ingredients.map(({_id, ...el}: IStepIngredient) => el)));
       if(initialState) {
         updateRecipe.mutate(formData);
       } else {
@@ -56,7 +56,7 @@ export function RecipeForm({initialState, initialImageUrl}: IProps): ReactElemen
 
   useEffect(() => {
     const unsubscribe = navigation.addListener("focus", () => {
-      formik.setValues(initialState);
+      (initialState) && formik.setValues(initialState);
     });
 
     return unsubscribe;

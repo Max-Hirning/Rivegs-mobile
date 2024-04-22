@@ -6,11 +6,11 @@ import {ImagePicker} from "./imagePicker";
 import {ButtonUI} from "@src/UI/ButtonUI";
 import {RootState} from "@src/modules/store";
 import {StyleSheet, View} from "react-native";
-import React, {ReactElement, useState} from "react";
 import {useDeleteAvatar} from "../hooks/deleteAvatar";
 import {useUpdateProfile} from "../hooks/updateProfile";
 import {settingsFormModel} from "../models/settingsForm";
 import {settingsFormSchema} from "../schemas/settingsForm";
+import React, {ReactElement, useEffect, useState} from "react";
 
 export function SettingsForm(): ReactElement {
   const formik = useFormik({
@@ -32,6 +32,13 @@ export function SettingsForm(): ReactElement {
   const [imageFile, setImageFile] = useState<null|IImage>(null);
   const profile = useSelector((state: RootState) => state.profile);
   const [avatarHasBeenChanged, setAvatarHasBeenChanged] = useState<boolean>(false);
+
+  useEffect(() => {
+    if(profile.data) {
+      formik.setFieldValue("description", profile.data.description);
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [profile.data]);
 
   return (
     <View style={styles.form}>
@@ -67,13 +74,13 @@ export function SettingsForm(): ReactElement {
       </View>
       <InputUI
         label="Login"
-        placeholder="Login"
         value={formik.values.login}
         onBlurAction={(): void => {
           formik.setFieldTouched("login", true);
         }}
         containerStyle={styles.input}
         errorMsg={formik.errors.login}
+        placeholder={profile.data?.login || ""}
         onChangeText={(value: string): void => {
           formik.setFieldValue("login", value);
         }}
@@ -81,13 +88,13 @@ export function SettingsForm(): ReactElement {
       />
       <InputUI
         label="Email"
-        placeholder="Email"
         value={formik.values.email}
         onBlurAction={(): void => {
           formik.setFieldTouched("email", true);
         }}
         containerStyle={styles.input}
         errorMsg={formik.errors.email}
+        placeholder={profile.data?.email || ""}
         onChangeText={(value: string): void => {
           formik.setFieldValue("email", value);
         }}

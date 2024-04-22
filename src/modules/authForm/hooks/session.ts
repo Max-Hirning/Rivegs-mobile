@@ -58,6 +58,7 @@ export function useSession(): IHookResponse {
       AsyncStorage.setItem(Token, token);
       AsyncStorage.setItem(UserId, userId);
       dispatch(fetchUser(userId));
+      dispatch(setToken(token));
       navigate(Routes.App);
     } catch {
       Toast.show({

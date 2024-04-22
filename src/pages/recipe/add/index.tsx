@@ -1,12 +1,12 @@
 import React, {ReactElement} from "react";
 import {Neutral} from "@src/config/themes";
+import {RecipeForm} from "@src/modules/recipeForm";
 import {ScreenRouteProp} from "@src/types/navigation";
 import {Header} from "@src/components/headers/header";
 import {useNavigation} from "@react-navigation/native";
 import ArrowLeftIcon from "@src/assets/icons/arrow/left";
 import {PageScroll} from "@src/components/wrappers/pageScroll";
 import {StyleSheet, TouchableOpacity, View} from "react-native";
-import {RecipeForm, recipeFormInitialValue} from "@src/modules/recipeForm";
 
 export default function Page(): ReactElement {
   const {goBack} = useNavigation<ScreenRouteProp>();
@@ -25,7 +25,7 @@ export default function Page(): ReactElement {
         }
       />
       <PageScroll listStyle={styles.list}>
-        <RecipeForm initialState={recipeFormInitialValue}/>
+        <RecipeForm/>
       </PageScroll>
     </View>
   );
