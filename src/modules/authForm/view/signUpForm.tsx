@@ -1,14 +1,15 @@
 import {useFormik} from "formik";
 import {TextUI} from "@src/UI/TextUI";
-import {StyleSheet} from "react-native";
 import {InputUI} from "@src/UI/InputUI";
-import React, {ReactElement} from "react";
 import {useSignUp} from "../hooks/signUp";
 import {ButtonUI} from "@src/UI/ButtonUI";
 import {signUpModel} from "../models/signUp";
 import {signUpSchema} from "../schemas/signUp";
+import {Linking, StyleSheet} from "react-native";
+import React, {ReactElement, useState} from "react";
 import {TouchableOpacity, View} from "react-native";
 import {Neutral, Primary} from "@src/config/themes";
+import BouncyCheckbox from "react-native-bouncy-checkbox";
 import ArrowRightIcon from "@src/assets/icons/arrow/right";
 
 export function SignUpForm(): ReactElement {
@@ -21,6 +22,7 @@ export function SignUpForm(): ReactElement {
     },
   });
   const {mutate} = useSignUp();
+  const [privacyPolicy, setPrivacyPolicy] = useState<boolean>(false);
 
   return (
     <View style={styles.form}>
@@ -82,7 +84,18 @@ export function SignUpForm(): ReactElement {
         error={!!(formik.touched.confirmPassword && formik.errors.confirmPassword)}
       />
       <View style={styles.linkContainer}>
-        <TouchableOpacity>
+        <BouncyCheckbox
+          size={25}
+          unFillColor="#FFFFFF"
+          isChecked={privacyPolicy}
+          fillColor={Primary.Primary50}
+          innerIconStyle={styles.checkbox}
+          iconStyle={{borderColor: Primary.Primary50}}
+          onPress={(): void => setPrivacyPolicy((state: boolean): boolean => !state)}
+        />
+        <TouchableOpacity onPress={(): void => {
+          Linking.openURL("https://www.freeprivacypolicy.com/live/63bf5ac7-52db-4d0d-baf5-ec82e0f49f3a");
+        }}>
           <TextUI
             variant="p"
             style={styles.link}
@@ -97,7 +110,7 @@ export function SignUpForm(): ReactElement {
         onPress={(): void => {
           formik.submitForm();
         }}
-        disabled={!formik.isValid || !(Object.values(formik.values) as string[]).some((value: string) => value.length)}
+        disabled={!formik.isValid || !privacyPolicy || !(Object.values(formik.values) as string[]).some((value: string) => value.length)}
         rightIcon={<ArrowRightIcon width={30} height={30} color={(!formik.isValid || !(Object.values(formik.values) as string[]).some((value: string) => value.length)) ? Neutral.Neutral50 : Neutral.Neutral0}/>}
       />
     </View>
@@ -114,6 +127,11 @@ const styles = StyleSheet.create({
   },
   linkContainer: {
     marginTop: 10,
+    flexDirection: "row",
+  },
+  checkbox: {
+    borderWidth: 2,
+    borderRadius: 8,
   },
   link: {
     color: Primary.Primary50,
