@@ -35,14 +35,14 @@ export function RecipeMenu({menu, closeMenu, rate, isAuthed, recipeImage, recipe
         onClose={closeMenu}
       >
         <View style={styles.menu}>
-          <TouchableOpacity
+          {/* <TouchableOpacity
             onPress={(): void => {
               closeMenu();
             }}
             style={styles.menuItem}
           >
             <TextUI variant="p">Share</TextUI>
-          </TouchableOpacity>
+          </TouchableOpacity> */}
           {
             (isAuthed) &&
             <TouchableOpacity

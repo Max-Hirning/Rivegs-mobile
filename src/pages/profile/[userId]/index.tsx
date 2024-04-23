@@ -48,6 +48,7 @@ export default function Page(): ReactElement {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    alignItems: "center",
     backgroundColor: Neutral.Neutral0,
   },
   horizontalDivider: {

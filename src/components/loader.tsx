@@ -13,7 +13,7 @@ export function Loader(): ReactElement {
   const isResetPassword = useIsMutating({mutationKey: [QueryKeys.ResetPassword]});
   const isForgotPassword = useIsMutating({mutationKey: [QueryKeys.ForgotPassword]});
 
-  const isGetingUser = useIsMutating({mutationKey: [QueryKeys.GetUser]});
+  const isGetingUser = useIsFetching({queryKey: [QueryKeys.GetUser]});
   const isDeletingUser = useIsMutating({mutationKey: [QueryKeys.DeleteUser]});
   const isUpdatingProfile = useIsMutating({mutationKey: [QueryKeys.UpdateProfile]});
   const isUpdatingSecurity = useIsMutating({mutationKey: [QueryKeys.UpdateSecurity]});
@@ -30,7 +30,7 @@ export function Loader(): ReactElement {
     <Modal
       transparent={true}
       animationType="fade"
-      visible={!!(isSignIn || isContactUs || isForgotPassword || isResetPassword || isConfirmCode || isDeletingUserAvatar || isGetingUser || isGetingRecipe || isUpdatingSecurity || isUpdatingRecipeRate || isDeletingUser || isSaveUnSaveRecipe || isDeletingRecipe || isUpdatingRecipe || isCreatingRecipe || isSignUp || isUpdatingProfile)}
+      visible={!!(isSignIn || isGetingUser || isContactUs || isForgotPassword || isResetPassword || isConfirmCode || isDeletingUserAvatar || isGetingUser || isGetingRecipe || isUpdatingSecurity || isUpdatingRecipeRate || isDeletingUser || isSaveUnSaveRecipe || isDeletingRecipe || isUpdatingRecipe || isCreatingRecipe || isSignUp || isUpdatingProfile)}
     >
       <View style={styles.modalContainer}>
         <ActivityIndicator

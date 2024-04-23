@@ -136,6 +136,8 @@ const styles = StyleSheet.create({
     width: 335,
     height: 223,
     marginTop: 10,
+    minWidth: 335,
+    minHeight: 223,
     borderRadius: 12,
     backgroundColor: Neutral.Neutral30,
   },

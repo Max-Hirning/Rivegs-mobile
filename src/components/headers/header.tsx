@@ -26,6 +26,7 @@ export function Header({leftIcon, rightIcon, title}: IProps): ReactElement {
 
 const styles = StyleSheet.create({
   container: {
+    width: "100%",
     display: "flex",
     paddingVertical: 20,
     flexDirection: "row",

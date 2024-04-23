@@ -38,6 +38,7 @@ const styles = StyleSheet.create({
   list: {
     flexGrow: 1,
     paddingBottom: 10,
+    justifyContent: "center",
   },
   listDivider: {
     marginHorizontal: 5,

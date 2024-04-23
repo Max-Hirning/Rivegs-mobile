@@ -49,6 +49,7 @@ const Stack = createNativeStackNavigator();
 const AddRecipeTabBarIcon = (): ReactElement => {
   return (
     <View style={{
+      width: 75,
       bottom: 5,
       alignItems: "center",
       position: "absolute",
@@ -72,6 +73,8 @@ const AddRecipeTabBarIcon = (): ReactElement => {
           color: Neutral.Neutral70,
         }}
         variant="small"
+        numberOfLines={1}
+        ellipsizeMode="tail"
       >{getVersion()}</TextUI>
     </View>
   );
@@ -151,7 +154,7 @@ export default function Navigation(): ReactElement {
   }, [start]);
 
   useEffect(() => {
-    if(!netInfo.isConnected) {
+    if(netInfo.isConnected === false) {
       Toast.show({
         type: "error",
         text1: "Error",

@@ -31,11 +31,10 @@ export function SearchHeader(): ReactElement {
         <MessageIcon width={28} height={28} color={Neutral.Neutral100} fill={Neutral.Neutral0}/>
       </TouchableOpacity>
       <View style={styles.container}>
-        <View style={styles.input}>
-          <InputUI
-            placeholder="Search recipe"
-          />
-        </View>
+        <InputUI
+          placeholder="Search recipe"
+          containerStyle={styles.input}
+        />
         <TouchableOpacity
           style={styles.button}
           onPress={(): void => setMenu(true)}
@@ -141,26 +140,29 @@ export function SearchHeader(): ReactElement {
 const styles = StyleSheet.create({
   messageIcon: {
     left: 25,
+    width: 28,
+    height: 28,
     marginTop: 5,
     position: "relative",
   },
   container: {
+    width: "100%",
     paddingTop: 10,
     display: "flex",
     paddingBottom: 20,
     flexDirection: "row",
     alignItems: "center",
     paddingHorizontal: 25,
-    backgroundColor: "white",
-    justifyContent: "space-between",
+    justifyContent: "center",
   },
   input: {
-    maxWidth: 255,
-    width: "100%",
+    flexGrow: 1,
+    maxWidth: 350,
   },
   button: {
     width: 40,
     height: 40,
+    marginLeft: 20,
     display: "flex",
     borderRadius: 10,
     alignItems: "center",

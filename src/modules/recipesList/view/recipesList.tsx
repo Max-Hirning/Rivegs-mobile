@@ -3,7 +3,7 @@ import {Error} from "@src/config/themes";
 import React, {ReactElement} from "react";
 import {IRecipe} from "@src/modules/recipe";
 import {RecipeCard} from "@src/components/recipeCard";
-import {ActivityIndicator, StyleSheet, View, VirtualizedList} from "react-native";
+import {ActivityIndicator, Dimensions, StyleSheet, View, VirtualizedList} from "react-native";
 
 interface IProps {
   data: IRecipe[];
@@ -77,6 +77,7 @@ const styles = StyleSheet.create({
   list: {
     paddingVertical: 20,
     alignItems: "center",
+    width: Dimensions.get("window").width,
   },
   listDivider: {
     marginVertical: 5,

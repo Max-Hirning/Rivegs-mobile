@@ -94,21 +94,21 @@ export function ProfileInfo({login, avatar, description, isUserProfile, recipesA
 
 const styles = StyleSheet.create({
   container: {
-    width: "100%",
     marginTop: 15,
+    maxWidth: 380,
+    width: "100%",
     paddingHorizontal: 25,
   },
   userAvatarContainer: {
-    maxWidth: 375,
     display: "flex",
     marginBottom: 30,
     flexDirection: "row",
     alignItems: "center",
-    justifyContent: "space-between",
   },
   button: {
     height: 36,
     width: 107,
+    marginLeft: 50,
   },
   description: {
     marginTop: 10,

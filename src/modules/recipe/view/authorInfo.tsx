@@ -62,6 +62,7 @@ const styles = StyleSheet.create({
   container: {
     width: "100%",
     marginTop: 10,
+    maxWidth: 335,
     marginBottom: 30,
   },
   rateContainer: {
