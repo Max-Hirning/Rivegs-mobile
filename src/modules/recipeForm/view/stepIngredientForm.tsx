@@ -1,11 +1,9 @@
 import {TextUI} from "@src/UI/TextUI";
-import {InputUI} from "@src/UI/InputUI";
-import {Neutral} from "@src/config/themes";
-import React, {ReactElement, useState} from "react";
 import {IStepIngredient} from "../types/recipeForm";
-import AddBorderIcon from "@src/assets/icons/border/plus";
-import RemoveBorderIcon from "@src/assets/icons/border/minus";
-import {StyleSheet, TouchableOpacity, View, ViewStyle} from "react-native";
+import React, {ReactElement, useCallback} from "react";
+import {StyleSheet, View, ViewStyle} from "react-native";
+import {EditStepIngredient} from "@src/components/editStepIngredient";
+import {CreateStepIngredient} from "@src/components/createStepIngredient";
 
 interface IProps {
   title: string;
@@ -18,7 +16,9 @@ interface IProps {
 }
 
 export function StepIngredientForm({title, placeholder, containerStyle, values, updateEntry, removeEntry, addEntry}: IProps): ReactElement {
-  const [value, setValue] = useState<string>("");
+  const addNewEntry = useCallback((data: IStepIngredient): void => addEntry(data), [addEntry]);
+  const removeExistedEntry = useCallback((_id: string): void => removeEntry(_id), [removeEntry]);
+  const updateExistedEntry = useCallback((data: IStepIngredient, index: number): void => updateEntry(data, index), [updateEntry]);
 
   return (
     <View style={containerStyle}>
@@ -27,69 +27,18 @@ export function StepIngredientForm({title, placeholder, containerStyle, values, 
         isBold={true}
       >{title}</TextUI>
       <View style={styles.list}>
-        <View style={styles.form}>
-          <InputUI
-            value={value}
-            onChangeText={setValue}
-            placeholder="Ingerdient"
-            containerStyle={styles.input}
-          />
-          <TouchableOpacity
-            style={styles.button}
-            onPress={(): void => {
-              addEntry({
-                value,
-                bold: false,
-                italic: false,
-                underlined: false,
-                _id: Date.now().toString(),
-              });
-              setValue("");
-            }}
-            disabled={value.length === 0}
-          >
-            <AddBorderIcon
-              width={30}
-              height={30}
-              color={(value.length === 0) ? Neutral.Neutral50 : Neutral.Neutral100}
-            />
-          </TouchableOpacity>
-        </View>
+        <CreateStepIngredient addEntry={addNewEntry}/>
         {
           values.map((el: IStepIngredient, index: number): ReactElement => {
             return (
-              <View
+              <EditStepIngredient
+                {...el}
                 key={el._id}
-                style={styles.form}
-              >
-                <InputUI
-                  value={el.value}
-                  multiline={true}
-                  placeholder={placeholder}
-                  onBlurAction={(): void => {
-                    if(el.value.length === 0) {
-                      removeEntry(el._id);
-                    }
-                  }}
-                  containerStyle={styles.input}
-                  onChangeText={(newValue: string): void => {
-                    updateEntry({
-                      ...el,
-                      value: newValue,
-                    }, index);
-                  }}
-                />
-                <TouchableOpacity
-                  style={styles.button}
-                  onPress={(): void => removeEntry(el._id)}
-                >
-                  <RemoveBorderIcon
-                    width={30}
-                    height={30}
-                    color={Neutral.Neutral100}
-                  />
-                </TouchableOpacity>
-              </View>
+                index={index}
+                placeholder={placeholder}
+                updateEntry={updateExistedEntry}
+                removeEntry={removeExistedEntry}
+              />
             );
           })
         }
@@ -102,17 +51,5 @@ const styles = StyleSheet.create({
   list: {
     gap: 10,
     marginTop: 10,
-  },
-  form: {
-    display: "flex",
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "space-between",
-  },
-  input: {
-    width: "90%",
-  },
-  button: {
-    marginLeft: 20,
   },
 });

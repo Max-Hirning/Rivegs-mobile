@@ -1,9 +1,9 @@
 import {IResponse} from "@src/types/api";
-import React, {ReactElement} from "react";
 import {Neutral} from "@src/config/themes";
 import {IRecipe} from "@src/modules/recipe";
 import {StyleSheet, View} from "react-native";
 import {useDispatch, useSelector} from "react-redux";
+import React, {ReactElement, useCallback} from "react";
 import {RecipeTypes} from "@src/components/recipeTypes";
 import {AppDispatch, RootState} from "@src/modules/store";
 import {SearchHeader} from "@src/components/headers/search";
@@ -17,21 +17,25 @@ export default function Page(): ReactElement {
   const recipeTypes = useSelector((state: RootState) => state.recipeTypes);
   const {data, isError, isLoading, fetchNextPage, refetch} = useSearchRecipes(filters);
 
+  const refresh = useCallback(() => refetch, [refetch]);
+
+  const choseRecipeType = useCallback((typeId: string): void => {
+    dispatch(changeTypeId(typeId));
+  }, [dispatch]);
+
   return (
     <View style={styles.container}>
       <SearchHeader/>
       <View style={styles.recipeTypesListContainer}>
         <RecipeTypes
           value={filters.typeId}
+          onChange={choseRecipeType}
           data={recipeTypes.data || []}
           style={styles.recipeTypesList}
-          onChange={(typeId: string): void => {
-            dispatch(changeTypeId(typeId));
-          }}
         />
       </View>
       <RecipesList
-        refetch={refetch}
+        refetch={refresh}
         isError={isError}
         isLoading={isLoading}
         fetchNextPage={fetchNextPage}

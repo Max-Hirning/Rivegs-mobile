@@ -6,13 +6,13 @@ import {recipeAPI} from "../controllers/api";
 import {RootState} from "@src/modules/store";
 import Toast from "react-native-toast-message";
 import {QueryKeys} from "@src/config/queryKeys";
-import {ScreenRouteProp} from "@src/types/navigation";
+import {AppRouteProp} from "@src/types/navigation";
 import {useNavigation} from "@react-navigation/native";
 import {UseMutationResult, useMutation, useQueryClient} from "@tanstack/react-query";
 
 export function useCreateRecipe(): UseMutationResult<IResponse<undefined>, IResponse<undefined>, FormData, unknown> {
   const queryClient = useQueryClient();
-  const {navigate} = useNavigation<ScreenRouteProp>();
+  const {navigate} = useNavigation<AppRouteProp>();
   const profile = useSelector((state: RootState) => state.profile);
 
   return useMutation({
@@ -31,7 +31,7 @@ export function useCreateRecipe(): UseMutationResult<IResponse<undefined>, IResp
         text2: success.message,
       });
       queryClient.invalidateQueries({queryKey: [QueryKeys.GetRecipes]});
-      navigate(Routes.App);
+      navigate(Routes.Home);
     },
     mutationFn: (data: FormData): Promise<IResponse<undefined>> => {
       data.append("authorId", (profile.data as IUser)._id);

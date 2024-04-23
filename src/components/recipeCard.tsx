@@ -1,8 +1,8 @@
 import {TextUI} from "@src/UI/TextUI";
 import {Routes} from "@src/config/routes";
-import React, {ReactElement} from "react";
 import {IRecipe} from "@src/modules/recipe";
 import StartIcon from "@src/assets/icons/star";
+import React, {ReactElement, memo} from "react";
 import {Neutral, Secondary} from "@src/config/themes";
 import {ScreenRouteProp} from "@src/types/navigation";
 import {useNavigation} from "@react-navigation/native";
@@ -13,7 +13,7 @@ interface IProps extends Pick<IRecipe, "image"|"title"|"rate"|"_id"> {
   authorLogin: string;
 }
 
-export function RecipeCard({image, title, rate, _id, authorLogin}: IProps): ReactElement {
+function Component({image, title, rate, _id, authorLogin}: IProps): ReactElement {
   const navigation = useNavigation<ScreenRouteProp>();
 
   return (
@@ -59,7 +59,7 @@ export function RecipeCard({image, title, rate, _id, authorLogin}: IProps): Reac
     </TouchableOpacity>
   );
 }
-
+export const RecipeCard = memo(Component);
 const styles = StyleSheet.create({
   cardBtn: {
     height: 223,

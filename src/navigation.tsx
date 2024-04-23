@@ -208,10 +208,6 @@ export default function Navigation(): ReactElement {
         component={SettingsPage}
       />
       <Stack.Screen
-        name={Routes.AddRecipe}
-        component={AddRecipePage}
-      />
-      <Stack.Screen
         name={Routes.EditRecipe}
         component={EditRecipePage}
       />

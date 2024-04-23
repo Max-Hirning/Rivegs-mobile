@@ -1,5 +1,5 @@
 import {ButtonUI} from "@src/UI/ButtonUI";
-import React, {ReactElement} from "react";
+import React, {ReactElement, memo} from "react";
 import {IRecipeType} from "@src/modules/recipeForm";
 import {FlatList, StyleSheet, View, ViewStyle} from "react-native";
 
@@ -12,7 +12,7 @@ interface IProps {
 
 const ListDivider = (): ReactElement => <View style={styles.listDivider} />;
 
-export function RecipeTypes({style, data, onChange, value}: IProps): ReactElement {
+function Component({style, data, onChange, value}: IProps): ReactElement {
   return (
     <FlatList
       data={data}
@@ -33,7 +33,7 @@ export function RecipeTypes({style, data, onChange, value}: IProps): ReactElemen
     />
   );
 }
-
+export const RecipeTypes = memo(Component);
 const styles = StyleSheet.create({
   list: {
     flexGrow: 1,
