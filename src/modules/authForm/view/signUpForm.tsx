@@ -94,7 +94,7 @@ export function SignUpForm(): ReactElement {
           onPress={(): void => setPrivacyPolicy((state: boolean): boolean => !state)}
         />
         <TouchableOpacity onPress={(): void => {
-          Linking.openURL("https://www.freeprivacypolicy.com/live/63bf5ac7-52db-4d0d-baf5-ec82e0f49f3a");
+          Linking.openURL("https://www.freeprivacypolicy.com/live/3698fd9c-29aa-4a5d-8052-03bf740ee93f");
         }}>
           <TextUI
             variant="p"

@@ -22,18 +22,26 @@ export default function Page(): ReactElement {
           <TextUI variant="h4">Welcome Back!</TextUI>
         </View>
         <SignInForm/>
-        <View style={styles.linkContainer}>
-          <TextUI variant="label">Don’t have an account?</TextUI>
-          <TouchableOpacity
-            style={styles.link}
-            onPress={(): void => navigate(Routes.SignUp)}
-            // onPress={(): void => navigate(Routes.ConfirmCode, {email: 'sadf', route: Routes.SignIn})}
-          >
+        <View style={styles.linksContainer}>
+          <View style={styles.linkContainer}>
+            <TextUI variant="label">Don’t have an account?</TextUI>
+            <TouchableOpacity
+              style={styles.link}
+              onPress={(): void => navigate(Routes.SignUp)}
+            >
+              <TextUI
+                isBold={true}
+                variant="label"
+                style={styles.linkText}
+              >Sign up</TextUI>
+            </TouchableOpacity>
+          </View>
+          <TouchableOpacity onPress={(): void => navigate(Routes.Home)}>
             <TextUI
               isBold={true}
               variant="label"
               style={styles.linkText}
-            >Sign up</TextUI>
+            >Go back</TextUI>
           </TouchableOpacity>
         </View>
       </>
@@ -51,6 +59,10 @@ const styles = StyleSheet.create({
     width: "100%",
     maxWidth: 360,
     marginBottom: 40,
+  },
+  linksContainer: {
+    gap: 15,
+    alignItems: "center",
   },
   linkContainer: {
     marginTop: 20,

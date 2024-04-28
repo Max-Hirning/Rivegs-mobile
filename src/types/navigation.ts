@@ -24,6 +24,7 @@ export type NavigationParamList = {
     route: Routes.SignIn|Routes.ResetPassword;
   };
   [Routes.App]: undefined;
+  [Routes.Home]: undefined;
   [Routes.ResetPassword]: {
     code: string;
     email: string;

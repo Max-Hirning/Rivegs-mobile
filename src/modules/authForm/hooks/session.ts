@@ -42,7 +42,7 @@ export function useSession(): IHookResponse {
         await dispatch(fetchUser(userId));
         (successCallback) && successCallback();
       } else {
-        navigate(Routes.SignIn);
+        navigate(Routes.Home);
       }
     } catch {
       Toast.show({

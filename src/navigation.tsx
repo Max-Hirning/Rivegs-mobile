@@ -168,8 +168,12 @@ export default function Navigation(): ReactElement {
       screenOptions={{
         headerShown: false,
       }}
-      initialRouteName={Routes.SignIn}
+      initialRouteName={Routes.Home}
     >
+      <Stack.Screen
+        name={Routes.Home}
+        component={HomePage}
+      />
       <Stack.Screen
         name={Routes.SignIn}
         component={SignInPage}
