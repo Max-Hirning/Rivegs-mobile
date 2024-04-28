@@ -28,7 +28,7 @@ const EmptyListComponnet = (isLoading: boolean): ReactElement => {
   );
 };
 const ListFooterComponent = (isLoading: boolean, nextPage: boolean): ReactElement => {
-  if(isLoading || nextPage) {
+  if(isLoading || (nextPage && !isLoading)) {
     return (
       <ActivityIndicator
         size="large"

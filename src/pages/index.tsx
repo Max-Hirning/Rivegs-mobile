@@ -39,8 +39,8 @@ export default function Page(): ReactElement {
         isError={isError}
         isLoading={isLoading}
         fetchNextPage={fetchNextPage}
-        nextPage={data?.pages.reverse()[0].data.next}
-        data={data?.pages.reduceRight((res: IRecipe[], el: IResponse<IPagination>) => res.concat(el.data.data), []) || []}
+        nextPage={(data?.pages) ? data.pages[data.pages.length - 1].data.next : null}
+        data={data?.pages.reduce((res: IRecipe[], el: IResponse<IPagination>) => res.concat(el.data.data), []) || []}
       />
     </View>
   );
